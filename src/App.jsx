@@ -874,6 +874,7 @@ function CurrencyTicker() {
     </div>
   );
 }
+
 function Hero({ go }) {
   return (
     <div style={{
