@@ -3667,87 +3667,1069 @@ function VisitToWorkCountryPage({ countryKey, go }) {
 }
 
 function UKVisaExtensionPage({ go }) {
+  const rtwResults = [
+    {
+      image: "/rtw-approval-1.jpeg",
+      title: "RTW approval ⚡",
+    },
+    {
+      image: "/rtw-approval-2.jpeg",
+      title: "Full time RTW ⚡",
+    },
+    {
+      image: "/rtw-approval-3.jpeg",
+      title: "Full time RTW ⚡",
+    },
+  ];
+
+  const clientTypes = [
+    {
+      title: "Active Visa Holder",
+      badge: "Guidance Available",
+      description:
+        "You currently hold valid UK immigration permission and want to extend, switch or check your right to work.",
+      items: [
+        "Students",
+        "Dependants",
+        "Work visa holders",
+        "Graduate / PSW holders",
+        "Existing right to work holders",
+        "Share Code holders",
+      ],
+      button: "Assess My Options",
+      color: "#1762d1",
+      soft: "#eaf3ff",
+      icon: "💼",
+    },
+    {
+      title: "Overstayer",
+      badge: "Support Available",
+      description:
+        "You have stayed in the UK beyond the permitted period and need to understand your status and possible next steps.",
+      items: [
+        "Overstayed on student visa",
+        "Overstayed on work visa",
+        "Overstayed on visitor visa",
+        "Previous refusal or curtailment",
+        "Need advice on next steps",
+        "Explore possible legal options",
+      ],
+      button: "Get Overstayer Assessment",
+      color: "#ff3f3f",
+      soft: "#fff0f0",
+      icon: "👤",
+    },
+    {
+      title: "Visitor Visa Holder",
+      badge: "Guidance Available",
+      description:
+        "You are currently in the UK on a visitor visa and want to understand your options.",
+      items: [
+        "Current visitor visa holder",
+        "Looking to switch to a work visa",
+        "Eligible routes and requirements",
+        "Switching options from within the UK",
+        "Supporting documents guidance",
+        "Personalised assessment",
+      ],
+      button: "Discuss My Options",
+      color: "#08a99c",
+      soft: "#e9faf7",
+      icon: "💼",
+    },
+  ];
+
+  const supportItems = [
+    "UK visa extension options",
+    "Right to Work assessment",
+    "Share Code guidance",
+    "eVisa / immigration status guidance",
+    "Skilled Worker visa eligibility",
+    "Certificate of Sponsorship guidance",
+    "Immigration route assessment",
+    "Documentation support",
+  ];
+
+  const processSteps = [
+    {
+      number: "01",
+      title: "Profile assessment",
+      desc: "We review your background and circumstances.",
+    },
+    {
+      number: "02",
+      title: "Immigration status review",
+      desc: "We establish your current and previous status.",
+    },
+    {
+      number: "03",
+      title: "Eligibility & route guidance",
+      desc: "We explain which routes may realistically apply.",
+    },
+    {
+      number: "04",
+      title: "Documentation & application support",
+      desc: "We support you through preparation and submission.",
+    },
+  ];
+
   return (
     <PageShell theme="uk">
-      <PageHero
-        theme="uk"
-        eyebrow="UK Visa Extension & Immigration Support"
-        h1="UK visa extension & right to work guidance"
-        sub="Understand your UK immigration options"
-        desc="We assist eligible clients in understanding UK visa extension options, right-to-work status, Share Code / eVisa guidance and possible immigration pathways based on their individual circumstances."
-      >
-        <Btn variant="gold" onClick={() => scrollToId("uk-clients")}>Check My UK Options ↓</Btn>
-        <Btn variant="navy" onClick={() => go("contact")}>Get Free Consultation</Btn>
-      </PageHero>
 
-      {/* TWO CLIENT TYPES */}
-      <Section style={{ paddingTop: 16 }}>
-        <Anchor id="uk-clients" />
-        <SectionHead eyebrow="Client Types" h2="Which situation describes you?"
-          h3="We work with two broad groups. Your route depends on your current status and immigration history." />
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 22 }} className="nc-2col">
-          <Glass pad={30} style={{ borderTop: `4px solid ${CORAL}` }}>
-            <h3 style={{ fontSize: 19, color: INK, margin: "0 0 6px" }}>Active right to work holders</h3>
-            <p style={{ fontSize: 13, color: "#7a8699", margin: "0 0 16px" }}>You currently hold valid UK immigration permission.</p>
-            {["Students", "Dependants", "Work visa holders", "Graduate / PSW holders", "Existing right to work holders", "Share Code holders"].map((t, i) => (
-              <div key={i} style={{ display: "flex", gap: 10, alignItems: "center", padding: "8px 0" }}>
-                <CheckCircle2 size={16} color={CORAL} style={{ flexShrink: 0 }} />
-                <span style={{ fontSize: 14, color: "#3c485c" }}>{t}</span>
+      <style>{`
+        .nc-uk-page {
+          background:
+            radial-gradient(circle at 10% 10%, rgba(85,120,255,0.08), transparent 28%),
+            radial-gradient(circle at 90% 25%, rgba(0,190,180,0.06), transparent 25%),
+            #f7f9ff;
+        }
+
+        .nc-uk-hero {
+          position: relative;
+          min-height: 430px;
+          overflow: hidden;
+          display: flex;
+          align-items: center;
+          background:
+            linear-gradient(
+              90deg,
+              rgba(247,249,255,0.98) 0%,
+              rgba(247,249,255,0.95) 34%,
+              rgba(247,249,255,0.70) 55%,
+              rgba(247,249,255,0.12) 100%
+            ),
+            url("https://images.unsplash.com/photo-1529655683826-aba9b3e77383?auto=format&fit=crop&w=2200&q=90")
+            center/cover;
+        }
+
+        .nc-uk-hero-inner {
+          width: min(1180px, calc(100% - 40px));
+          margin: 0 auto;
+          padding: 65px 0 58px;
+          position: relative;
+          z-index: 2;
+        }
+
+        .nc-uk-hero-copy {
+          max-width: 610px;
+        }
+
+        .nc-uk-feature-row {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 22px;
+          margin-top: 32px;
+          max-width: 730px;
+        }
+
+        .nc-uk-feature {
+          display: flex;
+          align-items: center;
+          gap: 11px;
+        }
+
+        .nc-uk-feature-icon {
+          width: 42px;
+          height: 42px;
+          border-radius: 50%;
+          background: #eaf2ff;
+          color: #1762d1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 19px;
+          flex-shrink: 0;
+        }
+
+        .nc-uk-section {
+          width: min(1180px, calc(100% - 40px));
+          margin: 0 auto;
+        }
+
+        .nc-uk-client-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 18px;
+        }
+
+        .nc-uk-client-card {
+          background: #fff;
+          border-radius: 17px;
+          padding: 25px;
+          border: 1px solid #e2e7f0;
+          box-shadow: 0 7px 22px rgba(20,32,65,0.07);
+          display: flex;
+          flex-direction: column;
+          min-height: 410px;
+          transition: transform .2s ease, box-shadow .2s ease;
+        }
+
+        .nc-uk-client-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 16px 32px rgba(20,32,65,0.13);
+        }
+
+        .nc-uk-client-top {
+          display: flex;
+          align-items: center;
+          gap: 13px;
+          margin-bottom: 15px;
+        }
+
+        .nc-uk-client-icon {
+          width: 52px;
+          height: 52px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 23px;
+          flex-shrink: 0;
+        }
+
+        .nc-uk-badge {
+          display: inline-flex;
+          width: fit-content;
+          border-radius: 20px;
+          padding: 5px 10px;
+          font-size: 10px;
+          font-weight: 800;
+          margin-top: 5px;
+        }
+
+        .nc-uk-list {
+          margin: 14px 0 20px;
+          padding: 0;
+          list-style: none;
+        }
+
+        .nc-uk-list li {
+          display: flex;
+          align-items: center;
+          gap: 9px;
+          margin: 8px 0;
+          font-size: 13px;
+          color: #46536a;
+        }
+
+        .nc-uk-check {
+          width: 17px;
+          height: 17px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 11px;
+          font-weight: 900;
+          flex-shrink: 0;
+        }
+
+        .nc-uk-client-btn {
+          width: 100%;
+          border: 0;
+          border-radius: 28px;
+          color: #fff;
+          padding: 13px 18px;
+          font-size: 13px;
+          font-weight: 800;
+          cursor: pointer;
+          margin-top: auto;
+          transition: transform .18s ease, filter .18s ease;
+        }
+
+        .nc-uk-client-btn:hover {
+          transform: translateY(-2px);
+          filter: brightness(1.04);
+        }
+
+        .nc-uk-results {
+          margin-top: 28px;
+          border-radius: 20px;
+          padding: 24px;
+          background: linear-gradient(135deg,#edf6ff,#f8fbff);
+          border: 1px solid #d9e7fb;
+        }
+
+        .nc-uk-results-head {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          gap: 20px;
+          margin-bottom: 20px;
+        }
+
+        .nc-uk-trust {
+          background: #fff;
+          border: 1px solid #dce8e8;
+          border-radius: 24px;
+          padding: 9px 13px;
+          color: #078b76;
+          font-size: 11px;
+          font-weight: 800;
+          white-space: nowrap;
+        }
+
+        .nc-uk-results-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 18px;
+        }
+
+        .nc-uk-result-card {
+          background: #fff;
+          border: 1px solid #9bc5ef;
+          border-radius: 12px;
+          overflow: hidden;
+          box-shadow: 0 5px 14px rgba(20,45,80,0.05);
+        }
+
+        .nc-uk-result-header {
+          background: #1175c9;
+          color: #fff;
+          font-weight: 800;
+          font-size: 12px;
+          padding: 8px 12px;
+        }
+
+        .nc-uk-result-image-wrap {
+          background: #fff;
+          height: 275px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+        }
+
+        .nc-uk-result-image {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          display: block;
+        }
+
+        .nc-uk-result-body {
+          padding: 13px 14px 15px;
+        }
+
+        .nc-uk-result-title {
+          display: inline-block;
+          background: #050505;
+          color: #fff;
+          border-radius: 20px;
+          padding: 7px 12px;
+          font-size: 12px;
+          font-weight: 800;
+          margin-bottom: 10px;
+        }
+
+        .nc-uk-result-body p {
+          margin: 0 0 10px;
+          color: #26334a;
+          font-size: 11.5px;
+          line-height: 1.55;
+        }
+
+        .nc-uk-result-conditions {
+          font-weight: 800;
+          font-size: 11.5px;
+          margin: 8px 0 5px;
+          color: #182033;
+        }
+
+        .nc-uk-result-link {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          margin-top: 10px;
+          color: #1671be;
+          text-decoration: underline;
+          font-size: 11.5px;
+          font-weight: 600;
+        }
+
+        .nc-uk-support-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 12px;
+        }
+
+        .nc-uk-support-card {
+          background: #fff;
+          border-radius: 13px;
+          padding: 17px;
+          border: 1px solid #e6e9f1;
+          display: flex;
+          gap: 9px;
+          align-items: center;
+          box-shadow: 0 4px 13px rgba(20,32,65,0.04);
+          font-size: 12.5px;
+          font-weight: 700;
+          color: #1c2540;
+        }
+
+        .nc-uk-support-check {
+          width: 18px;
+          height: 18px;
+          border: 2px solid #6573ff;
+          border-radius: 50%;
+          color: #6573ff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 10px;
+          flex-shrink: 0;
+        }
+
+        .nc-uk-process-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 14px;
+        }
+
+        .nc-uk-process-card {
+          background: #fff;
+          border-radius: 15px;
+          padding: 20px;
+          border: 1px solid #e2e7ef;
+          min-height: 145px;
+        }
+
+        .nc-uk-process-number {
+          color: #ff4d3d;
+          font-size: 24px;
+          font-weight: 900;
+        }
+
+        .nc-uk-process-title {
+          color: #182033;
+          font-size: 13.5px;
+          font-weight: 800;
+          margin-top: 8px;
+        }
+
+        .nc-uk-process-desc {
+          color: #68758b;
+          font-size: 12px;
+          line-height: 1.55;
+          margin-top: 7px;
+        }
+
+        @media (max-width: 950px) {
+          .nc-uk-client-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .nc-uk-results-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .nc-uk-support-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+
+          .nc-uk-process-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+
+          .nc-uk-hero-copy {
+            max-width: 650px;
+          }
+        }
+
+        @media (max-width: 650px) {
+          .nc-uk-hero {
+            min-height: 590px;
+            background:
+              linear-gradient(
+                90deg,
+                rgba(247,249,255,0.97),
+                rgba(247,249,255,0.84)
+              ),
+              url("https://images.unsplash.com/photo-1529655683826-aba9b3e77383?auto=format&fit=crop&w=1600&q=85")
+              center/cover;
+          }
+
+          .nc-uk-hero-inner {
+            width: calc(100% - 30px);
+            padding: 45px 0;
+          }
+
+          .nc-uk-feature-row {
+            grid-template-columns: 1fr;
+            gap: 14px;
+          }
+
+          .nc-uk-support-grid,
+          .nc-uk-process-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .nc-uk-section {
+            width: calc(100% - 30px);
+          }
+
+          .nc-uk-results {
+            padding: 16px;
+          }
+
+          .nc-uk-results-head {
+            flex-direction: column;
+          }
+
+          .nc-uk-trust {
+            white-space: normal;
+          }
+
+          .nc-uk-result-image-wrap {
+            height: 350px;
+          }
+        }
+      `}</style>
+
+      <div className="nc-uk-page">
+
+        {/* HERO */}
+        <div className="nc-uk-hero">
+          <div className="nc-uk-hero-inner">
+
+            <div className="nc-uk-hero-copy">
+
+              <div
+                style={{
+                  color: "#ff4b3f",
+                  fontSize: 13,
+                  fontWeight: 850,
+                  letterSpacing: 0.7,
+                  textTransform: "uppercase",
+                }}
+              >
+                UK Visa Extension & Right to Work
+              </div>
+
+              <h1
+                style={{
+                  fontSize: 43,
+                  lineHeight: 1.05,
+                  margin: "10px 0 8px",
+                  color: INK,
+                  fontWeight: 900,
+                }}
+              >
+                UK visa extension &
+                <br />
+                <span style={{ color: "#1762d1" }}>
+                  right to work guidance
+                </span>
+              </h1>
+
+              <div
+                style={{
+                  fontSize: 16,
+                  fontWeight: 750,
+                  color: "#516078",
+                  marginBottom: 10,
+                }}
+              >
+                Understand your UK immigration options
+              </div>
+
+              <p
+                style={{
+                  fontSize: 14,
+                  lineHeight: 1.7,
+                  color: "#536078",
+                  maxWidth: 570,
+                  margin: 0,
+                }}
+              >
+                We assist eligible clients in understanding UK visa
+                extension options, right-to-work status, Share Code /
+                eVisa guidance and possible immigration pathways based
+                on their individual circumstances.
+              </p>
+
+              <div
+                style={{
+                  display: "flex",
+                  gap: 12,
+                  flexWrap: "wrap",
+                  marginTop: 20,
+                }}
+              >
+                <Btn
+                  variant="gold"
+                  onClick={() => scrollToId("uk-clients")}
+                >
+                  Check My UK Options <ArrowRight size={15} />
+                </Btn>
+
+                <Btn
+                  variant="navy"
+                  onClick={() => go("contact")}
+                >
+                  Get Free Consultation <ArrowRight size={15} />
+                </Btn>
+              </div>
+
+              <div className="nc-uk-feature-row">
+
+                <div className="nc-uk-feature">
+                  <div className="nc-uk-feature-icon">♙</div>
+                  <div>
+                    <div style={{ fontSize: 12.5, fontWeight: 800, color: INK }}>
+                      Expert Guidance
+                    </div>
+                    <div style={{ fontSize: 11.5, color: "#68758b" }}>
+                      Up-to-date information
+                    </div>
+                  </div>
+                </div>
+
+                <div className="nc-uk-feature">
+                  <div className="nc-uk-feature-icon">♧</div>
+                  <div>
+                    <div style={{ fontSize: 12.5, fontWeight: 800, color: INK }}>
+                      Personalised Support
+                    </div>
+                    <div style={{ fontSize: 11.5, color: "#68758b" }}>
+                      Based on your profile
+                    </div>
+                  </div>
+                </div>
+
+                <div className="nc-uk-feature">
+                  <div className="nc-uk-feature-icon">▢</div>
+                  <div>
+                    <div style={{ fontSize: 12.5, fontWeight: 800, color: INK }}>
+                      Trusted & Genuine
+                    </div>
+                    <div style={{ fontSize: 11.5, color: "#68758b" }}>
+                      Genuine client support
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        {/* CLIENT TYPES */}
+        <div
+          className="nc-uk-section"
+          id="uk-clients"
+          style={{ paddingTop: 30 }}
+        >
+
+          <div
+            style={{
+              color: "#ff4b3f",
+              fontSize: 12,
+              fontWeight: 850,
+              letterSpacing: 0.7,
+              textTransform: "uppercase",
+            }}
+          >
+            Client Types
+          </div>
+
+          <h2
+            style={{
+              fontSize: 28,
+              color: INK,
+              margin: "5px 0 5px",
+              fontWeight: 900,
+            }}
+          >
+            Which situation describes you?
+          </h2>
+
+          <p
+            style={{
+              color: "#637088",
+              fontSize: 13.5,
+              margin: "0 0 20px",
+            }}
+          >
+            We work with three broad groups. Your route depends on your
+            current status and immigration history.
+          </p>
+
+          <div className="nc-uk-client-grid">
+
+            {clientTypes.map((client, index) => (
+              <div
+                key={index}
+                className="nc-uk-client-card"
+                style={{
+                  borderTop: `4px solid ${client.color}`,
+                }}
+              >
+
+                <div className="nc-uk-client-top">
+
+                  <div
+                    className="nc-uk-client-icon"
+                    style={{
+                      background: client.soft,
+                    }}
+                  >
+                    {client.icon}
+                  </div>
+
+                  <div>
+                    <div
+                      style={{
+                        fontSize: 16,
+                        fontWeight: 850,
+                        color: INK,
+                      }}
+                    >
+                      {client.title}
+                    </div>
+
+                    <div
+                      className="nc-uk-badge"
+                      style={{
+                        background: client.soft,
+                        color: client.color,
+                      }}
+                    >
+                      {client.badge}
+                    </div>
+                  </div>
+
+                </div>
+
+                <p
+                  style={{
+                    color: "#59677d",
+                    fontSize: 12.5,
+                    lineHeight: 1.6,
+                    margin: 0,
+                  }}
+                >
+                  {client.description}
+                </p>
+
+                <ul className="nc-uk-list">
+
+                  {client.items.map((item, itemIndex) => (
+                    <li key={itemIndex}>
+
+                      <span
+                        className="nc-uk-check"
+                        style={{
+                          color: client.color,
+                          border: `1.5px solid ${client.color}`,
+                        }}
+                      >
+                        ✓
+                      </span>
+
+                      {item}
+
+                    </li>
+                  ))}
+
+                </ul>
+
+                <button
+                  className="nc-uk-client-btn"
+                  style={{
+                    background: client.color,
+                  }}
+                  onClick={() => go("contact")}
+                >
+                  {client.button}
+                  <span style={{ marginLeft: 7 }}>→</span>
+                </button>
+
               </div>
             ))}
-            <Btn variant="coral" onClick={() => go("contact")} style={{ width: "100%", justifyContent: "center", marginTop: 18 }}>
-              Assess My UK Options <ArrowRight size={15} />
-            </Btn>
-          </Glass>
 
-          <Glass pad={30} style={{ borderTop: `4px solid ${TEAL}` }}>
-            <h3 style={{ fontSize: 19, color: INK, margin: "0 0 6px" }}>Visa expiry & complex cases</h3>
-            <p style={{ fontSize: 13, color: "#7a8699", margin: "0 0 16px" }}>Your permission has expired or your status is unclear.</p>
-            {["Expired student visa", "Expired work visa", "Expired Graduate / PSW visa", "Expired dependant visa", "Visitor visa holders", "Overstayer cases"].map((t, i) => (
-              <div key={i} style={{ display: "flex", gap: 10, alignItems: "center", padding: "8px 0" }}>
-                <CheckCircle2 size={16} color={TEAL} style={{ flexShrink: 0 }} />
-                <span style={{ fontSize: 14, color: "#3c485c" }}>{t}</span>
+          </div>
+        </div>
+
+        {/* REAL RTW RESULTS */}
+        <div
+          className="nc-uk-section"
+          style={{ paddingTop: 28 }}
+        >
+
+          <div className="nc-uk-results">
+
+            <div className="nc-uk-results-head">
+
+              <div>
+
+                <div
+                  style={{
+                    color: "#1762d1",
+                    fontSize: 12,
+                    fontWeight: 850,
+                    letterSpacing: 0.7,
+                  }}
+                >
+                  REAL RIGHT TO WORK RESULTS
+                </div>
+
+                <h2
+                  style={{
+                    color: INK,
+                    fontSize: 25,
+                    margin: "4px 0 5px",
+                    fontWeight: 900,
+                  }}
+                >
+                  Recent UKVI{" "}
+                  <span style={{ color: "#1762d1" }}>
+                    Right to Work Approvals
+                  </span>
+                </h2>
+
+                <p
+                  style={{
+                    color: "#617087",
+                    fontSize: 12.5,
+                    margin: 0,
+                  }}
+                >
+                  Our clients are receiving Right to Work (RTW)
+                  approvals across different categories.
+                </p>
+
+              </div>
+
+              <div className="nc-uk-trust">
+                ● Genuine Results • Real People • Real Approvals
+              </div>
+
+            </div>
+
+            <div className="nc-uk-results-grid">
+
+              {rtwResults.map((result, index) => (
+                <div
+                  className="nc-uk-result-card"
+                  key={index}
+                >
+
+                  <div className="nc-uk-result-header">
+                    Right to work
+                  </div>
+
+                  <div className="nc-uk-result-image-wrap">
+                    <img
+                      src={result.image}
+                      alt={`Right to Work result ${index + 1}`}
+                      className="nc-uk-result-image"
+                    />
+                  </div>
+
+                  <div className="nc-uk-result-body">
+
+                    <div className="nc-uk-result-title">
+                      {result.title}
+                    </div>
+
+                    <p>
+                      You can work in the UK until you receive a
+                      decision on your application or the outcome of
+                      any appeal on your application to the EU
+                      Settlement Scheme.
+                    </p>
+
+                    <div className="nc-uk-result-conditions">
+                      Conditions
+                    </div>
+
+                    <p>
+                      You can work in any job.
+                    </p>
+
+                    <p>
+                      You will need to prove your right to work again
+                      in 6 months, or if you change jobs.
+                    </p>
+
+                    <div className="nc-uk-result-link">
+                      ▶ Legal basis of Certificate of Application
+                    </div>
+
+                  </div>
+
+                </div>
+              ))}
+
+            </div>
+
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                gap: 8,
+                marginTop: 20,
+              }}
+            >
+              <span
+                style={{
+                  width: 28,
+                  height: 9,
+                  borderRadius: 10,
+                  background: "#1762d1",
+                }}
+              />
+              <span
+                style={{
+                  width: 9,
+                  height: 9,
+                  borderRadius: "50%",
+                  background: "#cdd7e8",
+                }}
+              />
+              <span
+                style={{
+                  width: 9,
+                  height: 9,
+                  borderRadius: "50%",
+                  background: "#cdd7e8",
+                }}
+              />
+            </div>
+
+          </div>
+        </div>
+
+        {/* SUPPORT */}
+        <div
+          className="nc-uk-section"
+          style={{ paddingTop: 28 }}
+        >
+
+          <div
+            style={{
+              color: "#ff4b3f",
+              fontSize: 12,
+              fontWeight: 850,
+              letterSpacing: 0.7,
+              textTransform: "uppercase",
+            }}
+          >
+            Support
+          </div>
+
+          <h2
+            style={{
+              color: INK,
+              fontSize: 25,
+              margin: "4px 0 16px",
+              fontWeight: 900,
+            }}
+          >
+            What we can help you understand
+          </h2>
+
+          <div className="nc-uk-support-grid">
+
+            {supportItems.map((item, index) => (
+              <div
+                className="nc-uk-support-card"
+                key={index}
+              >
+                <span className="nc-uk-support-check">
+                  ✓
+                </span>
+
+                {item}
               </div>
             ))}
-            <Btn variant="teal" onClick={() => go("contact")} style={{ width: "100%", justifyContent: "center", marginTop: 18 }}>
-              Request Profile Assessment <ArrowRight size={15} />
-            </Btn>
-          </Glass>
-        </div>
-      </Section>
 
-      {/* WHAT WE HELP WITH */}
-      <Section style={{ paddingTop: 10 }}>
-        <SectionHead eyebrow="Support" h2="What we can help you understand" />
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 14 }} className="nc-4col">
-          {["UK visa extension options", "Right to Work assessment", "Share Code guidance", "eVisa / immigration status guidance",
-            "Skilled Worker visa eligibility", "Certificate of Sponsorship-related guidance", "Immigration route assessment", "Documentation support"].map((t, i) => (
-            <Glass key={i} pad={18} style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
-              <CheckCircle2 size={17} color="#6c4fd1" style={{ flexShrink: 0, marginTop: 1 }} />
-              <span style={{ fontSize: 13.5, color: INK, fontWeight: 600, lineHeight: 1.45 }}>{t}</span>
-            </Glass>
-          ))}
-        </div>
-        <div style={{ marginTop: 22 }}>
-          <Disclaimer>
-            Eligibility depends on your immigration history, current status and applicable UK immigration rules. We assess your profile before recommending an available route. Immigration decisions are made by the Home Office, not by NC Migration.
-          </Disclaimer>
-        </div>
-      </Section>
+          </div>
 
-      {/* PROCESS */}
-      <Section style={{ paddingTop: 10 }}>
-        <SectionHead eyebrow="Process" h2="A simple four-step process" />
-        <StepFlow steps={[
-          ["01", "Profile assessment", "We review your background and circumstances."],
-          ["02", "Immigration status review", "We establish your current and previous status."],
-          ["03", "Eligibility & route guidance", "We explain which routes may realistically apply."],
-          ["04", "Documentation & application support", "We support you through preparation and submission."],
-        ]} />
-        <Btn variant="gold" onClick={() => go("contact")} style={{ marginTop: 26 }}>
-          Check My UK Visa Options <ArrowRight size={15} />
-        </Btn>
-      </Section>
+        </div>
+
+        {/* PROCESS */}
+        <div
+          className="nc-uk-section"
+          style={{
+            paddingTop: 28,
+            paddingBottom: 38,
+          }}
+        >
+
+          <div
+            style={{
+              color: "#ff4b3f",
+              fontSize: 12,
+              fontWeight: 850,
+              letterSpacing: 0.7,
+              textTransform: "uppercase",
+            }}
+          >
+            Process
+          </div>
+
+          <h2
+            style={{
+              color: INK,
+              fontSize: 25,
+              margin: "4px 0 16px",
+              fontWeight: 900,
+            }}
+          >
+            A simple four-step process
+          </h2>
+
+          <div className="nc-uk-process-grid">
+
+            {processSteps.map((step, index) => (
+              <div
+                className="nc-uk-process-card"
+                key={index}
+              >
+
+                <div className="nc-uk-process-number">
+                  {step.number}
+                </div>
+
+                <div className="nc-uk-process-title">
+                  {step.title}
+                </div>
+
+                <div className="nc-uk-process-desc">
+                  {step.desc}
+                </div>
+
+              </div>
+            ))}
+
+          </div>
+
+          <div style={{ marginTop: 18 }}>
+            <Disclaimer>
+              Eligibility depends on your immigration history, current
+              status and applicable UK immigration rules. We assess your
+              profile before recommending an available route.
+              Immigration decisions are made by the Home Office, not by
+              NC Migration.
+            </Disclaimer>
+          </div>
+
+          <Btn
+            variant="gold"
+            onClick={() => go("contact")}
+            style={{ marginTop: 20 }}
+          >
+            Check My UK Visa Options
+            <ArrowRight size={15} />
+          </Btn>
+
+        </div>
+
+      </div>
+
     </PageShell>
   );
 }
