@@ -228,39 +228,37 @@ const WORK_COUNTRIES = {
   },
 };
 
-const VISITOR_COUNTRIES = {
-  uae: { flag: "🇦🇪", name: "UAE", label: "Tourist Visa", hero: "linear-gradient(135deg,#3d2b0d,#8a6512)",
-    overview: "Short-stay tourist visas for holidays, shopping trips and family visits across Dubai, Abu Dhabi and the wider Emirates.",
-    purpose: "Tourism, family visits, transit and short leisure stays." },
-  singapore: { flag: "🇸🇬", name: "Singapore", label: "Visitor Visa", hero: "linear-gradient(135deg,#7a1c1c,#c9312a)",
-    overview: "Visitor visa guidance for short leisure and family visit trips to Singapore.",
-    purpose: "Tourism, family visits and short social visits." },
-  thailand: { flag: "🇹🇭", name: "Thailand", label: "Tourist Visa", hero: "linear-gradient(135deg,#122c4d,#1f5091)",
-    overview: "Tourist visa guidance for holidays and leisure travel across Thailand.",
-    purpose: "Tourism and short leisure stays." },
-  malaysia: { flag: "🇲🇾", name: "Malaysia", label: "Tourist Visa", hero: "linear-gradient(135deg,#0f3d2e,#136c50)",
-    overview: "Visitor and tourist visa guidance for trips to Kuala Lumpur, Penang, Langkawi and beyond.",
-    purpose: "Tourism, family visits and short leisure stays." },
-  vietnam: { flag: "🇻🇳", name: "Vietnam", label: "Tourist Visa", hero: "linear-gradient(135deg,#8a2f12,#c9601f)",
-    overview: "Tourist visa guidance for leisure travel across Vietnam.",
-    purpose: "Tourism and short leisure stays." },
-  uk: { flag: "🇬🇧", name: "United Kingdom", label: "Visitor Visa", hero: "linear-gradient(135deg,#101d3d,#233a72)",
-    overview: "UK Standard Visitor visa guidance for tourism, family visits and permitted short business activities.",
-    purpose: "Tourism, visiting family or friends, and certain permitted business activities. Visitors may not work in the UK." },
-  australia: { flag: "🇦🇺", name: "Australia", label: "Visitor Visa", hero: "linear-gradient(135deg,#0f3d2e,#136c50)",
-    overview: "Visitor visa guidance for holidays and family visits to Australia.",
-    purpose: "Tourism and visiting family or friends." },
-  "new-zealand": { flag: "🇳🇿", name: "New Zealand", label: "Visitor Visa", hero: "linear-gradient(135deg,#122c4d,#1f5091)",
-    overview: "Visitor visa guidance for holidays and family visits to New Zealand.",
-    purpose: "Tourism and visiting family or friends." },
-  switzerland: { flag: "🇨🇭", name: "Switzerland", label: "Visitor Visa", hero: "linear-gradient(135deg,#7a1c1c,#a62b22)",
-    overview: "Switzerland is part of the Schengen Area. Visitor travel is generally covered by a Schengen short-stay visa.",
-    purpose: "Tourism, family visits and short leisure stays within the Schengen Area." },
-  schengen: { flag: "🇪🇺", name: "Schengen Europe", label: "Schengen Visa", hero: "linear-gradient(135deg,#0d2b4e,#1c4a7a)",
-    overview: "A Schengen short-stay visa may allow travel across participating European countries, subject to destination-specific requirements.",
-    purpose: "Tourism, family visits and short stays across the Schengen Area." },
-};
+const VISITOR_IMAGES = {
+  UAE:
+    "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1200&q=85",
 
+  Singapore:
+    "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=1200&q=85",
+
+  Thailand:
+    "https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=1200&q=85",
+
+  Malaysia:
+    "https://images.unsplash.com/photo-1508062878650-88b52897f298?auto=format&fit=crop&w=1200&q=85",
+
+  Vietnam:
+    "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=1200&q=85",
+
+  "United Kingdom":
+    "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=85",
+
+  Australia:
+    "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d5?auto=format&fit=crop&w=1200&q=85",
+
+  "New Zealand":
+    "https://images.unsplash.com/photo-1507699622108-4be3abd695ad?auto=format&fit=crop&w=1200&q=85",
+
+  Switzerland:
+    "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=1200&q=85",
+
+  "Schengen Europe":
+    "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=85",
+};
 const SCHENGEN_MEMBERS = [
   ["🇫🇷", "France"], ["🇩🇪", "Germany"], ["🇮🇹", "Italy"], ["🇪🇸", "Spain"],
   ["🇬🇷", "Greece"], ["🇨🇭", "Switzerland"], ["🇳🇱", "Netherlands"],
@@ -2172,55 +2170,493 @@ function CountryDetailPage({ countryKey, go }) {
 /* ------------------------------------------------------------------ */
 /*  VISITOR VISA                                                        */
 /* ------------------------------------------------------------------ */
+function VisitorCountryCard({ c, onClick }) {
+  const [hover, setHover] = useState(false);
+
+  const image =
+    VISITOR_IMAGES[c.name] ||
+    "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1200&q=85";
+
+  return (
+    <div
+      onClick={onClick}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+      style={{
+        cursor: "pointer",
+        background: "#fff",
+        borderRadius: 14,
+        overflow: "hidden",
+        border: "1px solid #e3e8ef",
+        boxShadow: hover
+          ? "0 16px 30px rgba(16,22,48,0.16)"
+          : "0 5px 14px rgba(16,22,48,0.07)",
+        transform: hover
+          ? "translateY(-5px)"
+          : "translateY(0)",
+        transition:
+          "transform .22s ease, box-shadow .22s ease",
+      }}
+    >
+
+      {/* IMAGE */}
+      <div
+        style={{
+          height: 112,
+          position: "relative",
+          overflow: "hidden",
+          background: "#dce8ed",
+        }}
+      >
+        <img
+          src={image}
+          alt={`${c.name} destination`}
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            display: "block",
+            transform: hover ? "scale(1.08)" : "scale(1)",
+            transition: "transform .45s ease",
+          }}
+        />
+
+        {/* dark image overlay */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background:
+              "linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.28))",
+          }}
+        />
+
+        {/* FLAG */}
+        <div
+          role="img"
+          aria-label={`${c.name} flag`}
+          style={{
+            position: "absolute",
+            top: 10,
+            left: 10,
+            width: 35,
+            height: 35,
+            borderRadius: 9,
+            background: "rgba(255,255,255,0.90)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontSize: 22,
+            boxShadow: "0 4px 10px rgba(0,0,0,0.14)",
+          }}
+        >
+          {c.flag}
+        </div>
+      </div>
+
+
+      {/* CONTENT */}
+      <div
+        style={{
+          padding: "12px 13px 14px",
+        }}
+      >
+        <div
+          style={{
+            fontSize: 14,
+            fontWeight: 800,
+            color: INK,
+            lineHeight: 1.25,
+          }}
+        >
+          {c.name}
+        </div>
+
+        <div
+          style={{
+            fontSize: 10.5,
+            color: "#7a8699",
+            marginTop: 3,
+          }}
+        >
+          {c.label}
+        </div>
+
+        <div
+          style={{
+            marginTop: 10,
+            display: "flex",
+            alignItems: "center",
+            gap: 4,
+            color: TEAL,
+            fontSize: 11.5,
+            fontWeight: 800,
+          }}
+        >
+          View Details
+
+          <ArrowRight
+            size={13}
+            style={{
+              transform: hover
+                ? "translateX(3px)"
+                : "translateX(0)",
+              transition: "transform .2s ease",
+            }}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function VisitorVisaPage({ go }) {
+  const destinations = Object.entries(VISITOR_COUNTRIES);
+
   return (
     <PageShell theme="visitor">
-      <PageHero
-        theme="visitor"
-        eyebrow="Visitor Visa & Tourist Visa Services"
-        h1="Explore the world with NC Migration"
-        sub="Visitor visa assistance for holidays, family visits & international travel"
-        desc="Guidance on visitor and tourist visa requirements, documentation and application preparation for popular destinations across Asia, Europe and beyond."
-      >
-        <Btn variant="teal" onClick={() => scrollToId("vv-destinations")}>Explore Destinations ↓</Btn>
-        <Btn variant="navy" onClick={() => go("contact")}>Get Free Consultation</Btn>
-      </PageHero>
 
-      {/* DESTINATIONS FIRST */}
-      <Section style={{ paddingTop: 16 }}>
+      {/* ================= HERO ================= */}
+      <Section style={{ paddingTop: 38, paddingBottom: 30 }}>
+        <div
+          className="nc-visitor-hero"
+          style={{
+            position: "relative",
+            overflow: "hidden",
+            borderRadius: 26,
+            minHeight: 350,
+            display: "flex",
+            alignItems: "center",
+            background:
+              "linear-gradient(90deg, rgba(237,250,250,0.98) 0%, rgba(237,250,250,0.94) 42%, rgba(237,250,250,0.25) 72%), url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=2200&q=90') center/cover",
+            boxShadow: "0 18px 45px rgba(16,22,48,0.10)",
+          }}
+        >
+          <div
+            style={{
+              width: "55%",
+              padding: "42px 44px",
+              position: "relative",
+              zIndex: 2,
+            }}
+          >
+            <Eyebrow>Visitor Visa & Tourist Visa Services</Eyebrow>
+
+            <h1
+              style={{
+                fontSize: 32,
+                lineHeight: 1.15,
+                color: INK,
+                margin: "0 0 12px",
+                maxWidth: 520,
+              }}
+            >
+              Explore the world with
+              <br />
+              NC Migration
+            </h1>
+
+            <h2
+              style={{
+                fontSize: 16,
+                lineHeight: 1.5,
+                color: "#4d5a70",
+                margin: "0 0 12px",
+                fontWeight: 700,
+              }}
+            >
+              Visitor visa assistance for holidays, family visits & international travel.
+            </h2>
+
+            <p
+              style={{
+                color: "#536178",
+                fontSize: 13.5,
+                lineHeight: 1.7,
+                margin: "0 0 20px",
+                maxWidth: 570,
+              }}
+            >
+              Guidance on visitor and tourist visa requirements,
+              documentation and application preparation for popular
+              destinations across Asia, Europe and beyond.
+            </p>
+
+            <div
+              style={{
+                display: "flex",
+                gap: 12,
+                flexWrap: "wrap",
+              }}
+            >
+              <Btn
+                variant="teal"
+                onClick={() => scrollToId("vv-destinations")}
+              >
+                Explore Destinations ↓
+              </Btn>
+
+              <Btn
+                variant="navy"
+                onClick={() => go("contact")}
+              >
+                Get Free Consultation
+              </Btn>
+            </div>
+
+            {/* TRUST POINTS */}
+            <div
+              style={{
+                display: "flex",
+                gap: 25,
+                flexWrap: "wrap",
+                marginTop: 25,
+              }}
+            >
+              {[
+                ["🛡️", "Trusted Guidance", "Authentic & Genuine Support"],
+                ["🌐", "Multiple Destinations", "Asia, Europe & Beyond"],
+                ["👥", "End-to-End Assistance", "Application to Decision"],
+              ].map(([icon, title, sub], i) => (
+                <div
+                  key={i}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 9,
+                  }}
+                >
+                  <div
+                    style={{
+                      fontSize: 21,
+                      lineHeight: 1,
+                    }}
+                  >
+                    {icon}
+                  </div>
+
+                  <div>
+                    <div
+                      style={{
+                        fontSize: 11.5,
+                        fontWeight: 800,
+                        color: INK,
+                      }}
+                    >
+                      {title}
+                    </div>
+
+                    <div
+                      style={{
+                        fontSize: 9.5,
+                        color: "#7a8699",
+                        marginTop: 2,
+                      }}
+                    >
+                      {sub}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Decorative travel circle */}
+          <div
+            style={{
+              position: "absolute",
+              right: "-4%",
+              bottom: "-28%",
+              width: 470,
+              height: 470,
+              borderRadius: "50%",
+              background:
+                "radial-gradient(circle, rgba(255,255,255,0.45), rgba(255,255,255,0))",
+            }}
+          />
+        </div>
+      </Section>
+
+
+      {/* ================= DESTINATIONS ================= */}
+      <Section style={{ paddingTop: 12 }}>
         <Anchor id="vv-destinations" />
-        <SectionHead eyebrow="Destinations" h2="Popular visitor visa destinations"
-          h3="Select a destination for visa overview, documentation categories and application guidance." />
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 16 }} className="nc-5col">
-          {Object.entries(VISITOR_COUNTRIES).map(([key, c]) => (
-            <CountryTile key={key} flag={c.flag} name={c.name} label={c.label} accent={TEAL}
-                         onClick={() => go("visitor-country", key)} />
+
+        <div
+          style={{
+            display: "flex",
+            alignItems: "flex-end",
+            justifyContent: "space-between",
+            gap: 20,
+            marginBottom: 22,
+            flexWrap: "wrap",
+          }}
+        >
+          <div>
+            <Eyebrow>Destinations</Eyebrow>
+
+            <h2
+              style={{
+                fontSize: 27,
+                color: INK,
+                margin: "0 0 5px",
+              }}
+            >
+              Popular visitor visa destinations
+            </h2>
+
+            <p
+              style={{
+                color: "#647086",
+                fontSize: 13.5,
+                margin: 0,
+              }}
+            >
+              Select a destination for visa overview, documentation
+              categories and application guidance.
+            </p>
+          </div>
+
+          <Btn
+            variant="navy"
+            onClick={() => scrollToId("vv-destinations")}
+            style={{
+              fontSize: 12.5,
+            }}
+          >
+            View All Destinations <ArrowRight size={14} />
+          </Btn>
+        </div>
+
+
+        <div
+          className="nc-visitor-destination-grid"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(5, minmax(0, 1fr))",
+            gap: 14,
+          }}
+        >
+          {destinations.map(([key, c]) => (
+            <VisitorCountryCard
+              key={key}
+              c={c}
+              onClick={() => go("visitor-country", key)}
+            />
           ))}
         </div>
       </Section>
 
-      {/* SCHENGEN HIGHLIGHT */}
-      <Section style={{ paddingTop: 10 }}>
-        <div style={{ borderRadius: 18, overflow: "hidden", background: `linear-gradient(120deg,${NAVY},${ROYAL})`, padding: "34px 34px" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1.2fr 1fr", gap: 32, alignItems: "center" }} className="nc-2col">
+
+      {/* ================= SCHENGEN ================= */}
+      <Section style={{ paddingTop: 30 }}>
+        <div
+          className="nc-schengen-banner"
+          style={{
+            borderRadius: 20,
+            overflow: "hidden",
+            position: "relative",
+            background:
+              "linear-gradient(115deg, #21123f 0%, #651442 45%, #e0203a 100%)",
+            padding: "32px 34px",
+          }}
+        >
+          <div
+            style={{
+              position: "absolute",
+              right: -30,
+              top: -60,
+              width: 220,
+              height: 220,
+              border: "2px solid rgba(255,255,255,0.13)",
+              borderRadius: "50%",
+            }}
+          />
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1.15fr 1fr",
+              gap: 30,
+              alignItems: "center",
+              position: "relative",
+              zIndex: 2,
+            }}
+            className="nc-2col"
+          >
             <div>
               <Eyebrow light>Europe</Eyebrow>
-              <h2 style={{ fontSize: 26, color: "#fff", margin: "0 0 12px" }}>Schengen visitor visa</h2>
-              <p style={{ color: "rgba(255,255,255,0.85)", fontSize: 14.5, lineHeight: 1.75, margin: "0 0 18px" }}>
-                Explore Europe with a Schengen visitor visa, subject to destination-specific requirements and applicant eligibility.
+
+              <h2
+                style={{
+                  color: "#fff",
+                  fontSize: 25,
+                  margin: "0 0 10px",
+                }}
+              >
+                Schengen visitor visa
+              </h2>
+
+              <p
+                style={{
+                  color: "rgba(255,255,255,0.82)",
+                  fontSize: 13.5,
+                  lineHeight: 1.7,
+                  maxWidth: 540,
+                  margin: "0 0 18px",
+                }}
+              >
+                Explore Europe with a Schengen visitor visa, subject
+                to destination-specific requirements and applicant
+                eligibility.
               </p>
-              <Btn variant="gold" onClick={() => go("visitor-country", "schengen")}>
+
+              <Btn
+                variant="gold"
+                onClick={() => go("visitor-country", "schengen")}
+              >
                 Explore Schengen Visa <ArrowRight size={15} />
               </Btn>
             </div>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: 9,
+              }}
+            >
               {SCHENGEN_MEMBERS.map(([f, n], i) => (
-                <span key={i} style={{ background: "rgba(255,255,255,0.12)", borderRadius: 24, padding: "8px 14px", fontSize: 12.5, color: "#fff", fontWeight: 600, display: "inline-flex", alignItems: "center", gap: 6 }}>
-                  <span role="img" aria-label={`${n} flag`} style={{ fontSize: 15 }}>{f}</span>{n}
+                <span
+                  key={i}
+                  style={{
+                    background: "rgba(255,255,255,0.13)",
+                    border: "1px solid rgba(255,255,255,0.08)",
+                    borderRadius: 25,
+                    padding: "8px 13px",
+                    fontSize: 12,
+                    color: "#fff",
+                    fontWeight: 650,
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 6,
+                  }}
+                >
+                  <span style={{ fontSize: 15 }}>{f}</span>
+                  {n}
                 </span>
               ))}
-              <span style={{ background: "rgba(255,255,255,0.07)", borderRadius: 24, padding: "8px 14px", fontSize: 12.5, color: "rgba(255,255,255,0.75)", fontWeight: 600 }}>
+
+              <span
+                style={{
+                  background: "rgba(255,255,255,0.08)",
+                  borderRadius: 25,
+                  padding: "8px 13px",
+                  fontSize: 12,
+                  color: "rgba(255,255,255,0.75)",
+                  fontWeight: 600,
+                }}
+              >
                 and other Schengen destinations
               </span>
             </div>
@@ -2228,32 +2664,232 @@ function VisitorVisaPage({ go }) {
         </div>
       </Section>
 
-      {/* PACKAGES */}
-      <Section style={{ paddingTop: 10 }}>
-        <SectionHead eyebrow="Application Support" h2="Visitor visa application packages"
-          h3="Support tailored to who is travelling. Each package covers visa assistance, documentation guidance, application support and profile assessment." />
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }} className="nc-3col">
+
+      {/* ================= PACKAGES ================= */}
+      <Section style={{ paddingTop: 32 }}>
+        <SectionHead
+          eyebrow="Application Support"
+          h2="Visitor visa application packages"
+          h3="Support tailored to who is travelling. Each package covers visa assistance, documentation guidance, application support and profile assessment."
+        />
+
+        <div
+          className="nc-3col"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+            gap: 18,
+          }}
+        >
           {[
-            ["Family Package", "For families applying together for holidays or family visit visas.", CORAL],
-            ["Couple Package", "For couples travelling together on a shared itinerary.", TEAL],
-            ["Single Traveller", "For individual applicants planning an international trip.", SUN],
-          ].map(([t, d, col], i) => (
-            <Glass key={i} style={{ borderTop: `4px solid ${col}` }}>
-              <h3 style={{ fontSize: 17, color: INK, margin: "0 0 8px" }}>{t}</h3>
-              <p style={{ fontSize: 13.5, color: "#5a6577", lineHeight: 1.65, margin: "0 0 14px" }}>{d}</p>
-              <ul style={{ paddingLeft: 17, color: "#3c485c", fontSize: 13, lineHeight: 1.9, margin: 0 }}>
-                <li>Visa assistance</li>
-                <li>Documentation guidance</li>
-                <li>Application support</li>
-                <li>Profile assessment</li>
-              </ul>
-              <Btn variant="navy" onClick={() => go("contact")} style={{ width: "100%", justifyContent: "center", marginTop: 16, fontSize: 13 }}>
+            [
+              "👨‍👩‍👧",
+              "Family Package",
+              "For families applying together for holidays or family visit visas.",
+              CORAL,
+            ],
+            [
+              "👫",
+              "Couple Package",
+              "For couples travelling together on a shared itinerary.",
+              TEAL,
+            ],
+            [
+              "🧳",
+              "Single Traveller",
+              "For individual applicants planning an international trip.",
+              SUN,
+            ],
+          ].map(([icon, title, desc, col], i) => (
+            <Glass
+              key={i}
+              style={{
+                borderTop: `4px solid ${col}`,
+                padding: "23px 24px 20px",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 11,
+                  marginBottom: 10,
+                }}
+              >
+                <div
+                  style={{
+                    fontSize: 23,
+                  }}
+                >
+                  {icon}
+                </div>
+
+                <h3
+                  style={{
+                    fontSize: 17,
+                    color: INK,
+                    margin: 0,
+                  }}
+                >
+                  {title}
+                </h3>
+              </div>
+
+              <p
+                style={{
+                  fontSize: 13,
+                  color: "#5a6577",
+                  lineHeight: 1.6,
+                  margin: "0 0 13px",
+                }}
+              >
+                {desc}
+              </p>
+
+              <div
+                style={{
+                  display: "grid",
+                  gap: 7,
+                }}
+              >
+                {[
+                  "Visa assistance",
+                  "Documentation guidance",
+                  "Application support",
+                  "Profile assessment",
+                ].map((item, j) => (
+                  <div
+                    key={j}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 8,
+                      color: "#3c485c",
+                      fontSize: 12.5,
+                    }}
+                  >
+                    <CheckCircle2
+                      size={15}
+                      color={col}
+                    />
+                    {item}
+                  </div>
+                ))}
+              </div>
+
+              <Btn
+                variant="navy"
+                onClick={() => go("contact")}
+                style={{
+                  width: "100%",
+                  justifyContent: "center",
+                  marginTop: 17,
+                  fontSize: 12.5,
+                }}
+              >
                 Get Consultation <ArrowRight size={14} />
               </Btn>
             </Glass>
           ))}
         </div>
       </Section>
+
+
+      {/* ================= FINAL CTA ================= */}
+      <Section style={{ paddingTop: 28, paddingBottom: 45 }}>
+        <div
+          className="nc-visitor-final-cta"
+          style={{
+            borderRadius: 22,
+            overflow: "hidden",
+            minHeight: 210,
+            display: "flex",
+            alignItems: "center",
+            position: "relative",
+            background:
+              "linear-gradient(90deg, rgba(224,241,249,0.98) 0%, rgba(224,241,249,0.88) 48%, rgba(224,241,249,0.18) 100%), url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1800&q=85') center/cover",
+          }}
+        >
+          <div
+            style={{
+              padding: "30px 38px",
+              position: "relative",
+              zIndex: 2,
+            }}
+          >
+            <h2
+              style={{
+                fontSize: 24,
+                color: INK,
+                margin: "0 0 7px",
+              }}
+            >
+              Ready to plan your next trip?
+            </h2>
+
+            <p
+              style={{
+                color: "#5d697d",
+                fontSize: 13.5,
+                margin: "0 0 15px",
+              }}
+            >
+              Get expert guidance for your visitor visa and travel with confidence.
+            </p>
+
+            <Btn
+              variant="teal"
+              onClick={() => go("contact")}
+            >
+              Get Free Consultation <ArrowRight size={14} />
+            </Btn>
+
+            <div
+              style={{
+                display: "flex",
+                gap: 20,
+                flexWrap: "wrap",
+                marginTop: 20,
+              }}
+            >
+              {[
+                "✈️ Hassle-Free Process",
+                "📄 Complete Documentation Support",
+                "🎧 Expert Counsellors",
+              ].map((x, i) => (
+                <span
+                  key={i}
+                  style={{
+                    fontSize: 10.5,
+                    color: "#4e5a70",
+                    fontWeight: 600,
+                  }}
+                >
+                  {x}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div
+            style={{
+              position: "absolute",
+              right: "8%",
+              top: "20%",
+              fontSize: 25,
+              fontStyle: "italic",
+              fontWeight: 700,
+              color: "rgba(22,18,51,0.7)",
+              transform: "rotate(-5deg)",
+            }}
+          >
+            More Destinations
+            <br />
+            More Memories
+          </div>
+        </div>
+      </Section>
+
     </PageShell>
   );
 }
@@ -3275,4 +3911,71 @@ export default function App() {
       <FloatingCTAs />
     </div>
   );
+}
+@media (max-width: 1100px) {
+  .nc-visitor-destination-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .nc-visitor-hero {
+    min-height: auto !important;
+    background-position: center right !important;
+  }
+
+  .nc-visitor-hero > div:first-child {
+    width: 72% !important;
+    padding: 35px 30px !important;
+  }
+
+  .nc-visitor-final-cta {
+    min-height: 240px !important;
+  }
+
+  .nc-visitor-final-cta > div:last-child {
+    display: none !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .nc-visitor-destination-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .nc-visitor-hero {
+    background:
+      linear-gradient(
+        90deg,
+        rgba(237,250,250,0.98),
+        rgba(237,250,250,0.90)
+      ) !important;
+  }
+
+  .nc-visitor-hero > div:first-child {
+    width: 100% !important;
+    padding: 30px 24px !important;
+  }
+
+  .nc-visitor-hero h1 {
+    font-size: 27px !important;
+  }
+}
+
+@media (max-width: 520px) {
+  .nc-visitor-destination-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .nc-visitor-hero h1 {
+    font-size: 25px !important;
+  }
+
+  .nc-visitor-hero h2 {
+    font-size: 14px !important;
+  }
+
+  .nc-visitor-final-cta {
+    min-height: 270px !important;
+  }
 }
