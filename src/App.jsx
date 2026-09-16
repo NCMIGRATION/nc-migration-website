@@ -259,6 +259,97 @@ const VISITOR_IMAGES = {
   "Schengen Europe":
     "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=85",
 };
+const VISITOR_COUNTRIES = {
+  uae: {
+    flag: "🇦🇪",
+    name: "UAE",
+    label: "Tourist Visa",
+    hero: "linear-gradient(135deg,#3d2b0d,#8a6512)",
+    overview: "Short-stay tourist visas for holidays, shopping trips and family visits across Dubai, Abu Dhabi and the wider Emirates.",
+    purpose: "Tourism, family visits, transit and short leisure stays."
+  },
+
+  singapore: {
+    flag: "🇸🇬",
+    name: "Singapore",
+    label: "Visitor Visa",
+    hero: "linear-gradient(135deg,#7a1c1c,#c9312a)",
+    overview: "Visitor visa guidance for short leisure and family visit trips to Singapore.",
+    purpose: "Tourism, family visits and short social visits."
+  },
+
+  thailand: {
+    flag: "🇹🇭",
+    name: "Thailand",
+    label: "Tourist Visa",
+    hero: "linear-gradient(135deg,#122c4d,#1f5091)",
+    overview: "Tourist visa guidance for holidays and leisure travel across Thailand.",
+    purpose: "Tourism and short leisure stays."
+  },
+
+  malaysia: {
+    flag: "🇲🇾",
+    name: "Malaysia",
+    label: "Tourist Visa",
+    hero: "linear-gradient(135deg,#0f3d2e,#136c50)",
+    overview: "Visitor and tourist visa guidance for trips to Kuala Lumpur, Penang, Langkawi and beyond.",
+    purpose: "Tourism, family visits and short leisure stays."
+  },
+
+  vietnam: {
+    flag: "🇻🇳",
+    name: "Vietnam",
+    label: "Tourist Visa",
+    hero: "linear-gradient(135deg,#8a2f12,#c9601f)",
+    overview: "Tourist visa guidance for leisure travel across Vietnam.",
+    purpose: "Tourism and short leisure stays."
+  },
+
+  uk: {
+    flag: "🇬🇧",
+    name: "United Kingdom",
+    label: "Visitor Visa",
+    hero: "linear-gradient(135deg,#101d3d,#233a72)",
+    overview: "UK Standard Visitor visa guidance for tourism, family visits and permitted short business activities.",
+    purpose: "Tourism, visiting family or friends, and certain permitted business activities. Visitors may not work in the UK."
+  },
+
+  australia: {
+    flag: "🇦🇺",
+    name: "Australia",
+    label: "Visitor Visa",
+    hero: "linear-gradient(135deg,#0f3d2e,#136c50)",
+    overview: "Visitor visa guidance for holidays and family visits to Australia.",
+    purpose: "Tourism and visiting family or friends."
+  },
+
+  "new-zealand": {
+    flag: "🇳🇿",
+    name: "New Zealand",
+    label: "Visitor Visa",
+    hero: "linear-gradient(135deg,#122c4d,#1f5091)",
+    overview: "Visitor visa guidance for holidays and family visits to New Zealand.",
+    purpose: "Tourism and visiting family or friends."
+  },
+
+  switzerland: {
+    flag: "🇨🇭",
+    name: "Switzerland",
+    label: "Visitor Visa",
+    hero: "linear-gradient(135deg,#7a1c1c,#a62b22)",
+    overview: "Switzerland is part of the Schengen Area. Visitor travel is generally covered by a Schengen short-stay visa.",
+    purpose: "Tourism, family visits and short leisure stays within the Schengen Area."
+  },
+
+  schengen: {
+    flag: "🇪🇺",
+    name: "Schengen Europe",
+    label: "Schengen Visa",
+    hero: "linear-gradient(135deg,#0d2b4e,#1c4a7a)",
+    overview: "A Schengen short-stay visa may allow travel across participating European countries, subject to destination-specific requirements.",
+    purpose: "Tourism, family visits and short stays across the Schengen Area."
+  }
+};
 const SCHENGEN_MEMBERS = [
   ["🇫🇷", "France"], ["🇩🇪", "Germany"], ["🇮🇹", "Italy"], ["🇪🇸", "Spain"],
   ["🇬🇷", "Greece"], ["🇨🇭", "Switzerland"], ["🇳🇱", "Netherlands"],
