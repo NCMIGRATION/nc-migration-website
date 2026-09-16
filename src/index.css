@@ -1,0 +1,25 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Prevents any accidental horizontal scroll on mobile before the
+   component's own <style> block (with the full reset + ticker
+   animation) mounts. */
+html,
+body {
+  overflow-x: hidden;
+}
