@@ -1,41 +1,42 @@
 export default async function handler(req, res) {
-  const currencies = [
-    "GBP",
-    "EUR",
-    "USD",
-    "AED",
-    "NZD",
-    "AUD",
-    "SGD",
-    "CAD",
-    "CHF",
-    "MYR",
-    "THB",
-    "VND",
-  ];
-
   try {
+    const response = await fetch(
+      "https://api.frankfurter.app/latest?from=INR"
+    );
+
+    if (!response.ok) {
+      throw new Error(`Frankfurter returned ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    if (!data.rates) {
+      throw new Error("No rates returned");
+    }
+
+    const currencies = [
+      "GBP",
+      "EUR",
+      "USD",
+      "AED",
+      "NZD",
+      "AUD",
+      "SGD",
+      "CAD",
+      "CHF",
+      "MYR",
+      "THB",
+      "VND"
+    ];
+
     const rates = {};
 
     for (const currency of currencies) {
-      const response = await fetch(
-        `https://exchangerates.com/api/index.php?action=public_rate&from=${currency}&to=INR`
-      );
+      const inrToCurrency = data.rates[currency];
 
-      const data = await response.json();
-
-      const rate = Number(data?.rates?.INR);
-
-      if (Number.isFinite(rate) && rate > 0) {
-        rates[currency] = rate;
+      if (inrToCurrency > 0) {
+        rates[currency] = 1 / inrToCurrency;
       }
-    }
-
-    if (Object.keys(rates).length === 0) {
-      return res.status(503).json({
-        success: false,
-        error: "No rates received",
-      });
     }
 
     res.setHeader(
@@ -45,15 +46,16 @@ export default async function handler(req, res) {
 
     return res.status(200).json({
       success: true,
-      rates: rates,
-      updatedAt: new Date().toISOString(),
+      rates,
+      updatedAt: new Date().toISOString()
     });
+
   } catch (error) {
-    console.error(error);
+    console.error("Currency API error:", error);
 
     return res.status(503).json({
       success: false,
-      error: String(error),
+      error: String(error)
     });
   }
 }
