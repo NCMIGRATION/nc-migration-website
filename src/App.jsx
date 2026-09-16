@@ -1349,47 +1349,354 @@ function HomePage({ go }) {
         </Btn>
       </Section>
 
-      {/* WHY NC MIGRATION */}
-      <Section bg={PAPER}>
-        <SectionHead eyebrow="Why Us" h2="Why choose NC Migration?" />
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }} className="nc-3col">
+          {/* WHY NC MIGRATION */}
+      <Section
+        style={{
+          background: "#f7f8fb",
+          paddingTop: 76,
+          paddingBottom: 76,
+        }}
+      >
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1.05fr 1.95fr",
+            gap: 34,
+            alignItems: "stretch",
+          }}
+          className="nc-why-grid"
+        >
+          <div
+            style={{
+              minHeight: 390,
+              borderRadius: 24,
+              overflow: "hidden",
+              position: "relative",
+              backgroundImage:
+                "url('https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1200&q=85')",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              boxShadow: "0 18px 45px rgba(10,31,60,0.16)",
+            }}
+          >
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                background:
+                  "linear-gradient(180deg,rgba(8,18,45,0.08) 15%,rgba(8,18,45,0.82) 100%)",
+              }}
+            />
+
+            <div
+              style={{
+                position: "absolute",
+                left: 28,
+                right: 28,
+                bottom: 28,
+                color: "#fff",
+              }}
+            >
+              <div
+                style={{
+                  fontSize: 12,
+                  fontWeight: 800,
+                  letterSpacing: 1.5,
+                  color: SUN,
+                  marginBottom: 10,
+                }}
+              >
+                NC MIGRATION
+              </div>
+
+              <div
+                style={{
+                  fontSize: 27,
+                  lineHeight: 1.2,
+                  fontWeight: 800,
+                  marginBottom: 10,
+                }}
+              >
+                Guidance built around your profile.
+              </div>
+
+              <div
+                style={{
+                  fontSize: 14,
+                  lineHeight: 1.7,
+                  color: "rgba(255,255,255,0.82)",
+                }}
+              >
+                Clear information, country-specific guidance and support
+                throughout your application journey.
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <SectionHead
+              eyebrow="Why Us"
+              h2="Why choose NC Migration?"
+              h3="Simple, profile-based guidance for work visas, visitor visas and UK immigration services."
+            />
+
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(2, 1fr)",
+                gap: 16,
+              }}
+              className="nc-2col"
+            >
+              {[
+                ["01", "Profile assessment", "We understand your background and requirements.", CORAL],
+                ["02", "Country-specific guidance", "We explain the relevant route and requirements.", TEAL],
+                ["03", "Documentation support", "We help you understand the documents needed.", SUN],
+                ["04", "Application assistance", "We support you through preparation and submission.", ROYAL],
+              ].map(([num, title, desc, color]) => (
+                <div
+                  key={num}
+                  style={{
+                    background: "#fff",
+                    borderRadius: 16,
+                    padding: "22px 20px",
+                    border: "1px solid #e6e9f0",
+                    boxShadow: "0 6px 18px rgba(16,22,48,0.06)",
+                  }}
+                >
+                  <div
+                    style={{
+                      width: 40,
+                      height: 40,
+                      borderRadius: 12,
+                      background: `${color}18`,
+                      color,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontWeight: 800,
+                      fontSize: 13,
+                      marginBottom: 15,
+                    }}
+                  >
+                    {num}
+                  </div>
+
+                  <div
+                    style={{
+                      fontSize: 16,
+                      fontWeight: 750,
+                      color: INK,
+                      marginBottom: 7,
+                    }}
+                  >
+                    {title}
+                  </div>
+
+                  <div
+                    style={{
+                      fontSize: 13,
+                      lineHeight: 1.6,
+                      color: "#667085",
+                    }}
+                  >
+                    {desc}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      {/* HOW IT WORKS */}
+      <Section style={{ paddingTop: 74, paddingBottom: 74 }}>
+        <SectionHead
+          eyebrow="How It Works"
+          h2="Your journey in four simple steps"
+          h3="From profile assessment to application support, we keep the process clear and easy to follow."
+        />
+
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(4, 1fr)",
+            gap: 18,
+            marginTop: 34,
+          }}
+          className="nc-4col"
+        >
           {[
-            ["Personalised profile assessment", CORAL], ["Documentation guidance", SUN], ["Country-specific guidance", TEAL],
-            ["Visitor visa assistance", ROYAL], ["Work visa guidance", "#6c4fd1"], ["Transparent process", TEAL],
-          ].map(([t, color], i) => (
-            <div key={i} style={{ display: "flex", gap: 14, alignItems: "center", padding: 20, background: "#fff", borderRadius: 12, border: "1px solid #e7eaf2", borderLeft: `4px solid ${color}` }}>
-              <CheckCircle2 size={20} color={color} style={{ flexShrink: 0 }} />
-              <div style={{ fontSize: 14.5, color: INK, fontWeight: 600 }}>{t}</div>
+            ["01", "Profile assessment", "We review your background, experience and immigration history."],
+            ["02", "Country & route guidance", "We explain which routes may realistically apply to you."],
+            ["03", "Documentation", "We guide you through the documents each route requires."],
+            ["04", "Application support", "We support you through preparation and submission."],
+          ].map(([num, title, desc], i) => (
+            <div
+              key={num}
+              style={{
+                position: "relative",
+                background: "#fff",
+                borderRadius: 18,
+                padding: "26px 22px",
+                border: "1px solid #e5e8ef",
+                boxShadow: "0 7px 20px rgba(16,22,48,0.06)",
+              }}
+            >
+              <div
+                style={{
+                  fontSize: 34,
+                  fontWeight: 850,
+                  color: CORAL,
+                  lineHeight: 1,
+                  marginBottom: 18,
+                }}
+              >
+                {num}
+              </div>
+
+              <div
+                style={{
+                  fontSize: 16,
+                  fontWeight: 750,
+                  color: INK,
+                  marginBottom: 8,
+                }}
+              >
+                {title}
+              </div>
+
+              <div
+                style={{
+                  fontSize: 13,
+                  color: "#667085",
+                  lineHeight: 1.65,
+                }}
+              >
+                {desc}
+              </div>
+
+              {i < 3 && (
+                <div
+                  style={{
+                    position: "absolute",
+                    right: -15,
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    width: 30,
+                    height: 30,
+                    borderRadius: "50%",
+                    background: "#fff",
+                    border: "1px solid #e5e8ef",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    color: CORAL,
+                    zIndex: 2,
+                  }}
+                  className="nc-step-arrow"
+                >
+                  →
+                </div>
+              )}
             </div>
           ))}
         </div>
       </Section>
 
-      {/* HOW IT WORKS */}
-      <Section>
-        <SectionHead eyebrow="How It Works" h2="A clear four-step process" />
-        <StepFlow steps={[
-          ["01", "Profile assessment", "We review your background, experience and immigration history."],
-          ["02", "Country & route guidance", "We explain which routes may realistically apply to you."],
-          ["03", "Documentation", "We guide you through the documents each route requires."],
-          ["04", "Application support", "We support you through preparation and submission."],
-        ]} />
-      </Section>
-
       {/* FINAL CTA */}
-      <Section style={{ background: `linear-gradient(120deg,${CORAL} 0%,${ROYAL} 55%,${NAVY} 100%)` }}>
-        <div style={{ textAlign: "center", maxWidth: 680, margin: "0 auto" }}>
-          <h2 style={{ color: "#fff", fontSize: 28, marginBottom: 14 }}>Ready to explore your next opportunity?</h2>
-          <p style={{ color: "rgba(255,255,255,0.85)", marginBottom: 26, lineHeight: 1.7 }}>
-            Speak with our team and understand which visa routes may apply to your profile.
-          </p>
-          <Btn variant="gold" onClick={() => go("contact")}>Get Free Consultation <ArrowRight size={15} /></Btn>
-        </div>
-      </Section>
-    </>
-  );
-}
+      <section
+        style={{
+          position: "relative",
+          minHeight: 390,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          overflow: "hidden",
+          backgroundImage:
+            "url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=2200&q=90')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background:
+              "linear-gradient(90deg,rgba(8,18,45,0.88),rgba(8,18,45,0.58),rgba(8,18,45,0.78))",
+          }}
+        />
 
+        <div
+          style={{
+            position: "relative",
+            zIndex: 1,
+            textAlign: "center",
+            maxWidth: 760,
+            padding: "70px 24px",
+          }}
+        >
+          <div
+            style={{
+              display: "inline-block",
+              padding: "7px 14px",
+              borderRadius: 30,
+              background: "rgba(255,255,255,0.12)",
+              border: "1px solid rgba(255,255,255,0.22)",
+              color: SUN,
+              fontSize: 12,
+              fontWeight: 800,
+              letterSpacing: 1.2,
+              marginBottom: 18,
+            }}
+          >
+            START YOUR JOURNEY
+          </div>
+
+          <h2
+            style={{
+              color: "#fff",
+              fontSize: 38,
+              lineHeight: 1.15,
+              margin: "0 0 16px",
+              fontWeight: 850,
+            }}
+          >
+            Ready to explore your next opportunity?
+          </h2>
+
+          <p
+            style={{
+              color: "rgba(255,255,255,0.84)",
+              fontSize: 16,
+              lineHeight: 1.7,
+              margin: "0 auto 28px",
+              maxWidth: 650,
+            }}
+          >
+            Speak with our team and understand which visa routes may apply
+            to your profile.
+          </p>
+
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              gap: 12,
+              flexWrap: "wrap",
+            }}
+          >
+            <Btn variant="gold" onClick={() => go("contact")}>
+              Get Free Consultation <ArrowRight size={15} />
+            </Btn>
+
+            <Btn variant="ghost" onClick={() => go("work-visa")}>
+              Explore Work Visa <ArrowRight size={15} />
+            </Btn>
+          </div>
+        </div>
+      </section>
 /* ------------------------------------------------------------------ */
 /*  WORK VISA + COUNTRY DETAIL                                          */
 /* ------------------------------------------------------------------ */
