@@ -1696,13 +1696,14 @@ function HomePage({ go }) {
             </Btn>
           </div>
         </div>
-</section>
+      </section>
+    </>
+  );
 }
 
 /* ------------------------------------------------------------------ */
-/*  WORK VISA + COUNTRY DETAIL                                          */
+/*  WORK VISA + COUNTRY DETAIL                                       */
 /* ------------------------------------------------------------------ */
-      
 function WorkVisaPage({ go }) {
   return (
     <PageShell theme="work">
