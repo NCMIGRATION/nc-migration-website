@@ -1,21 +1,30 @@
 // NC Migration - Live Currency Rates
-// ExchangeRates.com public API - no API key required.
+// ExchangeRates.com public API
 
-const CURRENCIES = ["GBP", "EUR", "USD", "AED", "NZD", "AUD", "SGD"];
+const CURRENCIES = [
+  "GBP",
+  "EUR",
+  "USD",
+  "AED",
+  "NZD",
+  "AUD",
+  "SGD",
+  "CAD",
+  "CHF",
+  "MYR",
+  "THB",
+  "VND",
+];
 
 export default async function handler(req, res) {
   try {
-    const results = await Promise.all(
+    const results = await Promise.allSettled(
       CURRENCIES.map(async (currency) => {
         const url =
           `https://exchangerates.com/api/index.php` +
           `?action=public_rate&from=${currency}&to=INR`;
 
-        const response = await fetch(url, {
-          headers: {
-            Accept: "application/json",
-          },
-        });
+        const response = await fetch(url);
 
         if (!response.ok) {
           throw new Error(`${currency}: HTTP ${response.status}`);
@@ -31,20 +40,27 @@ export default async function handler(req, res) {
 
         return {
           currency,
-          rate: Math.round(rate * 100) / 100,
+          rate,
         };
       })
     );
 
     const rates = {};
 
-    for (const item of results) {
-      rates[item.currency] = item.rate;
+    for (const result of results) {
+      if (result.status === "fulfilled") {
+        rates[result.value.currency] =
+          Math.round(result.value.rate * 100000) / 100000;
+      }
+    }
+
+    if (Object.keys(rates).length === 0) {
+      throw new Error("No currency rates were returned");
     }
 
     res.setHeader(
       "Cache-Control",
-      "public, s-maxage=60, stale-while-revalidate=120"
+      "public, s-maxage=60, stale-while-revalidate=300"
     );
 
     return res.status(200).json({
