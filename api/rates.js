@@ -35,7 +35,7 @@ export default async function handler(req, res) {
       const inrToCurrency = data.rates[currency];
 
       if (inrToCurrency > 0) {
-        rates[currency] = 1 / inrToCurrency;
+        rates[currency] = inrToCurrency;
       }
     }
 
