@@ -713,77 +713,105 @@ function FloatingCTAs() {
 /* ------------------------------------------------------------------ */
 
 const TICKER_CURRENCIES = [
-  ["🇬🇧", "United Kingdom", "GBP", "\u00a31"],
-  ["🇪🇺", "Euro", "EUR", "\u20ac1"],
-  ["🇺🇸", "USA", "USD", "$1"],
-  ["🇦🇪", "UAE", "AED", "1"],
-  ["🇳🇿", "New Zealand", "NZD", "1"],
-  ["🇦🇺", "Australia", "AUD", "1"],
-  ["🇸🇬", "Singapore", "SGD", "1"],
-  ["🇨🇦", "Canada", "CAD", "1"],
-  ["🇨🇭", "Switzerland", "CHF", "1"],
-  ["🇲🇾", "Malaysia", "MYR", "1"],
-  ["🇹🇭", "Thailand", "THB", "1"],
-  ["🇻🇳", "Vietnam", "VND", "1"],
+  ["🇬🇧", "United Kingdom", "GBP"],
+  ["🇪🇺", "Euro", "EUR"],
+  ["🇺🇸", "USA", "USD"],
+  ["🇦🇪", "UAE", "AED"],
+  ["🇳🇿", "New Zealand", "NZD"],
+  ["🇦🇺", "Australia", "AUD"],
+  ["🇸🇬", "Singapore", "SGD"],
 ];
 
-// Cached fallback used only if the rates API is unavailable. Clearly labelled
-// as an indicative reference rather than presented as a live figure.
-const FALLBACK_RATES = {
-  GBP: 112.4, EUR: 97.6, USD: 88.2, AED: 24.0, NZD: 51.3, AUD: 57.8,
-  SGD: 68.1, CAD: 63.4, CHF: 104.9, MYR: 20.9, THB: 2.72, VND: 0.0035,
-};
-
-function formatRate(code, value) {
-  if (value == null) return "\u2014";
-  if (value < 0.01) return value.toFixed(5);
-  if (value < 1) return value.toFixed(3);
-  return value.toFixed(2);
+function formatRate(value) {
+  if (value == null || !Number.isFinite(Number(value))) return "\u2014";
+  return Number(value).toFixed(2);
 }
 
 function CurrencyTicker() {
-  const [rates, setRates] = useState(FALLBACK_RATES);
+  // No hard-coded fallback rates: if the live source is unavailable, the
+  // ticker keeps the last successfully fetched value, or shows — on first load.
+  const [rates, setRates] = useState(() => {
+    try {
+      const saved = JSON.parse(localStorage.getItem("nc_fx_rates") || "null");
+      return saved && typeof saved === "object" ? saved : {};
+    } catch {
+      return {};
+    }
+  });
+
+  const [updatedAt, setUpdatedAt] = useState(() => {
+    try {
+      return localStorage.getItem("nc_fx_updated_at") || null;
+    } catch {
+      return null;
+    }
+  });
 
   const load = useCallback(async () => {
     try {
-      const res = await fetch("https://api.exchangerate.host/latest?base=INR");
-      if (!res.ok) throw new Error("bad response");
+      // Server-side Vercel function — see /api/rates.js.
+      const res = await fetch("/api/rates", { cache: "no-store" });
+      if (!res.ok) throw new Error("Currency API unavailable");
+
       const data = await res.json();
-      if (!data || !data.rates) throw new Error("no rates");
-      // API returns INR -> X; invert to get X -> INR for display.
-      const out = {};
-      Object.keys(FALLBACK_RATES).forEach((code) => {
-        const r = data.rates[code];
-        if (r && r > 0) out[code] = 1 / r;
-      });
-      if (Object.keys(out).length > 0) setRates(out);
-    } catch (e) {
-      // Silently keep the last known rates — the ticker stays clean either way.
+      if (!data?.rates) throw new Error("No rates returned");
+
+      setRates(data.rates);
+      setUpdatedAt(data.updatedAt || new Date().toISOString());
+
+      try {
+        localStorage.setItem("nc_fx_rates", JSON.stringify(data.rates));
+        localStorage.setItem("nc_fx_updated_at", data.updatedAt || new Date().toISOString());
+      } catch {
+        // localStorage can be unavailable in private/restricted browser modes.
+      }
+    } catch {
+      // Keep the last successfully fetched values. Never replace them with an
+      // old hard-coded rate. On first load, the ticker simply shows —.
     }
   }, []);
 
   useEffect(() => {
     load();
-    const refresh = setInterval(load, 30 * 60 * 1000); // refresh every 30 min
-    return () => clearInterval(refresh);
+
+    // Refresh every minute so the ticker picks up provider changes promptly.
+    const refresh = setInterval(load, 60 * 1000);
+
+    // Refresh when the visitor returns to the tab.
+    const onVisible = () => {
+      if (document.visibilityState === "visible") load();
+    };
+    document.addEventListener("visibilitychange", onVisible);
+
+    return () => {
+      clearInterval(refresh);
+      document.removeEventListener("visibilitychange", onVisible);
+    };
   }, [load]);
 
   const items = [...TICKER_CURRENCIES, ...TICKER_CURRENCIES];
 
+  const updatedLabel = updatedAt
+    ? `Updated ${new Date(updatedAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}`
+    : "Updating rates…";
+
   return (
     <div style={{ background: NAVY, borderBottom: `2px solid ${SUN}`, position: "relative", maxWidth: "100vw", overflow: "hidden" }}>
       <div style={{ overflow: "hidden" }}>
-        <div className="nc-ticker-track" style={{ display: "flex", width: "max-content", padding: "11px 0" }}>
+        <div className="nc-ticker-track" style={{ display: "flex", width: "max-content", padding: "8px 0 4px" }}>
           {items.map(([flag, country, code], i) => (
             <div key={i} style={{ display: "flex", alignItems: "center", gap: 9, padding: "0 22px", whiteSpace: "nowrap" }}>
               <span style={{ fontSize: 17 }}>{flag}</span>
               <span style={{ color: "rgba(255,255,255,0.78)", fontSize: 12.5, fontWeight: 500 }}>{country}</span>
               <span style={{ color: "#fff", fontSize: 12.5, fontWeight: 700 }}>
-                {"\u20b9"}{formatRate(code, rates[code])}
+                {"\u20b9"}{formatRate(rates[code])}
               </span>
               <span style={{ color: SUN, marginLeft: 10, opacity: 0.6 }}>{"\u2022"}</span>
             </div>
           ))}
+        </div>
+        <div style={{ textAlign: "center", color: "rgba(255,255,255,0.48)", fontSize: 9.5, padding: "0 0 4px", lineHeight: 1.2 }}>
+          {updatedLabel} · Rates by <a href="https://exchangerates.com" target="_blank" rel="noreferrer" style={{ color: "rgba(255,255,255,0.62)", textDecoration: "underline" }}>ExchangeRates.com</a>
         </div>
       </div>
     </div>

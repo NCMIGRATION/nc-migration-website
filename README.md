@@ -102,9 +102,9 @@ then resolve any conflicts and push.
 - Country flags are rendered as native emoji (real Unicode characters, not
   escape codes) and are verified to render correctly in the source.
 - The ₹ symbol in the currency ticker is a real character in the source.
-- The currency ticker fetches live rates from `exchangerate.host` on load
-  and every 30 minutes; if the request fails (e.g. blocked by a network
-  policy) it silently falls back to the built-in reference rates so the
+- **The currency ticker fetches live rates through `/api/rates`** (see
+  "Live currency ticker" below) every 30 minutes; if that endpoint is ever
+  unreachable it silently falls back to built-in reference rates so the
   ticker never breaks or shows an error to visitors.
 - Images use `picsum.photos` (deterministic seeded placeholders) and
   verified `images.pexels.com` URLs — both are public CDNs and need no API
@@ -113,3 +113,29 @@ then resolve any conflicts and push.
   hosted photography whenever you're ready.
 - The NC Migration logo is embedded directly as a base64 data URI inside
   `App.jsx`, so no separate logo file is needed for it to render.
+
+## Live currency ticker
+
+The homepage ticker shows GBP, EUR, USD, AED, NZD, AUD and SGD converted to
+INR. It never calls a third-party rates API directly from the browser —
+instead it calls a Vercel Serverless Function at `api/rates.js`, which:
+
+1. Fetches USD-based rates from a free, keyless public API server-side.
+2. Converts each currency to "1 unit = ? INR", rounded to 2 decimals.
+3. Returns a small JSON payload, cached at Vercel's edge for 30 minutes
+   (`stale-while-revalidate` for another hour after that), so repeat
+   visits are fast and the upstream provider is never hit too often.
+4. Falls back to a small built-in rate table if the upstream API is ever
+   down, so the ticker always renders sensible numbers.
+
+No API key is required for the current provider. If you switch to a
+provider that does need one, add it in Vercel under **Project → Settings →
+Environment Variables** (a plain name like `RATES_API_KEY`, **not** a
+`VITE_`-prefixed one) and read it in `api/rates.js` with
+`process.env.RATES_API_KEY` — that keeps it server-side only and it will
+never be bundled into the frontend JavaScript.
+
+`api/rates.js` needs no build step and no entry in `vite.config.js` —
+Vercel automatically turns any file under `/api` into a serverless
+function, independent of the Vite frontend build.
+
