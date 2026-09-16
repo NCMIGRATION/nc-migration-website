@@ -1707,6 +1707,8 @@ function HomePage({ go }) {
 function WorkVisaPage({ go }) {
   return (
     <PageShell theme="work">
+
+      {/* HERO */}
       <PageHero
         theme="work"
         eyebrow="Work Visa Opportunities"
@@ -1714,85 +1716,344 @@ function WorkVisaPage({ go }) {
         sub="Explore work visa opportunities across Europe, the UK, New Zealand & UAE"
         desc="Explore country-specific work visa pathways and immigration requirements based on your profile, occupation and applicable rules."
       >
-        <Btn variant="coral" onClick={() => scrollToId("wv-countries")}>Explore Countries ↓</Btn>
-        <Btn variant="navy" onClick={() => go("contact")}>Get Free Consultation</Btn>
+        <Btn
+          variant="coral"
+          onClick={() => scrollToId("wv-countries")}
+        >
+          Explore Countries ↓
+        </Btn>
+
+        <Btn
+          variant="navy"
+          onClick={() => go("contact")}
+        >
+          Get Free Consultation
+        </Btn>
       </PageHero>
 
-      <Section style={{ paddingTop: 16 }}>
+
+      {/* COUNTRY DESTINATIONS */}
+      <Section style={{ paddingTop: 18, paddingBottom: 20 }}>
+
         <Anchor id="wv-countries" />
-        <SectionHead eyebrow="Destinations" h2="Choose a destination"
-          h3="Select a country to see who may be eligible, common work areas, documentation and the route requirements that apply." />
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }} className="nc-3col">
+
+        <SectionHead
+          eyebrow="Destinations"
+          h2="Choose a destination"
+          h3="Select a country to see who may be eligible, common work areas, documentation and the route requirements that apply."
+        />
+
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+            gap: 20,
+            marginTop: 30,
+          }}
+          className="nc-work-country-grid"
+        >
           {Object.entries(WORK_COUNTRIES).map(([key, c]) => (
-            <WorkCountryCard key={key} c={c} onClick={() => go("work-country", key)} />
+            <WorkCountryCard
+              key={key}
+              c={c}
+              onClick={() => go("work-country", key)}
+            />
           ))}
         </div>
-        <p style={{ fontSize: 13, color: "#6b7689", marginTop: 20 }}>
-          Duration varies by route and employment conditions. Available roles may vary by employer, occupation and current demand.
+
+        <p
+          style={{
+            fontSize: 13,
+            color: "#6b7689",
+            marginTop: 18,
+            lineHeight: 1.6,
+          }}
+        >
+          Duration varies by route and employment conditions. Available roles
+          may vary by employer, occupation and current demand.
         </p>
+
       </Section>
 
-      <Section style={{ paddingTop: 8 }}>
+
+      {/* VISIT TO WORK CTA */}
+      <Section style={{ paddingTop: 8, paddingBottom: 70 }}>
+
         <div
           onClick={() => go("visit-to-work")}
           style={{
-            borderRadius: 18, padding: "30px 32px", cursor: "pointer",
-            background: `linear-gradient(115deg,${TEAL},#0d6b62)`, display: "flex",
-            alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 18,
+            borderRadius: 20,
+            padding: "30px 32px",
+            cursor: "pointer",
+            background: `linear-gradient(115deg, ${TEAL}, #0d6b62)`,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            flexWrap: "wrap",
+            gap: 20,
+            boxShadow: "0 15px 35px rgba(13,107,98,0.18)",
           }}
         >
+
           <div>
-            <div style={{ color: SUN, fontSize: 12.5, fontWeight: 700, letterSpacing: 0.6, marginBottom: 7 }}>ANOTHER PATHWAY</div>
-            <div style={{ color: "#fff", fontSize: 21, fontWeight: 700 }}>Not eligible for a direct work visa?</div>
-            <div style={{ color: "rgba(255,255,255,0.82)", fontSize: 13.5, marginTop: 7, maxWidth: 560, lineHeight: 1.6 }}>
-              Explore whether a lawful pathway may be available based on your destination and individual eligibility.
+
+            <div
+              style={{
+                color: SUN,
+                fontSize: 12,
+                fontWeight: 800,
+                letterSpacing: 1.2,
+                marginBottom: 8,
+              }}
+            >
+              ANOTHER PATHWAY
             </div>
+
+            <div
+              style={{
+                color: "#fff",
+                fontSize: 22,
+                fontWeight: 800,
+              }}
+            >
+              Not eligible for a direct work visa?
+            </div>
+
+            <div
+              style={{
+                color: "rgba(255,255,255,0.84)",
+                fontSize: 13.5,
+                marginTop: 8,
+                maxWidth: 580,
+                lineHeight: 1.65,
+              }}
+            >
+              Explore whether a lawful pathway may be available based on your
+              destination and individual eligibility.
+            </div>
+
           </div>
-          <Btn variant="gold" onClick={() => go("visit-to-work")}>Explore Visit to Work <ArrowRight size={15} /></Btn>
+
+          <Btn
+            variant="gold"
+            onClick={() => go("visit-to-work")}
+          >
+            Explore Visit to Work
+            <ArrowRight size={15} />
+          </Btn>
+
         </div>
+
       </Section>
+
     </PageShell>
   );
 }
-
 function WorkCountryCard({ c, onClick }) {
+
   const [hover, setHover] = useState(false);
+
+  const COUNTRY_IMAGES = {
+    Spain:
+      "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?auto=format&fit=crop&w=1200&q=85",
+
+    Italy:
+      "https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1200&q=85",
+
+    Germany:
+      "https://images.unsplash.com/photo-1560969184-10fe8719e047?auto=format&fit=crop&w=1200&q=85",
+
+    "New Zealand":
+      "https://images.unsplash.com/photo-1507699622108-4be3abd695ad?auto=format&fit=crop&w=1200&q=85",
+
+    "United Kingdom":
+      "https://images.unsplash.com/photo-1529655683826-aba9b3e77383?auto=format&fit=crop&w=1200&q=85",
+
+    UAE:
+      "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1200&q=85",
+
+    Slovakia:
+      "https://images.unsplash.com/photo-1590050752117-23a9d3c9c8c1?auto=format&fit=crop&w=1200&q=85",
+
+    Bulgaria:
+      "https://images.unsplash.com/photo-1603565816030-6b389eeb23cb?auto=format&fit=crop&w=1200&q=85",
+
+    Serbia:
+      "https://images.unsplash.com/photo-1587487268606-2f3f2d7c2f7d?auto=format&fit=crop&w=1200&q=85",
+  };
+
+  const image = COUNTRY_IMAGES[c.name];
+
   return (
     <div
       onClick={onClick}
-      onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
       style={{
-        cursor: "pointer", borderRadius: 16, overflow: "hidden",
-        background: "#fff", border: "1px solid #e7eaf2",
-        transform: hover ? "translateY(-6px)" : "translateY(0)",
-        boxShadow: hover ? "0 22px 40px rgba(16,22,48,0.18)" : "0 6px 16px rgba(16,22,48,0.07)",
-        transition: "transform .22s ease, box-shadow .22s ease",
+        cursor: "pointer",
+        borderRadius: 16,
+        overflow: "hidden",
+        background: "#fff",
+        border: "1px solid #e7eaf2",
+
+        transform: hover
+          ? "translateY(-6px)"
+          : "translateY(0)",
+
+        boxShadow: hover
+          ? "0 22px 40px rgba(16,22,48,0.18)"
+          : "0 7px 18px rgba(16,22,48,0.08)",
+
+        transition:
+          "transform .25s ease, box-shadow .25s ease",
+
+        minWidth: 0,
       }}
     >
-      <div style={{ height: 118, background: c.hero, position: "relative", overflow: "hidden" }}>
-        <img src={SKYLINE_SVG} alt="" aria-hidden="true" style={{
-          position: "absolute", bottom: 0, left: 0, width: "100%", height: 90,
-          objectFit: "cover", objectPosition: "bottom",
-          transform: hover ? "scale(1.07)" : "scale(1)", transformOrigin: "bottom center",
-          transition: "transform .4s ease",
-        }} />
-        <div role="img" aria-label={`${c.name} flag`} style={{
-          position: "absolute", top: 12, left: 14, fontSize: 26, lineHeight: 1,
-          background: "rgba(255,255,255,0.22)", backdropFilter: "blur(3px)",
-          borderRadius: 8, width: 38, height: 38, display: "flex", alignItems: "center", justifyContent: "center",
-        }}>{c.flag}</div>
-      </div>
-      <div style={{ padding: "18px 20px 20px" }}>
-        <div style={{ fontSize: 18, fontWeight: 800, color: INK }}>{c.name}</div>
-        <div style={{ fontSize: 12.5, color: "#7a8699", marginTop: 2, fontWeight: 600 }}>Work Visa</div>
-        <div style={{ marginTop: 14, display: "flex", alignItems: "center", gap: 6, color: CORAL, fontWeight: 700, fontSize: 13 }}>
-          View Details <ArrowRight size={14} style={{ transform: hover ? "translateX(4px)" : "none", transition: "transform .2s ease" }} />
+
+      {/* LANDMARK IMAGE */}
+      <div
+        style={{
+          height: 155,
+          position: "relative",
+          overflow: "hidden",
+          background: c.hero || "#dfe5ef",
+        }}
+      >
+
+        {image && (
+          <img
+            src={image}
+            alt={`${c.name} landmark`}
+            loading="lazy"
+            style={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+
+              transform: hover
+                ? "scale(1.07)"
+                : "scale(1)",
+
+              transition:
+                "transform .45s ease",
+
+              filter:
+                "saturate(1.05) contrast(1.02)",
+            }}
+          />
+        )}
+
+        {/* IMAGE OVERLAY */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background:
+              "linear-gradient(180deg, rgba(8,18,45,0.05) 25%, rgba(8,18,45,0.30) 100%)",
+          }}
+        />
+
+        {/* FLAG */}
+        <div
+          role="img"
+          aria-label={`${c.name} flag`}
+          style={{
+            position: "absolute",
+            top: 12,
+            left: 14,
+
+            fontSize: 25,
+            lineHeight: 1,
+
+            background:
+              "rgba(255,255,255,0.88)",
+
+            backdropFilter:
+              "blur(6px)",
+
+            borderRadius: 9,
+
+            width: 40,
+            height: 40,
+
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+
+            boxShadow:
+              "0 5px 15px rgba(0,0,0,0.14)",
+          }}
+        >
+          {c.flag}
         </div>
+
       </div>
+
+
+      {/* CARD INFORMATION */}
+      <div
+        style={{
+          padding: "17px 20px 19px",
+        }}
+      >
+
+        <div
+          style={{
+            fontSize: 18,
+            fontWeight: 800,
+            color: INK,
+            lineHeight: 1.25,
+          }}
+        >
+          {c.name}
+        </div>
+
+        <div
+          style={{
+            fontSize: 12.5,
+            color: "#7a8699",
+            marginTop: 3,
+            fontWeight: 600,
+          }}
+        >
+          Work Visa
+        </div>
+
+        <div
+          style={{
+            marginTop: 13,
+            display: "flex",
+            alignItems: "center",
+            gap: 6,
+
+            color: CORAL,
+            fontWeight: 800,
+            fontSize: 13.5,
+          }}
+        >
+          View Details
+
+          <ArrowRight
+            size={15}
+            style={{
+              transform: hover
+                ? "translateX(5px)"
+                : "translateX(0)",
+
+              transition:
+                "transform .2s ease",
+            }}
+          />
+        </div>
+
+      </div>
+
     </div>
   );
 }
-
 function DetailHero({ theme, flag, title, sub, back, backLabel, go }) {
   const t = PAGE_THEMES[theme] || PAGE_THEMES.about;
   return (
