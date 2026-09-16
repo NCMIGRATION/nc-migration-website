@@ -3082,51 +3082,92 @@ function VisitorCountryPage({ countryKey, go }) {
 /* ------------------------------------------------------------------ */
 
 function VisitToWorkPage({ go }) {
+  const destinations = [
+    {
+      key: "uk",
+      name: "United Kingdom",
+      flag: "🇬🇧",
+      image:
+        "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=85",
+    },
+    {
+      key: "spain",
+      name: "Spain",
+      flag: "🇪🇸",
+      image:
+        "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?auto=format&fit=crop&w=1200&q=85",
+    },
+    {
+      key: "germany",
+      name: "Germany",
+      flag: "🇩🇪",
+      image:
+        "https://images.unsplash.com/photo-1528728329032-2972f65dfb3f?auto=format&fit=crop&w=1200&q=85",
+    },
+    {
+      key: "greece",
+      name: "Greece",
+      flag: "🇬🇷",
+      image:
+        "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=85",
+    },
+    {
+      key: "italy",
+      name: "Italy",
+      flag: "🇮🇹",
+      image:
+        "https://images.unsplash.com/photo-1529260830199-42c24126f198?auto=format&fit=crop&w=1200&q=85",
+    },
+    {
+      key: "lithuania",
+      name: "Lithuania",
+      flag: "🇱🇹",
+      image:
+        "https://images.unsplash.com/photo-1561484930-998b6a7b22e8?auto=format&fit=crop&w=1200&q=85",
+    },
+  ];
+
   return (
     <PageShell theme="pathway">
 
       <style>{`
         .nc-v2w-hero {
-          min-height: 390px;
-          border-radius: 22px;
+          min-height: 400px;
+          border-radius: 24px;
           overflow: hidden;
           position: relative;
           background:
             linear-gradient(
               90deg,
               rgba(255,255,255,0.98) 0%,
-              rgba(255,255,255,0.94) 42%,
-              rgba(255,255,255,0.35) 72%,
-              rgba(255,255,255,0.02) 100%
+              rgba(255,255,255,0.94) 40%,
+              rgba(255,255,255,0.50) 67%,
+              rgba(255,255,255,0.05) 100%
             ),
             url("https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=2200&q=90")
             center/cover;
+          box-shadow: 0 10px 30px rgba(16,22,48,0.08);
         }
 
         .nc-v2w-hero-content {
           width: 58%;
-          padding: 55px 48px;
+          padding: 58px 48px;
           position: relative;
           z-index: 2;
-        }
-
-        .nc-v2w-grid {
-          display: grid;
-          grid-template-columns: repeat(3, minmax(0, 1fr));
-          gap: 20px;
         }
 
         .nc-v2w-features {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
-          gap: 22px;
-          margin-top: 26px;
+          gap: 18px;
+          margin-top: 28px;
+          max-width: 720px;
         }
 
         .nc-v2w-feature {
           display: flex;
           align-items: center;
-          gap: 12px;
+          gap: 11px;
         }
 
         .nc-v2w-icon {
@@ -3134,18 +3175,115 @@ function VisitToWorkPage({ go }) {
           height: 42px;
           border-radius: 50%;
           background: #eef4ff;
-          color: #1655b8;
+          color: #1762d1;
           display: flex;
           align-items: center;
           justify-content: center;
           flex-shrink: 0;
-          font-size: 20px;
+          font-size: 19px;
+        }
+
+        .nc-v2w-destination-grid {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 22px;
+        }
+
+        .nc-v2w-card {
+          background: #fff;
+          border: 1px solid #e2e7ef;
+          border-radius: 18px;
+          overflow: hidden;
+          cursor: pointer;
+          box-shadow: 0 6px 18px rgba(16,22,48,0.07);
+          transition: transform .22s ease, box-shadow .22s ease;
+        }
+
+        .nc-v2w-card:hover {
+          transform: translateY(-6px);
+          box-shadow: 0 18px 36px rgba(16,22,48,0.15);
+        }
+
+        .nc-v2w-card-image {
+          height: 185px;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .nc-v2w-card-image img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+          transition: transform .4s ease;
+        }
+
+        .nc-v2w-card:hover .nc-v2w-card-image img {
+          transform: scale(1.06);
+        }
+
+        .nc-v2w-card-overlay {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(
+            180deg,
+            rgba(0,0,0,0.02),
+            rgba(0,0,0,0.30)
+          );
+        }
+
+        .nc-v2w-flag {
+          position: absolute;
+          top: 13px;
+          left: 14px;
+          width: 43px;
+          height: 43px;
+          border-radius: 11px;
+          background: rgba(255,255,255,0.95);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 25px;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.14);
+        }
+
+        .nc-v2w-card-body {
+          padding: 17px 20px 20px;
+        }
+
+        .nc-v2w-card-title {
+          font-size: 17px;
+          font-weight: 800;
+          color: #182033;
+        }
+
+        .nc-v2w-card-subtitle {
+          font-size: 12.5px;
+          color: #7a8699;
+          margin-top: 4px;
+          font-weight: 600;
+        }
+
+        .nc-v2w-card-link {
+          margin-top: 13px;
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          color: #c9700e;
+          font-weight: 800;
+          font-size: 13px;
+        }
+
+        .nc-v2w-eligibility {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 14px;
         }
 
         .nc-v2w-cta {
-          margin-top: 28px;
-          border-radius: 18px;
-          padding: 24px 28px;
+          margin-top: 30px;
+          border-radius: 19px;
+          padding: 26px 28px;
           background: linear-gradient(100deg, #e8f3ff, #dceeff);
           display: flex;
           align-items: center;
@@ -3153,9 +3291,23 @@ function VisitToWorkPage({ go }) {
           gap: 20px;
         }
 
-        @media (max-width: 900px) {
+        @media (max-width: 1000px) {
+          .nc-v2w-hero-content {
+            width: 72%;
+          }
+
+          .nc-v2w-destination-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+          }
+
+          .nc-v2w-eligibility {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+
+        @media (max-width: 700px) {
           .nc-v2w-hero {
-            min-height: 460px;
+            min-height: 500px;
             background:
               linear-gradient(
                 90deg,
@@ -3167,34 +3319,24 @@ function VisitToWorkPage({ go }) {
           }
 
           .nc-v2w-hero-content {
-            width: 80%;
-            padding: 42px 30px;
+            width: 100%;
+            padding: 38px 25px;
           }
 
-          .nc-v2w-grid {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
+          .nc-v2w-hero h1 {
+            font-size: 32px !important;
           }
 
           .nc-v2w-features {
             grid-template-columns: 1fr;
-          }
-        }
-
-        @media (max-width: 600px) {
-          .nc-v2w-hero {
-            min-height: 500px;
+            gap: 14px;
           }
 
-          .nc-v2w-hero-content {
-            width: 100%;
-            padding: 32px 22px;
+          .nc-v2w-destination-grid {
+            grid-template-columns: 1fr;
           }
 
-          .nc-v2w-hero h1 {
-            font-size: 30px !important;
-          }
-
-          .nc-v2w-grid {
+          .nc-v2w-eligibility {
             grid-template-columns: 1fr;
           }
 
@@ -3205,9 +3347,9 @@ function VisitToWorkPage({ go }) {
         }
       `}</style>
 
+      {/* HERO */}
       <Section style={{ paddingTop: 24, paddingBottom: 18 }}>
         <div className="nc-v2w-hero">
-
           <div className="nc-v2w-hero-content">
 
             <div
@@ -3227,7 +3369,7 @@ function VisitToWorkPage({ go }) {
                 fontSize: 42,
                 lineHeight: 1.08,
                 color: INK,
-                margin: "12px 0 8px",
+                margin: "12px 0 10px",
                 fontWeight: 850,
               }}
             >
@@ -3247,10 +3389,9 @@ function VisitToWorkPage({ go }) {
                 margin: 0,
               }}
             >
-              Discover countries where you may be able to switch from
-              a visitor visa to a work visa based on your profile and
-              eligibility. Each destination has specific rules and
-              requirements.
+              Discover countries where different immigration pathways may
+              be available based on your profile and eligibility. Each
+              destination has its own rules and requirements.
             </p>
 
             <div className="nc-v2w-features">
@@ -3297,31 +3438,67 @@ function VisitToWorkPage({ go }) {
         </div>
       </Section>
 
+      {/* DISCLAIMER */}
       <Section style={{ paddingTop: 6 }}>
         <Disclaimer>
           A visitor visa does not itself permit work. Work requires the
           appropriate visa, work authorisation or residence permit required
-          by the destination country. We do not advise or assist with working
-          without the correct authorisation.
+          by the destination country. We do not advise or assist with
+          working without the correct authorisation.
         </Disclaimer>
       </Section>
 
-      <Section style={{ paddingTop: 20 }}>
-
+      {/* DESTINATIONS */}
+      <Section style={{ paddingTop: 22 }}>
         <SectionHead
           eyebrow="Destinations"
           h2="Explore Visit to Work destinations"
           h3="Select a destination to understand the pathway position and what is assessed. Subject to immigration rules and individual eligibility."
         />
 
-        <div className="nc-v2w-grid">
+        <div className="nc-v2w-destination-grid">
 
-          {Object.entries(VISIT_TO_WORK_OPTIONS).map(([key, c]) => (
-            <VisitToWorkCard
-              key={key}
-              c={c}
-              onClick={() => go("visit-to-work-country", key)}
-            />
+          {destinations.map((d) => (
+            <div
+              key={d.key}
+              className="nc-v2w-card"
+              onClick={() => go("visit-to-work-country", d.key)}
+            >
+              <div className="nc-v2w-card-image">
+
+                <img
+                  src={d.image}
+                  alt={`${d.name} destination`}
+                  onError={(e) => {
+                    e.currentTarget.style.display = "none";
+                  }}
+                />
+
+                <div className="nc-v2w-card-overlay" />
+
+                <div className="nc-v2w-flag">
+                  {d.flag}
+                </div>
+
+              </div>
+
+              <div className="nc-v2w-card-body">
+
+                <div className="nc-v2w-card-title">
+                  {d.name}
+                </div>
+
+                <div className="nc-v2w-card-subtitle">
+                  Work Visa
+                </div>
+
+                <div className="nc-v2w-card-link">
+                  View Details
+                  <ArrowRight size={14} />
+                </div>
+
+              </div>
+            </div>
           ))}
 
         </div>
@@ -3336,25 +3513,19 @@ function VisitToWorkPage({ go }) {
           Other eligible destinations may also be available depending
           on your profile. Speak with our team for an individual assessment.
         </p>
-
       </Section>
 
+      {/* ELIGIBILITY */}
       <Section style={{ paddingTop: 24 }}>
 
         <SectionHead
           eyebrow="Eligibility"
           h2="Who should get a profile assessment?"
-          h3="We review your circumstances before suggesting whether any legal pathway may apply."
+          h3="We review your circumstances before suggesting whether any lawful pathway may apply."
         />
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(4, 1fr)",
-            gap: 14,
-          }}
-          className="nc-4col"
-        >
+        <div className="nc-v2w-eligibility">
+
           {[
             "Existing visitor status",
             "Travel history",
@@ -3364,9 +3535,9 @@ function VisitToWorkPage({ go }) {
             "Immigration history",
             "Intended destination",
             "Potential employment pathway",
-          ].map((t, i) => (
+          ].map((text, index) => (
             <Glass
-              key={i}
+              key={index}
               pad={18}
               style={{
                 display: "flex",
@@ -3387,14 +3558,16 @@ function VisitToWorkPage({ go }) {
                   fontWeight: 600,
                 }}
               >
-                {t}
+                {text}
               </span>
             </Glass>
           ))}
+
         </div>
 
       </Section>
 
+      {/* CTA */}
       <Section style={{ paddingTop: 18, paddingBottom: 45 }}>
 
         <div className="nc-v2w-cta">
