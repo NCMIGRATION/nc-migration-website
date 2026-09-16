@@ -720,99 +720,183 @@ const TICKER_CURRENCIES = [
   ["🇳🇿", "New Zealand", "NZD"],
   ["🇦🇺", "Australia", "AUD"],
   ["🇸🇬", "Singapore", "SGD"],
+  ["🇨🇦", "Canada", "CAD"],
+  ["🇨🇭", "Switzerland", "CHF"],
+  ["🇲🇾", "Malaysia", "MYR"],
+  ["🇹🇭", "Thailand", "THB"],
+  ["🇻🇳", "Vietnam", "VND"],
 ];
 
-function formatRate(value) {
-  if (value == null || !Number.isFinite(Number(value))) return "\u2014";
-  return Number(value).toFixed(2);
-}
-
 function CurrencyTicker() {
-  // No hard-coded fallback rates: if the live source is unavailable, the
-  // ticker keeps the last successfully fetched value, or shows — on first load.
-  const [rates, setRates] = useState(() => {
-    try {
-      const saved = JSON.parse(localStorage.getItem("nc_fx_rates") || "null");
-      return saved && typeof saved === "object" ? saved : {};
-    } catch {
-      return {};
-    }
-  });
+  const [rates, setRates] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [lastUpdated, setLastUpdated] = useState(null);
 
-  const [updatedAt, setUpdatedAt] = useState(() => {
+  const loadRates = useCallback(async () => {
     try {
-      return localStorage.getItem("nc_fx_updated_at") || null;
-    } catch {
-      return null;
-    }
-  });
+      const res = await fetch("/api/rates", {
+        cache: "no-store",
+      });
 
-  const load = useCallback(async () => {
-    try {
-      // Server-side Vercel function — see /api/rates.js.
-      const res = await fetch("/api/rates", { cache: "no-store" });
-      if (!res.ok) throw new Error("Currency API unavailable");
+      if (!res.ok) {
+        throw new Error("Live rates unavailable");
+      }
 
       const data = await res.json();
-      if (!data?.rates) throw new Error("No rates returned");
+
+      if (!data.success || !data.rates) {
+        throw new Error("Invalid rates response");
+      }
 
       setRates(data.rates);
-      setUpdatedAt(data.updatedAt || new Date().toISOString());
-
-      try {
-        localStorage.setItem("nc_fx_rates", JSON.stringify(data.rates));
-        localStorage.setItem("nc_fx_updated_at", data.updatedAt || new Date().toISOString());
-      } catch {
-        // localStorage can be unavailable in private/restricted browser modes.
-      }
-    } catch {
-      // Keep the last successfully fetched values. Never replace them with an
-      // old hard-coded rate. On first load, the ticker simply shows —.
+      setLastUpdated(data.updatedAt);
+      setLoading(false);
+    } catch (error) {
+      console.error("Unable to load live currency rates:", error);
+      setLoading(false);
     }
   }, []);
 
   useEffect(() => {
-    load();
+    loadRates();
 
-    // Refresh every minute so the ticker picks up provider changes promptly.
-    const refresh = setInterval(load, 60 * 1000);
+    const refresh = setInterval(loadRates, 60 * 1000);
 
-    // Refresh when the visitor returns to the tab.
-    const onVisible = () => {
-      if (document.visibilityState === "visible") load();
+    return () => clearInterval(refresh);
+  }, [loadRates]);
+
+  useEffect(() => {
+    const handleVisibility = () => {
+      if (document.visibilityState === "visible") {
+        loadRates();
+      }
     };
-    document.addEventListener("visibilitychange", onVisible);
+
+    document.addEventListener("visibilitychange", handleVisibility);
 
     return () => {
-      clearInterval(refresh);
-      document.removeEventListener("visibilitychange", onVisible);
+      document.removeEventListener("visibilitychange", handleVisibility);
     };
-  }, [load]);
+  }, [loadRates]);
+
+  const formatRate = (code) => {
+    const value = rates[code];
+
+    if (value == null) {
+      return "Updating…";
+    }
+
+    const number = Number(value);
+
+    if (number < 0.01) {
+      return `₹${number.toFixed(5)}`;
+    }
+
+    if (number < 1) {
+      return `₹${number.toFixed(3)}`;
+    }
+
+    return `₹${number.toFixed(2)}`;
+  };
 
   const items = [...TICKER_CURRENCIES, ...TICKER_CURRENCIES];
 
-  const updatedLabel = updatedAt
-    ? `Updated ${new Date(updatedAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}`
-    : "Updating rates…";
-
   return (
-    <div style={{ background: NAVY, borderBottom: `2px solid ${SUN}`, position: "relative", maxWidth: "100vw", overflow: "hidden" }}>
+    <div
+      style={{
+        background: NAVY,
+        borderBottom: `2px solid ${SUN}`,
+        position: "relative",
+        maxWidth: "100vw",
+        overflow: "hidden",
+      }}
+    >
       <div style={{ overflow: "hidden" }}>
-        <div className="nc-ticker-track" style={{ display: "flex", width: "max-content", padding: "8px 0 4px" }}>
+        <div
+          className="nc-ticker-track"
+          style={{
+            display: "flex",
+            width: "max-content",
+            padding: "11px 0",
+          }}
+        >
           {items.map(([flag, country, code], i) => (
-            <div key={i} style={{ display: "flex", alignItems: "center", gap: 9, padding: "0 22px", whiteSpace: "nowrap" }}>
+            <div
+              key={i}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 9,
+                padding: "0 22px",
+                whiteSpace: "nowrap",
+              }}
+            >
               <span style={{ fontSize: 17 }}>{flag}</span>
-              <span style={{ color: "rgba(255,255,255,0.78)", fontSize: 12.5, fontWeight: 500 }}>{country}</span>
-              <span style={{ color: "#fff", fontSize: 12.5, fontWeight: 700 }}>
-                {"\u20b9"}{formatRate(rates[code])}
+
+              <span
+                style={{
+                  color: "rgba(255,255,255,0.78)",
+                  fontSize: 12.5,
+                  fontWeight: 500,
+                }}
+              >
+                {country}
               </span>
-              <span style={{ color: SUN, marginLeft: 10, opacity: 0.6 }}>{"\u2022"}</span>
+
+              <span
+                style={{
+                  color: "#fff",
+                  fontSize: 12.5,
+                  fontWeight: 700,
+                }}
+              >
+                {formatRate(code)}
+              </span>
+
+              <span
+                style={{
+                  color: SUN,
+                  marginLeft: 10,
+                  opacity: 0.6,
+                }}
+              >
+                {"\u2022"}
+              </span>
             </div>
           ))}
         </div>
-        <div style={{ textAlign: "center", color: "rgba(255,255,255,0.48)", fontSize: 9.5, padding: "0 0 4px", lineHeight: 1.2 }}>
-          {updatedLabel} · Rates by <a href="https://exchangerates.com" target="_blank" rel="noreferrer" style={{ color: "rgba(255,255,255,0.62)", textDecoration: "underline" }}>ExchangeRates.com</a>
-        </div>
+      </div>
+
+      <div
+        style={{
+          textAlign: "center",
+          fontSize: 10.5,
+          color: "rgba(255,255,255,0.55)",
+          paddingBottom: 4,
+        }}
+      >
+        {loading
+          ? "Updating rates..."
+          : lastUpdated
+          ? `Live mid-market rates • Updated ${new Date(
+              lastUpdated
+            ).toLocaleTimeString([], {
+              hour: "2-digit",
+              minute: "2-digit",
+            })}`
+          : "Live currency rates"}
+        {" • "}
+        <a
+          href="https://exchangerates.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            color: "rgba(255,255,255,0.65)",
+            textDecoration: "underline",
+          }}
+        >
+          Rates by ExchangeRates.com
+        </a>
       </div>
     </div>
   );
