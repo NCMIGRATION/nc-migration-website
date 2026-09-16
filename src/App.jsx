@@ -147,7 +147,7 @@ const WORK_COUNTRIES = {
   spain: {
     flag: "🇪🇸", name: "Spain",
     hero: "linear-gradient(135deg,#8a2f12,#c9601f)",
-    duration: "Duration varies by route and employment conditions.",
+    duration: "2 Year Work permission.",
     eligible: "Applicants with relevant experience in hospitality, agriculture, logistics or trades, subject to Spanish immigration rules and employer requirements.",
     jobs: ["Hospitality", "Warehouse & logistics", "Packing", "Agriculture", "Shop assistant", "Manufacturing"],
     permission: "Work in Spain requires an appropriate work authorisation or residence permit. Routes vary by occupation and applicant profile.",
@@ -156,7 +156,7 @@ const WORK_COUNTRIES = {
   italy: {
     flag: "🇮🇹", name: "Italy",
     hero: "linear-gradient(135deg,#0f3d2e,#136c50)",
-    duration: "Duration varies by route and employment conditions.",
+    duration: "2 Year Work permission.",
     eligible: "Applicants whose occupation falls within Italy's quota-based and seasonal work schemes, subject to eligibility and annual allocations.",
     jobs: ["Hospitality", "Agriculture", "Manufacturing", "Logistics", "Construction", "Care and domestic work"],
     permission: "Italy operates quota-based work authorisation schemes. Availability depends on the published decree, occupation and employer sponsorship.",
@@ -165,7 +165,7 @@ const WORK_COUNTRIES = {
   germany: {
     flag: "🇩🇪", name: "Germany",
     hero: "linear-gradient(135deg,#111827,#2a2a2a)",
-    duration: "Duration varies by route and employment conditions.",
+    duration: "2 Year Work permission.",
     eligible: "Skilled and semi-skilled applicants with relevant experience or recognised qualifications, subject to German immigration rules.",
     jobs: ["Packing", "Warehouse", "Factory & production", "Logistics", "Skilled trades"],
     permission: "Germany offers several work authorisation routes, including skilled worker pathways. Some routes may be extendable where conditions are met.",
@@ -174,7 +174,7 @@ const WORK_COUNTRIES = {
   "new-zealand": {
     flag: "🇳🇿", name: "New Zealand",
     hero: "linear-gradient(135deg,#0d2b4e,#1c4a7a)",
-    duration: "Duration varies by route and employment conditions.",
+    duration: "3 Year Work permission.",
     eligible: "Applicants with experience in driving, warehousing, IT or other in-demand occupations, subject to accredited employer requirements.",
     jobs: ["Driving", "Warehouse", "IT roles", "Other occupations matched to your CV and profile"],
     permission: "Most work routes require a job offer from an accredited employer. Eligibility depends on occupation, experience and immigration rules.",
@@ -183,7 +183,7 @@ const WORK_COUNTRIES = {
   uk: {
     flag: "🇬🇧", name: "United Kingdom",
     hero: "linear-gradient(135deg,#101d3d,#233a72)",
-    duration: "Duration varies by route and employment conditions.",
+    duration: "1 Year & 5 Year Work Visa  .",
     eligible: "Applicants who can meet Skilled Worker or other route requirements, including employer sponsorship, salary and English language thresholds.",
     jobs: ["Healthcare", "Hospitality", "IT", "Warehouse & logistics", "Construction", "Skilled professions"],
     permission: "Most UK work routes require a licensed sponsor and a Certificate of Sponsorship. Eligibility is assessed against current Home Office rules.",
@@ -193,7 +193,7 @@ const WORK_COUNTRIES = {
   uae: {
     flag: "🇦🇪", name: "UAE",
     hero: "linear-gradient(135deg,#3d2b0d,#8a6512)",
-    duration: "Duration varies by employer and job contract.",
+    duration: "2 Year Work permission.",
     eligible: "Applicants across experience levels in hospitality, retail, driving, security and office support, subject to employer requirements.",
     jobs: ["Hospitality", "Hotel staff", "Sales & retail", "Driving", "Security", "Warehouse", "Office support", "Customer service"],
     permission: "UAE work permits are employer-sponsored. Terms, duration and conditions are set by the employer and relevant authorities.",
@@ -202,7 +202,7 @@ const WORK_COUNTRIES = {
   slovakia: {
     flag: "🇸🇰", name: "Slovakia",
     hero: "linear-gradient(135deg,#122c4d,#1f5091)",
-    duration: "Duration varies by route and employment conditions.",
+    duration: "3 Year Work permission.",
     eligible: "Applicants with manufacturing, logistics or automotive experience, subject to Slovak immigration rules and employer requirements.",
     jobs: ["Warehouse", "Packing", "Manufacturing", "Factory work", "Logistics", "Automotive industry"],
     permission: "Work in Slovakia requires an appropriate work and residence authorisation. Requirements vary by occupation and employer.",
@@ -211,7 +211,7 @@ const WORK_COUNTRIES = {
   bulgaria: {
     flag: "🇧🇬", name: "Bulgaria",
     hero: "linear-gradient(135deg,#0f3d2e,#136c50)",
-    duration: "Duration varies by route and employment conditions.",
+    duration: "2 Year Work permission.",
     eligible: "Applicants with experience in manufacturing, warehousing or hospitality, subject to Bulgarian immigration rules.",
     jobs: ["Warehouse", "Factory", "Packing", "Manufacturing", "Hospitality"],
     permission: "Work authorisation is required and is generally tied to a specific employer and occupation.",
@@ -220,7 +220,7 @@ const WORK_COUNTRIES = {
   serbia: {
     flag: "🇷🇸", name: "Serbia",
     hero: "linear-gradient(135deg,#3b0d0d,#7a1c1c)",
-    duration: "Duration varies by route and employment conditions.",
+    duration: "3 Year Work permission.",
     eligible: "Applicants with construction, manufacturing, warehousing or hospitality backgrounds, subject to Serbian immigration rules.",
     jobs: ["Warehouse", "Packing", "Factory", "Construction", "Hospitality"],
     permission: "A work permit and residence approval are generally required, tied to the employer and role.",
@@ -280,37 +280,37 @@ const VISIT_TO_WORK_OPTIONS = {
   uk: {
     flag: "🇬🇧", name: "United Kingdom",
     hero: "linear-gradient(135deg,#101d3d,#233a72)",
-    pathway: "The UK restricts switching from visitor status inside the country for most routes. Eligible applicants are usually assessed for a sponsored route applied for correctly and lawfully.",
+    pathway: "After reaching UK on visitor visa its directly converted to 1 Year Work Permit.",
     considerations: ["Current and previous immigration status", "Whether a licensed sponsor is available", "Skilled Worker eligibility criteria", "Whether an application must be made from outside the UK"],
   },
   spain: {
     flag: "🇪🇸", name: "Spain",
     hero: "linear-gradient(135deg,#8a2f12,#c9601f)",
-    pathway: "Spain operates work authorisation and residence routes with specific eligibility criteria. A visitor cannot work without obtaining the appropriate authorisation.",
+    pathway: "2 Year Schengen TRC Card - Spain operates work authorisation and residence routes with specific eligibility criteria. A visitor cannot work without obtaining the appropriate authorisation.",
     considerations: ["Occupation and sector demand", "Employer willingness to support an application", "Residence and work authorisation requirements", "Individual immigration history"],
   },
   germany: {
     flag: "🇩🇪", name: "Germany",
     hero: "linear-gradient(135deg,#111827,#2a2a2a)",
-    pathway: "Germany has structured skilled worker and job-seeker routes. Requirements depend on qualifications, recognition and the specific route applied for.",
+    pathway: "2 Year Schengen TRC Card - Germany has structured skilled worker and job-seeker routes. Requirements depend on qualifications, recognition and the specific route applied for.",
     considerations: ["Recognised qualifications or experience", "German language ability for some routes", "Whether a job offer is in place", "Applicable route and where it must be applied for"],
   },
   greece: {
     flag: "🇬🇷", name: "Greece",
     hero: "linear-gradient(135deg,#0d2b4e,#1c4a7a)",
-    pathway: "Greece operates seasonal and quota-based work authorisation schemes. Availability depends on published allocations and occupation.",
+    pathway: "2 Year Schengen TRC Card - Greece operates seasonal and quota-based work authorisation schemes. Availability depends on published allocations and occupation.",
     considerations: ["Seasonal scheme availability", "Occupation and sector", "Employer sponsorship", "Residence permit requirements"],
   },
   italy: {
     flag: "🇮🇹", name: "Italy",
     hero: "linear-gradient(135deg,#0f3d2e,#136c50)",
-    pathway: "Italy's work authorisation is largely quota-based through periodic decrees. Eligibility depends on the scheme open at the time of application.",
+    pathway: "2 Year Schengen TRC Card  - Italy's work authorisation is largely quota-based through periodic decrees. Eligibility depends on the scheme open at the time of application.",
     considerations: ["Whether a quota scheme is currently open", "Occupation covered by the decree", "Employer sponsorship", "Application timing and location"],
   },
   lithuania: {
     flag: "🇱🇹", name: "Lithuania",
     hero: "linear-gradient(135deg,#3b0d0d,#7a1c1c)",
-    pathway: "Lithuania issues work and residence permits tied to a specific employer and occupation. Visitor status does not itself permit work.",
+    pathway: "2 Year Schengen TRC Card - Lithuania issues work and residence permits tied to a specific employer and occupation. Visitor status does not itself permit work.",
     considerations: ["Employer sponsorship", "Occupation and shortage list", "Work and residence permit requirements", "Individual immigration history"],
   },
 };
