@@ -4740,302 +4740,1838 @@ function AboutPage({ go }) {
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  const SERVICES = [
+  const services = [
     {
-      title: "Work Visa Opportunities",
-      flags: ["🇩🇪", "🇳🇿", "🇬🇧", "🇦🇪"],
-      img: WORK_VISA_IMG,
-      alt: "Skilled worker on a warehouse floor — overseas work visa opportunities with NC Migration",
-      color: CORAL,
-      body: "Explore work visa opportunities across Europe, the UK, New Zealand and the UAE. We provide profile-based guidance for people looking to build international career opportunities.",
-      cta: "Explore Work Visa Opportunities",
-      route: "work-visa",
-    },
-    {
-      title: "Visitor Visa",
-      flags: ["🇪🇺", "🇬🇧", "🇦🇺", "🇳🇿"],
-      img: VISITOR_VISA_IMG,
-      alt: "International airport terminal — visitor and tourist visa assistance from NC Migration",
-      color: TEAL,
-      body: "Planning an international holiday, family visit or couple trip? Explore visitor and tourist visa assistance for the UAE, Singapore, Thailand, Malaysia, Vietnam, the UK, Australia, New Zealand and Europe.",
-      bullets: ["Schengen visa & Europe visa", "UK visitor visa", "Australia & New Zealand visitor visa", "Family, couple and single applicant packages"],
-      cta: "Explore Visitor Visa",
-      route: "visitor-visa",
-    },
-    {
-      title: "Visit to Work",
-      flags: ["🇬🇧", "🇪🇸", "🇱🇹", "🇪🇺"],
-      img: VISIT_TO_WORK_IMG,
-      alt: "Traveller reviewing visa documents — visit-to-work immigration pathways",
-      color: "#c9700e",
-      body: "Explore lawful immigration pathways where a person may be able to move from visiting a country to a work-authorised route — where legally permitted and subject to eligibility. We cover the UK, Spain, Lithuania and selected European/Schengen destinations.",
-      cta: "Explore Visit to Work",
-      route: "visit-to-work",
-    },
-    {
-      title: "UK Visa Extension & Right to Work Guidance",
-      flags: ["🇬🇧"],
-      img: UK_EXTENSION_IMG,
-      alt: "London skyline with Big Ben — UK visa extension and right to work guidance",
-      color: "#6c4fd1",
-      body: "We help eligible individuals understand their UK immigration options, including visa extension routes, right-to-work documentation and share code guidance based on their current status.",
-      groups: [
-        { h: "Active right to work holders", items: "Students · Dependants · Work visa holders · Graduate / PSW holders · Share code holders" },
-        { h: "Expired visa & complex status cases", items: "Expired student, work, Graduate/PSW or dependant visas · Visitor visa holders · Overstayer cases" },
-      ],
-      note: "Eligibility depends on your immigration history, current status and applicable UK immigration rules. We assess the profile before recommending an available route.",
-      cta: "Explore UK Visa Extension",
+      title: "UK VISA EXTENSION",
+      subtitle: "& RIGHT TO WORK",
+      description:
+        "Explore UK visa extension and Right to Work options based on your current immigration status. Active RTW holders, overstayer cases and visitor visa holders can discuss whether an eligible work or immigration route may be available.",
+      flags: ["🇬🇧", "🇺🇸", "🇮🇳"],
+      image: UK_EXTENSION_IMG,
+      color: "#1762d1",
+      badge: "MOST POPULAR",
       route: "uk-extension",
+      button: "Explore UK Visa Extension",
+    },
+    {
+      title: "WORK VISA",
+      subtitle: "GLOBAL CAREER OPPORTUNITIES",
+      description:
+        "Explore work visa opportunities across the UK, Germany, Spain, Italy, New Zealand, UAE and selected European destinations through employer-sponsored and eligible work routes.",
+      flags: ["🇬🇧", "🇩🇪", "🇪🇸", "🇮🇹", "🇳🇿", "🇦🇪"],
+      image: WORK_VISA_IMG,
+      color: "#08a99c",
+      route: "work-visa",
+      button: "Explore Work Visa",
+    },
+    {
+      title: "VISITOR / TOURIST VISA",
+      subtitle: "TRAVEL WITH CONFIDENCE",
+      description:
+        "Visitor and tourist visa assistance for holidays, family visits, business visits and international travel across the UK, Schengen / Europe, UAE, Singapore, Malaysia, Thailand, Australia and New Zealand.",
+      flags: ["🇬🇧", "🇪🇺", "🇦🇪", "🇸🇬", "🇦🇺", "🇳🇿"],
+      image: VISITOR_VISA_IMG,
+      color: "#f5b400",
+      route: "visitor-visa",
+      button: "Explore Visitor Visa",
+    },
+    {
+      title: "VISIT TO WORK",
+      subtitle: "LEGAL IMMIGRATION PATHWAYS",
+      description:
+        "Explore whether a lawful pathway may allow you to move from visitor status to a work-authorised route where permitted. We cover the UK, Spain, Germany, Italy, Greece, Lithuania and selected European destinations.",
+      flags: ["🇬🇧", "🇪🇸", "🇩🇪", "🇮🇹", "🇬🇷", "🇱🇹"],
+      image: VISIT_TO_WORK_IMG,
+      color: "#7254d8",
+      route: "visit-to-work",
+      button: "Explore Visit to Work",
+    },
+    {
+      title: "FAMILY & DEPENDANT VISA",
+      subtitle: "KEEP YOUR FAMILY TOGETHER",
+      description:
+        "Guidance for eligible spouses, partners, children and dependant applicants joining or accompanying family members under applicable immigration routes.",
+      flags: ["🇬🇧", "🇨🇦", "🇦🇺", "🇩🇪", "🇳🇿", "🇦🇪"],
+      image: VISITOR_VISA_IMG,
+      color: "#ef476f",
+      route: "contact",
+      button: "Discuss Family Visa",
+    },
+    {
+      title: "SKILLED WORKER VISA",
+      subtitle: "EMPLOYER-SPONSORED ROUTES",
+      description:
+        "Understand Skilled Worker and other eligible sponsored work routes, including employer requirements, Certificate of Sponsorship, documentation and application preparation.",
+      flags: ["🇬🇧", "🇩🇪", "🇦🇺", "🇨🇦", "🇳🇿", "🇸🇬"],
+      image: WORK_VISA_IMG,
+      color: "#1762d1",
+      route: "work-visa",
+      button: "Explore Skilled Work",
+    },
+    {
+      title: "BUSINESS & INVESTOR VISA",
+      subtitle: "GLOBAL BUSINESS OPPORTUNITIES",
+      description:
+        "Explore business, entrepreneur and investor immigration options where available, with guidance on route requirements, supporting documents and eligibility.",
+      flags: ["🇬🇧", "🇺🇸", "🇨🇦", "🇦🇪", "🇸🇬", "🇪🇺"],
+      image: VISITOR_VISA_IMG,
+      color: "#f07828",
+      route: "contact",
+      button: "Discuss Business Visa",
     },
   ];
 
-  const WORK_DESTINATIONS = [
-    { flag: "🇪🇸", name: "Spain", key: "spain", desc: "Hospitality, agriculture, logistics and trades work visa routes." },
-    { flag: "🇮🇹", name: "Italy", key: "italy", desc: "Quota-based and seasonal work schemes across several sectors." },
-    { flag: "🇩🇪", name: "Germany", key: "germany", desc: "Packing, warehouse, factory and logistics work visa options." },
-    { flag: "🇳🇿", name: "New Zealand", key: "new-zealand", desc: "Driving, warehouse and IT roles via accredited employers." },
-    { flag: "🇬🇧", name: "United Kingdom", key: "uk", desc: "Skilled Worker routes subject to employer sponsorship and eligibility." },
-    { flag: "🇦🇪", name: "UAE", key: "uae", desc: "Hospitality, retail, driving and office support roles in the Emirates." },
-    { flag: "🇸🇰", name: "Slovakia", key: "slovakia", desc: "Manufacturing, logistics and automotive industry work visa routes." },
-    { flag: "🇧🇬", name: "Bulgaria", key: "bulgaria", desc: "Warehouse, factory, packing and hospitality opportunities in the EU." },
-    { flag: "🇷🇸", name: "Serbia", key: "serbia", desc: "Warehouse, construction, packing and hospitality work visa routes." },
+  const workCountries = [
+    ["🇪🇸", "Spain", "Hospitality, agriculture, logistics & trades"],
+    ["🇮🇹", "Italy", "Seasonal & quota-based work routes"],
+    ["🇩🇪", "Germany", "Warehouse, factory & logistics"],
+    ["🇳🇿", "New Zealand", "Driving, warehouse & skilled roles"],
+    ["🇬🇧", "United Kingdom", "Skilled Worker & sponsored routes"],
+    ["🇦🇪", "UAE", "Hospitality, retail & office roles"],
+    ["🇸🇰", "Slovakia", "Manufacturing & automotive"],
+    ["🇧🇬", "Bulgaria", "Warehouse, factory & hospitality"],
+    ["🇷🇸", "Serbia", "Construction, packing & hospitality"],
   ];
 
-  const VISIT_DESTINATIONS = [
-    ["🇦🇪", "UAE"], ["🇸🇬", "Singapore"], ["🇹🇭", "Thailand"], ["🇲🇾", "Malaysia"], ["🇻🇳", "Vietnam"],
-    ["🇬🇧", "United Kingdom"], ["🇦🇺", "Australia"], ["🇳🇿", "New Zealand"], ["🇨🇭", "Switzerland"], ["🇪🇺", "Schengen / Europe"],
+  const visitorCountries = [
+    ["🇬🇧", "United Kingdom"],
+    ["🇪🇺", "Schengen / Europe"],
+    ["🇦🇪", "UAE"],
+    ["🇸🇬", "Singapore"],
+    ["🇲🇾", "Malaysia"],
+    ["🇹🇭", "Thailand"],
+    ["🇻🇳", "Vietnam"],
+    ["🇦🇺", "Australia"],
+    ["🇳🇿", "New Zealand"],
+    ["🇨🇭", "Switzerland"],
   ];
 
-  const EUROPE = [["🇪🇸", "Spain"], ["🇮🇹", "Italy"], ["🇩🇪", "Germany"], ["🇬🇷", "Greece"], ["🇱🇹", "Lithuania"], ["🇸🇰", "Slovakia"], ["🇧🇬", "Bulgaria"], ["🇷🇸", "Serbia"], ["🇨🇭", "Switzerland"]];
-  const ELSEWHERE = [["🇬🇧", "United Kingdom"], ["🇳🇿", "New Zealand"], ["🇦🇪", "UAE"], ["🇦🇺", "Australia"], ["🇸🇬", "Singapore"], ["🇲🇾", "Malaysia"], ["🇹🇭", "Thailand"], ["🇻🇳", "Vietnam"]];
+  const whyUs = [
+    "Personalised guidance based on your profile",
+    "Updated information on immigration requirements",
+    "End-to-end support from documentation to application",
+    "Transparent communication and realistic expectations",
+    "Country-specific visa guidance",
+    "Support with complex immigration cases",
+  ];
 
-  const card = { background: "rgba(255,255,255,0.86)", backdropFilter: "blur(10px)", borderRadius: 16, border: "1px solid #e7eaf2", overflow: "hidden" };
+  const process = [
+    {
+      no: "01",
+      title: "Initial Consultation",
+      desc: "Understand your goals, immigration history and profile.",
+      icon: "💬",
+      color: "#1762d1",
+    },
+    {
+      no: "02",
+      title: "Profile Assessment",
+      desc: "Review eligibility and identify possible routes.",
+      icon: "📄",
+      color: "#ef476f",
+    },
+    {
+      no: "03",
+      title: "Application Support",
+      desc: "Documentation and application preparation.",
+      icon: "✓",
+      color: "#08a99c",
+    },
+    {
+      no: "04",
+      title: "Ongoing Guidance",
+      desc: "Support and updates throughout your visa process.",
+      icon: "👤",
+      color: "#f5b400",
+    },
+  ];
 
   return (
     <PageShell theme="about">
-      {/* ---------------- HERO ---------------- */}
-      <Section style={{ paddingTop: 56, paddingBottom: 48 }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1.15fr 1fr", gap: 46, alignItems: "center" }} className="nc-2col">
-          <div>
-            <Eyebrow>About NC Migration</Eyebrow>
-            <h1 style={{ fontSize: 36, color: INK, margin: "0 0 18px", lineHeight: 1.2 }}>
-              Your trusted partner for global visa &amp; immigration opportunities
-            </h1>
-            <p style={{ color: "#3c485c", fontSize: 15.5, lineHeight: 1.8, marginTop: 0 }}>
-              NC Migration is an immigration and visa consultancy for people looking to work abroad, visit international destinations and understand their visa options clearly before they commit.
-            </p>
-            <p style={{ color: "#3c485c", fontSize: 15.5, lineHeight: 1.8 }}>
-              We assist with work visa opportunities, visitor visas, visit-to-work pathways and UK visa extension services — with guidance built around your individual profile and the immigration rules that actually apply to it.
-            </p>
-            <div style={{ display: "flex", gap: 12, marginTop: 26, flexWrap: "wrap" }}>
-              <Btn variant="coral" onClick={() => scrollTo("nc-services")}>Explore Our Services</Btn>
-              <Btn variant="navy" onClick={() => go("contact")}>Get Free Consultation</Btn>
+
+      <style>{`
+        .nc-about-page {
+          background: #f7faff;
+          color: ${INK};
+        }
+
+        .nc-about-container {
+          width: min(1180px, calc(100% - 40px));
+          margin: 0 auto;
+        }
+
+        .nc-about-hero {
+          position: relative;
+          overflow: hidden;
+          min-height: 400px;
+          display: flex;
+          align-items: center;
+          background:
+            linear-gradient(
+              90deg,
+              rgba(247,250,255,0.98) 0%,
+              rgba(247,250,255,0.95) 35%,
+              rgba(247,250,255,0.78) 55%,
+              rgba(247,250,255,0.10) 100%
+            ),
+            url("https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=2200&q=90")
+            center/cover;
+        }
+
+        .nc-about-hero-inner {
+          width: min(1180px, calc(100% - 40px));
+          margin: 0 auto;
+          padding: 54px 0 48px;
+          position: relative;
+          z-index: 2;
+        }
+
+        .nc-about-hero-copy {
+          max-width: 650px;
+        }
+
+        .nc-about-eyebrow {
+          color: ${CORAL};
+          font-size: 12px;
+          font-weight: 900;
+          letter-spacing: 1px;
+          text-transform: uppercase;
+          margin-bottom: 8px;
+        }
+
+        .nc-about-hero h1 {
+          font-size: 43px;
+          line-height: 1.04;
+          font-weight: 950;
+          margin: 0 0 8px;
+          letter-spacing: -1.5px;
+        }
+
+        .nc-about-blue {
+          color: #1762d1;
+        }
+
+        .nc-about-tagline {
+          font-size: 17px;
+          font-weight: 850;
+          color: ${INK};
+          margin-bottom: 8px;
+        }
+
+        .nc-about-hero p {
+          color: #4c5b73;
+          font-size: 14px;
+          line-height: 1.65;
+          margin: 0;
+        }
+
+        .nc-about-buttons {
+          display: flex;
+          gap: 12px;
+          flex-wrap: wrap;
+          margin-top: 20px;
+        }
+
+        .nc-about-stats {
+          width: min(1180px, calc(100% - 40px));
+          margin: -34px auto 0;
+          position: relative;
+          z-index: 5;
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          background: rgba(255,255,255,0.94);
+          border: 1px solid #e2e8f3;
+          box-shadow: 0 12px 28px rgba(16,35,75,0.10);
+          border-radius: 18px;
+          overflow: hidden;
+        }
+
+        .nc-about-stat {
+          padding: 15px 20px;
+          display: flex;
+          align-items: center;
+          gap: 11px;
+          border-right: 1px solid #e7ebf3;
+        }
+
+        .nc-about-stat:last-child {
+          border-right: 0;
+        }
+
+        .nc-about-stat-icon {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          background: #edf5ff;
+          color: #1762d1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 20px;
+          flex-shrink: 0;
+        }
+
+        .nc-about-stat strong {
+          display: block;
+          font-size: 14px;
+          color: ${INK};
+        }
+
+        .nc-about-stat span {
+          display: block;
+          color: #65728a;
+          font-size: 11px;
+          margin-top: 2px;
+        }
+
+        .nc-about-section {
+          padding: 42px 0;
+        }
+
+        .nc-about-section-label {
+          color: ${CORAL};
+          font-size: 11px;
+          font-weight: 900;
+          letter-spacing: .9px;
+          text-transform: uppercase;
+        }
+
+        .nc-about-section-title {
+          color: ${INK};
+          font-size: 28px;
+          line-height: 1.15;
+          font-weight: 900;
+          margin: 5px 0 5px;
+        }
+
+        .nc-about-section-subtitle {
+          color: #637089;
+          font-size: 13.5px;
+          margin: 0 0 22px;
+        }
+
+        .nc-about-service-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 14px;
+        }
+
+        .nc-about-service {
+          background: #fff;
+          border: 1px solid #e1e7f0;
+          border-radius: 15px;
+          overflow: hidden;
+          box-shadow: 0 5px 15px rgba(16,35,75,0.06);
+          display: flex;
+          flex-direction: column;
+          min-height: 360px;
+          transition: .22s ease;
+        }
+
+        .nc-about-service:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 17px 30px rgba(16,35,75,0.13);
+        }
+
+        .nc-about-service-image {
+          height: 125px;
+          position: relative;
+          overflow: hidden;
+          flex-shrink: 0;
+        }
+
+        .nc-about-service-image img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+          transition: transform .35s ease;
+        }
+
+        .nc-about-service:hover img {
+          transform: scale(1.07);
+        }
+
+        .nc-about-service-overlay {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(
+            180deg,
+            rgba(5,15,45,0.02),
+            rgba(5,15,45,0.75)
+          );
+        }
+
+        .nc-about-service-badge {
+          position: absolute;
+          top: 8px;
+          right: 8px;
+          background: #ef476f;
+          color: #fff;
+          padding: 4px 7px;
+          border-radius: 9px;
+          font-size: 8px;
+          font-weight: 900;
+        }
+
+        .nc-about-service-flags {
+          position: absolute;
+          bottom: 8px;
+          left: 10px;
+          display: flex;
+          flex-wrap: wrap;
+          gap: 4px;
+        }
+
+        .nc-about-service-flag {
+          background: rgba(255,255,255,0.88);
+          border-radius: 5px;
+          padding: 2px 4px;
+          font-size: 14px;
+        }
+
+        .nc-about-service-content {
+          padding: 16px;
+          display: flex;
+          flex-direction: column;
+          flex: 1;
+          border-top: 3px solid;
+        }
+
+        .nc-about-service-title {
+          font-size: 14px;
+          font-weight: 900;
+          line-height: 1.15;
+          color: ${INK};
+        }
+
+        .nc-about-service-subtitle {
+          color: #1762d1;
+          font-size: 10px;
+          font-weight: 900;
+          margin-top: 3px;
+        }
+
+        .nc-about-service-text {
+          color: #5b687e;
+          font-size: 11.5px;
+          line-height: 1.55;
+          margin: 9px 0 10px;
+        }
+
+        .nc-about-service-button {
+          margin-top: auto;
+          border: 0;
+          border-radius: 22px;
+          background: #fff;
+          border: 1px solid #dfe5ef;
+          padding: 9px 12px;
+          font-size: 11px;
+          font-weight: 850;
+          color: ${INK};
+          cursor: pointer;
+          transition: .18s ease;
+        }
+
+        .nc-about-service-button:hover {
+          background: ${INK};
+          color: #fff;
+        }
+
+        .nc-about-why {
+          display: grid;
+          grid-template-columns: 1fr 1.15fr .72fr;
+          gap: 25px;
+          align-items: center;
+        }
+
+        .nc-about-checks {
+          margin-top: 18px;
+        }
+
+        .nc-about-check {
+          display: flex;
+          align-items: center;
+          gap: 9px;
+          margin: 10px 0;
+          color: #4f5d73;
+          font-size: 12.5px;
+        }
+
+        .nc-about-check span {
+          width: 18px;
+          height: 18px;
+          background: #15b88a;
+          color: #fff;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 10px;
+          font-weight: 900;
+          flex-shrink: 0;
+        }
+
+        .nc-about-map {
+          min-height: 270px;
+          border-radius: 18px;
+          background:
+            radial-gradient(circle at 50% 50%, rgba(23,98,209,0.09), transparent 60%),
+            url("https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg")
+            center/contain no-repeat;
+          position: relative;
+        }
+
+        .nc-about-map-dot {
+          position: absolute;
+          background: #fff;
+          border: 2px solid #1762d1;
+          border-radius: 50%;
+          padding: 4px;
+          font-size: 16px;
+          box-shadow: 0 4px 12px rgba(20,40,80,.15);
+        }
+
+        .nc-about-values {
+          background: linear-gradient(145deg, #10184d, #282071);
+          border-radius: 17px;
+          padding: 22px;
+          color: #fff;
+          box-shadow: 0 12px 25px rgba(16,24,77,.18);
+        }
+
+        .nc-about-value-block {
+          margin-bottom: 17px;
+        }
+
+        .nc-about-value-block:last-child {
+          margin-bottom: 0;
+        }
+
+        .nc-about-value-label {
+          color: #ffcf39;
+          font-size: 9px;
+          font-weight: 900;
+          letter-spacing: .7px;
+          text-transform: uppercase;
+        }
+
+        .nc-about-value-text {
+          color: rgba(255,255,255,.82);
+          font-size: 10.5px;
+          line-height: 1.5;
+          margin-top: 4px;
+        }
+
+        .nc-about-values-list {
+          margin-top: 6px;
+        }
+
+        .nc-about-values-list div {
+          font-size: 10.5px;
+          color: rgba(255,255,255,.84);
+          margin: 5px 0;
+        }
+
+        .nc-about-process {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 12px;
+        }
+
+        .nc-about-process-card {
+          background: #fff;
+          border: 1px solid #e3e8f1;
+          border-radius: 14px;
+          padding: 18px;
+          min-height: 125px;
+          position: relative;
+        }
+
+        .nc-about-process-number {
+          font-size: 22px;
+          font-weight: 950;
+        }
+
+        .nc-about-process-title {
+          color: ${INK};
+          font-size: 12.5px;
+          font-weight: 900;
+          margin-top: 6px;
+        }
+
+        .nc-about-process-desc {
+          color: #69758b;
+          font-size: 11px;
+          line-height: 1.5;
+          margin-top: 5px;
+        }
+
+        .nc-about-testimonials {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 14px;
+        }
+
+        .nc-about-testimonial {
+          background: #fff;
+          border: 1px solid #e1e7f0;
+          border-radius: 15px;
+          padding: 19px;
+          box-shadow: 0 5px 14px rgba(16,35,75,.05);
+        }
+
+        .nc-about-quote {
+          color: #b9c3d3;
+          font-size: 28px;
+          line-height: 1;
+        }
+
+        .nc-about-testimonial-text {
+          color: #536078;
+          font-size: 11.5px;
+          line-height: 1.6;
+          margin: 7px 0 14px;
+        }
+
+        .nc-about-client {
+          display: flex;
+          align-items: center;
+          gap: 9px;
+        }
+
+        .nc-about-client-avatar {
+          width: 38px;
+          height: 38px;
+          border-radius: 50%;
+          background: #edf3ff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 18px;
+        }
+
+        .nc-about-client strong {
+          display: block;
+          font-size: 11.5px;
+          color: ${INK};
+        }
+
+        .nc-about-client span {
+          display: block;
+          font-size: 9.5px;
+          color: #748096;
+          margin-top: 2px;
+        }
+
+        .nc-about-cta {
+          background:
+            linear-gradient(
+              90deg,
+              rgba(8,18,62,.94),
+              rgba(17,35,91,.78)
+            ),
+            url("https://images.unsplash.com/photo-1444723121867-7a241cacace9?auto=format&fit=crop&w=1800&q=85")
+            center/cover;
+          padding: 36px 0;
+          color: #fff;
+        }
+
+        .nc-about-cta-inner {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 20px;
+        }
+
+        .nc-about-cta h2 {
+          font-size: 27px;
+          margin: 0 0 6px;
+          color: #fff;
+        }
+
+        .nc-about-cta p {
+          margin: 0;
+          color: rgba(255,255,255,.82);
+          font-size: 12.5px;
+        }
+
+        .nc-about-country-section {
+          background: #fff;
+        }
+
+        .nc-about-country-groups {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 25px;
+        }
+
+        .nc-about-country-box {
+          background: #f7faff;
+          border: 1px solid #e2e8f2;
+          border-radius: 16px;
+          padding: 20px;
+        }
+
+        .nc-about-country-box h3 {
+          margin: 0 0 13px;
+          font-size: 16px;
+          color: ${INK};
+        }
+
+        .nc-about-country-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 9px;
+        }
+
+        .nc-about-country-card {
+          background: #fff;
+          border: 1px solid #e3e8f0;
+          border-radius: 10px;
+          padding: 10px;
+          cursor: pointer;
+          transition: .18s ease;
+        }
+
+        .nc-about-country-card:hover {
+          transform: translateY(-2px);
+          border-color: #1762d1;
+          box-shadow: 0 7px 16px rgba(20,60,120,.09);
+        }
+
+        .nc-about-country-flag {
+          font-size: 19px;
+        }
+
+        .nc-about-country-name {
+          color: ${INK};
+          font-size: 11.5px;
+          font-weight: 850;
+          margin-top: 4px;
+        }
+
+        .nc-about-country-desc {
+          color: #738096;
+          font-size: 9.5px;
+          line-height: 1.35;
+          margin-top: 3px;
+        }
+
+        @media (max-width: 1000px) {
+          .nc-about-service-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+
+          .nc-about-why {
+            grid-template-columns: 1fr 1fr;
+          }
+
+          .nc-about-values {
+            grid-column: span 2;
+          }
+
+          .nc-about-process {
+            grid-template-columns: repeat(2, 1fr);
+          }
+
+          .nc-about-stats {
+            grid-template-columns: repeat(2, 1fr);
+          }
+
+          .nc-about-stat:nth-child(2) {
+            border-right: 0;
+          }
+
+          .nc-about-stat:nth-child(3),
+          .nc-about-stat:nth-child(4) {
+            border-top: 1px solid #e7ebf3;
+          }
+        }
+
+        @media (max-width: 700px) {
+          .nc-about-container {
+            width: calc(100% - 30px);
+          }
+
+          .nc-about-hero {
+            min-height: 560px;
+            background:
+              linear-gradient(
+                90deg,
+                rgba(247,250,255,.97),
+                rgba(247,250,255,.86)
+              ),
+              url("https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1600&q=85")
+              center/cover;
+          }
+
+          .nc-about-hero-inner {
+            width: calc(100% - 30px);
+          }
+
+          .nc-about-hero h1 {
+            font-size: 35px;
+          }
+
+          .nc-about-stats {
+            width: calc(100% - 30px);
+            grid-template-columns: 1fr;
+            margin-top: -20px;
+          }
+
+          .nc-about-stat,
+          .nc-about-stat:nth-child(2),
+          .nc-about-stat:nth-child(3) {
+            border-right: 0;
+            border-bottom: 1px solid #e7ebf3;
+            border-top: 0;
+          }
+
+          .nc-about-stat:last-child {
+            border-bottom: 0;
+          }
+
+          .nc-about-service-grid,
+          .nc-about-process,
+          .nc-about-testimonials,
+          .nc-about-country-groups {
+            grid-template-columns: 1fr;
+          }
+
+          .nc-about-why {
+            grid-template-columns: 1fr;
+          }
+
+          .nc-about-values {
+            grid-column: auto;
+          }
+
+          .nc-about-country-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+
+          .nc-about-cta-inner {
+            flex-direction: column;
+            align-items: flex-start;
+          }
+        }
+      `}</style>
+
+      <div className="nc-about-page">
+
+        {/* ================= HERO ================= */}
+
+        <section className="nc-about-hero">
+
+          <div className="nc-about-hero-inner">
+
+            <div className="nc-about-hero-copy">
+
+              <div className="nc-about-eyebrow">
+                About NC Migration
+              </div>
+
+              <h1>
+                Your Global Partner for
+                <br />
+                <span className="nc-about-blue">
+                  Visa & Immigration Success
+                </span>
+              </h1>
+
+              <div className="nc-about-tagline">
+                Guiding People. Building Futures. Worldwide.
+              </div>
+
+              <p>
+                NC Migration is a trusted immigration and visa consultancy
+                helping individuals, families and professionals explore
+                international opportunities. We provide honest guidance,
+                transparent processes and personalised support for work,
+                visit, visa extension and immigration pathways.
+              </p>
+
+              <div className="nc-about-buttons">
+
+                <Btn
+                  variant="gold"
+                  onClick={() => go("contact")}
+                >
+                  Get Free Consultation
+                  <ArrowRight size={15} />
+                </Btn>
+
+                <Btn
+                  variant="navy"
+                  onClick={() => scrollTo("nc-about-services")}
+                >
+                  Explore Our Services
+                  <ArrowRight size={15} />
+                </Btn>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        {/* ================= STATS ================= */}
+
+        <div className="nc-about-stats">
+
+          <div className="nc-about-stat">
+            <div className="nc-about-stat-icon">👥</div>
+            <div>
+              <strong>5000+</strong>
+              <span>Successful Clients</span>
             </div>
           </div>
-          <div style={{ borderRadius: 18, overflow: "hidden", boxShadow: "0 18px 40px rgba(10,31,60,0.2)" }}>
-            <img src={VISITOR_VISA_IMG} alt="International travel and overseas work opportunities with NC Migration visa consultants"
-                 style={{ width: "100%", height: 320, objectFit: "cover", display: "block" }} />
+
+          <div className="nc-about-stat">
+            <div className="nc-about-stat-icon">★</div>
+            <div>
+              <strong>98%</strong>
+              <span>Success Rate</span>
+            </div>
           </div>
+
+          <div className="nc-about-stat">
+            <div className="nc-about-stat-icon">🛡</div>
+            <div>
+              <strong>Trusted & Genuine</strong>
+              <span>Transparent Process</span>
+            </div>
+          </div>
+
+          <div className="nc-about-stat">
+            <div className="nc-about-stat-icon">♧</div>
+            <div>
+              <strong>Expert Team</strong>
+              <span>Personalised Support</span>
+            </div>
+          </div>
+
         </div>
-      </Section>
 
-      {/* ---------------- WHAT WE DO ---------------- */}
-      <Section bg={PAPER} style={{ paddingTop: 56 }}>
-        <div id="nc-services" style={{ scrollMarginTop: 90 }} />
-        <Eyebrow>What We Do</Eyebrow>
-        <h2 style={{ fontSize: 28, color: INK, margin: "0 0 10px" }}>Immigration &amp; visa services designed around your goals</h2>
-        <p style={{ color: "#5a6577", maxWidth: 680, marginBottom: 34, lineHeight: 1.75 }}>
-          As a visa consultant, our job is to help you understand the routes available to you — the documentation, the eligibility criteria and the application requirements — so you can make an informed decision.
-        </p>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 22 }} className="nc-2col">
-          {SERVICES.map((s, i) => (
-            <AboutServiceCard key={i} s={s} go={go} />
-          ))}
-        </div>
-      </Section>
+        {/* ================= SERVICES ================= */}
 
-      {/* ---------------- WORK VISA COUNTRIES ---------------- */}
-      <Section>
-        <Eyebrow>Work Visa</Eyebrow>
-        <h2 style={{ fontSize: 28, color: INK, margin: "0 0 6px" }}>Work visa opportunities around the world</h2>
-        <h3 style={{ fontSize: 15.5, color: "#5a6577", fontWeight: 500, margin: "0 0 30px" }}>
-          Explore work opportunities in Europe, the UK, New Zealand &amp; the UAE
-        </h3>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 18 }} className="nc-4col">
-          {WORK_DESTINATIONS.map((c) => (
-            <div key={c.key} style={{ ...card, padding: 20, display: "flex", flexDirection: "column" }}>
-              <div style={{ fontSize: 28 }}>{c.flag}</div>
-              <h4 style={{ fontSize: 16, color: INK, margin: "8px 0 6px" }}>{c.name} work visa</h4>
-              <p style={{ fontSize: 13, color: "#5a6577", lineHeight: 1.6, margin: "0 0 16px" }}>{c.desc}</p>
-              <Btn variant="navy" onClick={() => go("work-country", c.key)}
-                   style={{ marginTop: "auto", width: "100%", justifyContent: "center", fontSize: 12.5, padding: "10px 14px" }}>
-                View Work Visa Options
+        <section
+          className="nc-about-section"
+          id="nc-about-services"
+        >
+
+          <div className="nc-about-container">
+
+            <div className="nc-about-section-label">
+              Our Services
+            </div>
+
+            <h2 className="nc-about-section-title">
+              Complete Visa & Immigration Solutions
+            </h2>
+
+            <p className="nc-about-section-subtitle">
+              Choose your goal, explore your options and let us guide you
+              through the next step.
+            </p>
+
+            <div className="nc-about-service-grid">
+
+              {services.map((service, index) => (
+
+                <div
+                  className="nc-about-service"
+                  key={index}
+                >
+
+                  <div className="nc-about-service-image">
+
+                    <img
+                      src={service.image}
+                      alt={`${service.title} - NC Migration`}
+                    />
+
+                    <div className="nc-about-service-overlay" />
+
+                    {service.badge && (
+                      <div className="nc-about-service-badge">
+                        {service.badge}
+                      </div>
+                    )}
+
+                    <div className="nc-about-service-flags">
+
+                      {service.flags.map((flag, i) => (
+                        <span
+                          key={i}
+                          className="nc-about-service-flag"
+                        >
+                          {flag}
+                        </span>
+                      ))}
+
+                    </div>
+
+                  </div>
+
+                  <div
+                    className="nc-about-service-content"
+                    style={{
+                      borderTopColor: service.color,
+                    }}
+                  >
+
+                    <div className="nc-about-service-title">
+                      {service.title}
+                    </div>
+
+                    <div className="nc-about-service-subtitle">
+                      {service.subtitle}
+                    </div>
+
+                    <div className="nc-about-service-text">
+                      {service.description}
+                    </div>
+
+                    <button
+                      className="nc-about-service-button"
+                      onClick={() => go(service.route)}
+                    >
+                      {service.button}
+                      <span style={{ marginLeft: 6 }}>
+                        →
+                      </span>
+                    </button>
+
+                  </div>
+
+                </div>
+
+              ))}
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        {/* ================= WHY CHOOSE US ================= */}
+
+        <section
+          className="nc-about-section"
+          style={{ background: "#f1f7ff" }}
+        >
+
+          <div className="nc-about-container">
+
+            <div className="nc-about-why">
+
+              <div>
+
+                <div className="nc-about-section-label">
+                  Why Choose Us
+                </div>
+
+                <h2 className="nc-about-section-title">
+                  More Than Just Visa Assistance
+                </h2>
+
+                <p
+                  style={{
+                    color: "#5d6a80",
+                    fontSize: 13,
+                    lineHeight: 1.7,
+                    margin: 0,
+                  }}
+                >
+                  We are committed to making your global journey simple,
+                  transparent and successful with guidance based on your
+                  individual circumstances.
+                </p>
+
+                <div className="nc-about-checks">
+
+                  {whyUs.map((item, index) => (
+                    <div
+                      className="nc-about-check"
+                      key={index}
+                    >
+                      <span>✓</span>
+                      {item}
+                    </div>
+                  ))}
+
+                </div>
+
+                <Btn
+                  variant="gold"
+                  onClick={() => go("contact")}
+                  style={{ marginTop: 12 }}
+                >
+                  Talk to Our Experts
+                  <ArrowRight size={15} />
+                </Btn>
+
+              </div>
+
+
+              {/* WORLD MAP */}
+
+              <div className="nc-about-map">
+
+                <div
+                  className="nc-about-map-dot"
+                  style={{ left: "20%", top: "35%" }}
+                >
+                  🇺🇸
+                </div>
+
+                <div
+                  className="nc-about-map-dot"
+                  style={{ left: "48%", top: "22%" }}
+                >
+                  🇬🇧
+                </div>
+
+                <div
+                  className="nc-about-map-dot"
+                  style={{ left: "62%", top: "30%" }}
+                >
+                  🇩🇪
+                </div>
+
+                <div
+                  className="nc-about-map-dot"
+                  style={{ left: "33%", top: "65%" }}
+                >
+                  🇦🇺
+                </div>
+
+                <div
+                  className="nc-about-map-dot"
+                  style={{ left: "55%", top: "61%" }}
+                >
+                  🇦🇪
+                </div>
+
+                <div
+                  className="nc-about-map-dot"
+                  style={{ left: "72%", top: "55%" }}
+                >
+                  🇸🇬
+                </div>
+
+                <div
+                  className="nc-about-map-dot"
+                  style={{ left: "80%", top: "70%" }}
+                >
+                  🇳🇿
+                </div>
+
+              </div>
+
+
+              {/* MISSION / VISION / VALUES */}
+
+              <div className="nc-about-values">
+
+                <div className="nc-about-value-block">
+
+                  <div className="nc-about-value-label">
+                    Our Mission
+                  </div>
+
+                  <div className="nc-about-value-text">
+                    To make global opportunities accessible through
+                    honest guidance and transparent processes.
+                  </div>
+
+                </div>
+
+                <div className="nc-about-value-block">
+
+                  <div className="nc-about-value-label">
+                    Our Vision
+                  </div>
+
+                  <div className="nc-about-value-text">
+                    To become a trusted global immigration consultancy
+                    known for integrity, transparency and client support.
+                  </div>
+
+                </div>
+
+                <div className="nc-about-value-block">
+
+                  <div className="nc-about-value-label">
+                    Our Values
+                  </div>
+
+                  <div className="nc-about-values-list">
+
+                    <div>✓ Integrity</div>
+                    <div>✓ Transparency</div>
+                    <div>✓ Client First</div>
+                    <div>✓ Excellence</div>
+                    <div>✓ Long-Term Relationships</div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        {/* ================= WORK VISA COUNTRIES ================= */}
+
+        <section className="nc-about-section">
+
+          <div className="nc-about-container">
+
+            <div className="nc-about-section-label">
+              Work Visa
+            </div>
+
+            <h2 className="nc-about-section-title">
+              Work Visa Opportunities Around The World
+            </h2>
+
+            <p className="nc-about-section-subtitle">
+              Explore work visa opportunities across Europe, the UK,
+              New Zealand and the UAE.
+            </p>
+
+            <div
+              className="nc-about-country-grid"
+              style={{
+                gridTemplateColumns:
+                  "repeat(4, minmax(0, 1fr))",
+              }}
+            >
+
+              {workCountries.map(
+                ([flag, name, desc], index) => (
+
+                  <div
+                    className="nc-about-country-card"
+                    key={index}
+                    onClick={() => {
+                      const keys = {
+                        Spain: "spain",
+                        Italy: "italy",
+                        Germany: "germany",
+                        "New Zealand": "new-zealand",
+                        "United Kingdom": "uk",
+                        UAE: "uae",
+                        Slovakia: "slovakia",
+                        Bulgaria: "bulgaria",
+                        Serbia: "serbia",
+                      };
+
+                      if (keys[name]) {
+                        go("work-country", keys[name]);
+                      } else {
+                        go("contact");
+                      }
+                    }}
+                  >
+
+                    <div className="nc-about-country-flag">
+                      {flag}
+                    </div>
+
+                    <div className="nc-about-country-name">
+                      {name} Work Visa
+                    </div>
+
+                    <div className="nc-about-country-desc">
+                      {desc}
+                    </div>
+
+                  </div>
+
+                )
+              )}
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        {/* ================= VISITOR VISA COUNTRIES ================= */}
+
+        <section
+          className="nc-about-section nc-about-country-section"
+        >
+
+          <div className="nc-about-container">
+
+            <div className="nc-about-section-label">
+              Visitor Visa
+            </div>
+
+            <h2 className="nc-about-section-title">
+              Visitor & Tourist Visa Services
+            </h2>
+
+            <p className="nc-about-section-subtitle">
+              Travel for holidays, family visits, business visits and
+              international trips.
+            </p>
+
+            <div className="nc-about-country-groups">
+
+              <div className="nc-about-country-box">
+
+                <h3>
+                  Popular Visitor Destinations
+                </h3>
+
+                <div className="nc-about-country-grid">
+
+                  {visitorCountries.map(
+                    ([flag, name], index) => (
+
+                      <div
+                        className="nc-about-country-card"
+                        key={index}
+                        onClick={() => {
+                          const keys = {
+                            Switzerland: "switzerland",
+                            Australia: "australia",
+                            Singapore: "singapore",
+                            Malaysia: "malaysia",
+                            Thailand: "thailand",
+                            Vietnam: "vietnam",
+                            "United Kingdom": "uk",
+                            "New Zealand": "new-zealand",
+                          };
+
+                          if (keys[name]) {
+                            go("visitor-country", keys[name]);
+                          } else {
+                            go("visitor-visa");
+                          }
+                        }}
+                      >
+
+                        <div className="nc-about-country-flag">
+                          {flag}
+                        </div>
+
+                        <div className="nc-about-country-name">
+                          {name}
+                        </div>
+
+                      </div>
+
+                    )
+                  )}
+
+                </div>
+
+              </div>
+
+
+              <div className="nc-about-country-box">
+
+                <h3>
+                  Visitor Visa Packages
+                </h3>
+
+                <div
+                  style={{
+                    display: "grid",
+                    gap: 10,
+                  }}
+                >
+
+                  <div
+                    style={{
+                      background: "#fff",
+                      borderRadius: 10,
+                      padding: 13,
+                      borderLeft: `4px solid ${CORAL}`,
+                    }}
+                  >
+                    <strong
+                      style={{
+                        display: "block",
+                        fontSize: 13,
+                        color: INK,
+                      }}
+                    >
+                      Single Traveller
+                    </strong>
+
+                    <span
+                      style={{
+                        color: "#68758b",
+                        fontSize: 11,
+                      }}
+                    >
+                      Individual international travel assistance.
+                    </span>
+                  </div>
+
+                  <div
+                    style={{
+                      background: "#fff",
+                      borderRadius: 10,
+                      padding: 13,
+                      borderLeft: `4px solid ${TEAL}`,
+                    }}
+                  >
+                    <strong
+                      style={{
+                        display: "block",
+                        fontSize: 13,
+                        color: INK,
+                      }}
+                    >
+                      Couple Package
+                    </strong>
+
+                    <span
+                      style={{
+                        color: "#68758b",
+                        fontSize: 11,
+                      }}
+                    >
+                      Assistance for couples travelling together.
+                    </span>
+                  </div>
+
+                  <div
+                    style={{
+                      background: "#fff",
+                      borderRadius: 10,
+                      padding: 13,
+                      borderLeft: `4px solid ${SUN}`,
+                    }}
+                  >
+                    <strong
+                      style={{
+                        display: "block",
+                        fontSize: 13,
+                        color: INK,
+                      }}
+                    >
+                      Family Package
+                    </strong>
+
+                    <span
+                      style={{
+                        color: "#68758b",
+                        fontSize: 11,
+                      }}
+                    >
+                      Support for eligible family travel applications.
+                    </span>
+                  </div>
+
+                </div>
+
+                <Btn
+                  variant="teal"
+                  onClick={() => go("visitor-visa")}
+                  style={{ marginTop: 16 }}
+                >
+                  Explore Visitor Visa
+                  <ArrowRight size={15} />
+                </Btn>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        {/* ================= PROCESS ================= */}
+
+        <section
+          className="nc-about-section"
+          style={{ background: "#f8fbff" }}
+        >
+
+          <div className="nc-about-container">
+
+            <div className="nc-about-section-label">
+              Our Process
+            </div>
+
+            <h2 className="nc-about-section-title">
+              A Simple & Transparent Process
+            </h2>
+
+            <p className="nc-about-section-subtitle">
+              We make your visa and immigration journey clear and
+              structured from the first consultation.
+            </p>
+
+            <div className="nc-about-process">
+
+              {process.map((step, index) => (
+
+                <div
+                  className="nc-about-process-card"
+                  key={index}
+                >
+
+                  <div
+                    style={{
+                      fontSize: 20,
+                      marginBottom: 2,
+                    }}
+                  >
+                    {step.icon}
+                  </div>
+
+                  <div
+                    className="nc-about-process-number"
+                    style={{
+                      color: step.color,
+                    }}
+                  >
+                    {step.no}
+                  </div>
+
+                  <div className="nc-about-process-title">
+                    {step.title}
+                  </div>
+
+                  <div className="nc-about-process-desc">
+                    {step.desc}
+                  </div>
+
+                </div>
+
+              ))}
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        {/* ================= TESTIMONIALS ================= */}
+
+        <section className="nc-about-section">
+
+          <div className="nc-about-container">
+
+            <div className="nc-about-section-label">
+              What Our Clients Say
+            </div>
+
+            <h2 className="nc-about-section-title">
+              Real People. Real Success Stories.
+            </h2>
+
+            <div className="nc-about-testimonials">
+
+              <div className="nc-about-testimonial">
+
+                <div className="nc-about-quote">
+                  “
+                </div>
+
+                <div className="nc-about-testimonial-text">
+                  NC Migration helped me understand my UK visa
+                  extension and Right to Work options. The process
+                  was explained clearly and professionally.
+                </div>
+
+                <div className="nc-about-client">
+
+                  <div className="nc-about-client-avatar">
+                    👩
+                  </div>
+
+                  <div>
+                    <strong>UK Visa Client</strong>
+                    <span>UK Visa Extension</span>
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <div className="nc-about-testimonial">
+
+                <div className="nc-about-quote">
+                  “
+                </div>
+
+                <div className="nc-about-testimonial-text">
+                  Very supportive team with clear communication
+                  throughout the visa process. Everything was
+                  explained step by step.
+                </div>
+
+                <div className="nc-about-client">
+
+                  <div className="nc-about-client-avatar">
+                    👨
+                  </div>
+
+                  <div>
+                    <strong>Visitor Visa Client</strong>
+                    <span>International Visitor Visa</span>
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <div className="nc-about-testimonial">
+
+                <div className="nc-about-quote">
+                  “
+                </div>
+
+                <div className="nc-about-testimonial-text">
+                  Excellent guidance for overseas work visa
+                  opportunities. The team explained the requirements
+                  and documentation clearly.
+                </div>
+
+                <div className="nc-about-client">
+
+                  <div className="nc-about-client-avatar">
+                    👩
+                  </div>
+
+                  <div>
+                    <strong>Work Visa Client</strong>
+                    <span>Germany Work Visa</span>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        {/* ================= FINAL CTA ================= */}
+
+        <section className="nc-about-cta">
+
+          <div className="nc-about-container">
+
+            <div className="nc-about-cta-inner">
+
+              <div>
+
+                <h2>
+                  Ready to Start Your Global Journey?
+                </h2>
+
+                <p>
+                  Talk to our experts today and get personalised
+                  guidance for your visa and immigration goals.
+                </p>
+
+              </div>
+
+              <Btn
+                variant="gold"
+                onClick={() => go("contact")}
+              >
+                Get Free Consultation
+                <ArrowRight size={15} />
               </Btn>
+
             </div>
-          ))}
-        </div>
-        <p style={{ fontSize: 13, color: "#7a8699", marginTop: 20 }}>
-          Visa requirements vary by occupation, employer and immigration rules. We help you check eligibility before you apply.
-        </p>
-      </Section>
 
-      {/* ---------------- VISITOR VISA ---------------- */}
-      <Section bg={PAPER}>
-        <Eyebrow>Visitor Visa</Eyebrow>
-        <h2 style={{ fontSize: 28, color: INK, margin: "0 0 6px" }}>Visitor &amp; tourist visa services</h2>
-        <h3 style={{ fontSize: 15.5, color: "#5a6577", fontWeight: 500, margin: "0 0 28px" }}>
-          Travel abroad for holidays, family visits &amp; international trips
-        </h3>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginBottom: 30 }}>
-          {VISIT_DESTINATIONS.map(([f, n], i) => (
-            <span key={i} style={{ background: "#fff", border: "1px solid #e7eaf2", borderRadius: 30, padding: "9px 16px", fontSize: 13.5, fontWeight: 600, color: INK, display: "inline-flex", alignItems: "center", gap: 7 }}>
-              <span style={{ fontSize: 17 }}>{f}</span>{n}
-            </span>
-          ))}
-        </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }} className="nc-3col">
-          {[
-            ["Single Traveller", "For individual applicants planning an international trip.", CORAL],
-            ["Couple Package", "For couples travelling together.", TEAL],
-            ["Family Package", "For families planning holidays or family visit visas.", SUN],
-          ].map(([t, d, col], i) => (
-            <div key={i} style={{ ...card, padding: 24, borderTop: `4px solid ${col}` }}>
-              <h4 style={{ fontSize: 16.5, color: INK, margin: "0 0 8px" }}>{t}</h4>
-              <p style={{ fontSize: 13.5, color: "#5a6577", lineHeight: 1.6, margin: 0 }}>{d}</p>
-            </div>
-          ))}
-        </div>
-        <Btn variant="teal" onClick={() => go("visitor-visa")} style={{ marginTop: 28 }}>
-          Explore Visitor Visa Services <ArrowRight size={15} />
-        </Btn>
-      </Section>
-
-      {/* ---------------- VISIT TO WORK ---------------- */}
-      <Section>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 44, alignItems: "center" }} className="nc-2col">
-          <div>
-            <Eyebrow>Visit to Work</Eyebrow>
-            <h2 style={{ fontSize: 28, color: INK, margin: "0 0 14px" }}>Visit to work — explore legal work pathways</h2>
-            <p style={{ color: "#3c485c", fontSize: 15, lineHeight: 1.8 }}>
-              Some immigration systems provide routes to change or switch immigration status. Others do not allow a visitor to switch to a work route from inside the country. We help you understand whether an available pathway may apply to your profile.
-            </p>
-            <p style={{ color: "#3c485c", fontSize: 15, lineHeight: 1.8 }}>
-              Destinations we cover include the United Kingdom, Spain, Germany, Greece, Italy, Lithuania and other eligible European destinations — where legally permitted and subject to eligibility.
-            </p>
-            <Btn variant="gold" onClick={() => go("visit-to-work")} style={{ marginTop: 18 }}>
-              Explore Visit to Work <ArrowRight size={15} />
-            </Btn>
           </div>
-          <div style={{ borderRadius: 18, overflow: "hidden", boxShadow: "0 16px 34px rgba(10,31,60,0.18)" }}>
-            <img src={VISIT_TO_WORK_IMG} alt="Traveller with documents exploring legal visit-to-work immigration pathways in Europe"
-                 style={{ width: "100%", height: 300, objectFit: "cover", display: "block" }} />
-          </div>
-        </div>
-      </Section>
 
-      {/* ---------------- UK VISA EXTENSION ---------------- */}
-      <Section style={{ background: `linear-gradient(120deg,${NAVY},#3a2d8f)` }}>
-        <Eyebrow light>UK Services</Eyebrow>
-        <h2 style={{ fontSize: 28, color: "#fff", margin: "0 0 10px" }}>UK visa extension &amp; immigration support</h2>
-        <p style={{ color: "rgba(255,255,255,0.8)", maxWidth: 680, lineHeight: 1.75, marginBottom: 30 }}>
-          Guidance on UK visa extension options, right to work status and share code documentation — assessed against your immigration history and current status.
-        </p>
+        </section>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 22 }} className="nc-2col">
-          <div style={{ background: "rgba(255,255,255,0.08)", borderRadius: 14, padding: 26, borderTop: `4px solid ${CORAL}` }}>
-            <h3 style={{ fontSize: 17, color: "#fff", margin: "0 0 14px" }}>Active right to work holders</h3>
-            {["Students", "Dependants", "Work visa holders", "Graduate / PSW holders", "Existing right to work holders", "Share code holders"].map((t, i) => (
-              <div key={i} style={{ display: "flex", gap: 9, alignItems: "center", padding: "7px 0" }}>
-                <CheckCircle2 size={15} color={CORAL} style={{ flexShrink: 0 }} />
-                <span style={{ color: "rgba(255,255,255,0.88)", fontSize: 13.5 }}>{t}</span>
+
+        {/* ================= SEO / INFORMATION FOOTER AREA ================= */}
+
+        <section
+          style={{
+            background: "#0c1237",
+            padding: "35px 0",
+            color: "#fff",
+          }}
+        >
+
+          <div className="nc-about-container">
+
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns:
+                  "1.5fr 1fr 1fr 1fr",
+                gap: 30,
+              }}
+              className="nc-about-footer-grid"
+            >
+
+              <div>
+
+                <div
+                  style={{
+                    fontSize: 24,
+                    fontWeight: 950,
+                    marginBottom: 8,
+                  }}
+                >
+                  NC
+                  <span
+                    style={{
+                      color: "#f5c542",
+                    }}
+                  >
+                    Migration
+                  </span>
+                </div>
+
+                <p
+                  style={{
+                    color: "rgba(255,255,255,.68)",
+                    fontSize: 11.5,
+                    lineHeight: 1.6,
+                    maxWidth: 280,
+                  }}
+                >
+                  Your trusted partner for UK visa extension,
+                  Right to Work guidance, work visas, visitor
+                  visas, visit-to-work pathways and global
+                  immigration support.
+                </p>
+
               </div>
-            ))}
-          </div>
-          <div style={{ background: "rgba(255,255,255,0.08)", borderRadius: 14, padding: 26, borderTop: `4px solid ${TEAL}` }}>
-            <h3 style={{ fontSize: 17, color: "#fff", margin: "0 0 14px" }}>Visa expiry &amp; complex cases</h3>
-            {["Expired student visa", "Expired work visa", "Expired Graduate / PSW visa", "Expired dependant visa", "Visitor visa holders", "Overstayer cases"].map((t, i) => (
-              <div key={i} style={{ display: "flex", gap: 9, alignItems: "center", padding: "7px 0" }}>
-                <CheckCircle2 size={15} color={TEAL} style={{ flexShrink: 0 }} />
-                <span style={{ color: "rgba(255,255,255,0.88)", fontSize: 13.5 }}>{t}</span>
+
+
+              <div>
+
+                <strong style={{ fontSize: 12 }}>
+                  Quick Links
+                </strong>
+
+                <div
+                  style={{
+                    marginTop: 10,
+                    color: "rgba(255,255,255,.7)",
+                    fontSize: 11,
+                    lineHeight: 2,
+                  }}
+                >
+                  Home
+                  <br />
+                  About Us
+                  <br />
+                  Contact Us
+                </div>
+
               </div>
-            ))}
-          </div>
-        </div>
 
-        <h3 style={{ fontSize: 17, color: "#fff", margin: "34px 0 16px" }}>What we can help you understand</h3>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 12 }} className="nc-4col">
-          {["UK visa extension options", "Right to work status", "Share code / eVisa guidance", "Skilled Worker visa eligibility", "Certificate of Sponsorship guidance", "Immigration route assessment", "Documentation support"].map((t, i) => (
-            <div key={i} style={{ background: "rgba(255,255,255,0.1)", borderRadius: 10, padding: "13px 15px", color: "rgba(255,255,255,0.92)", fontSize: 13, fontWeight: 500 }}>
-              ✓ {t}
+
+              <div>
+
+                <strong style={{ fontSize: 12 }}>
+                  Our Services
+                </strong>
+
+                <div
+                  style={{
+                    marginTop: 10,
+                    color: "rgba(255,255,255,.7)",
+                    fontSize: 11,
+                    lineHeight: 2,
+                  }}
+                >
+                  UK Visa Extension
+                  <br />
+                  Right to Work
+                  <br />
+                  Work Visa
+                  <br />
+                  Visitor Visa
+                  <br />
+                  Visit to Work
+                </div>
+
+              </div>
+
+
+              <div>
+
+                <strong style={{ fontSize: 12 }}>
+                  Contact
+                </strong>
+
+                <div
+                  style={{
+                    marginTop: 10,
+                    color: "rgba(255,255,255,.7)",
+                    fontSize: 11,
+                    lineHeight: 2,
+                  }}
+                >
+                  +91 76588 82546
+                  <br />
+                  info@ncmigration.com
+                  <br />
+                  Sector 17, Chandigarh
+                </div>
+
+              </div>
+
             </div>
-          ))}
-        </div>
 
-        <div style={{ marginTop: 26, background: "rgba(0,0,0,0.22)", borderRadius: 10, padding: "15px 18px", color: "rgba(255,255,255,0.75)", fontSize: 13, lineHeight: 1.65 }}>
-          Eligibility depends on your immigration history, current status and applicable UK immigration rules. We assess your profile before recommending an available route.
-        </div>
-
-        <Btn variant="gold" onClick={() => go("uk-extension")} style={{ marginTop: 26 }}>
-          Check Your UK Visa Options <ArrowRight size={15} />
-        </Btn>
-      </Section>
-
-      {/* ---------------- WHY NC MIGRATION ---------------- */}
-      <Section bg={PAPER}>
-        <Eyebrow>Why Us</Eyebrow>
-        <h2 style={{ fontSize: 28, color: INK, margin: "0 0 28px" }}>Why choose NC Migration?</h2>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }} className="nc-3col">
-          {[
-            ["Profile-based guidance", CORAL], ["Country-specific visa support", TEAL], ["Documentation assistance", SUN],
-            ["Work visa opportunities", ROYAL], ["Visitor visa assistance", "#6c4fd1"], ["UK immigration support", TEAL],
-          ].map(([t, col], i) => (
-            <div key={i} style={{ ...card, padding: 22, display: "flex", gap: 13, alignItems: "center", borderLeft: `4px solid ${col}` }}>
-              <CheckCircle2 size={19} color={col} style={{ flexShrink: 0 }} />
-              <span style={{ fontSize: 14.5, color: INK, fontWeight: 600 }}>{t}</span>
+            <div
+              style={{
+                borderTop:
+                  "1px solid rgba(255,255,255,.1)",
+                marginTop: 25,
+                paddingTop: 15,
+                textAlign: "center",
+                color: "rgba(255,255,255,.45)",
+                fontSize: 9.5,
+              }}
+            >
+              © 2026 NC Migration. All rights reserved.
             </div>
-          ))}
-        </div>
-        <div style={{ marginTop: 24 }}>
-          <Disclaimer>
-            We believe in clear guidance, transparent communication and realistic expectations. Visa decisions are made by the relevant immigration authorities, employers or government departments.
-          </Disclaimer>
-        </div>
-      </Section>
 
-      {/* ---------------- COUNTRIES WE COVER ---------------- */}
-      <Section>
-        <Eyebrow>Coverage</Eyebrow>
-        <h2 style={{ fontSize: 28, color: INK, margin: "0 0 26px" }}>Countries we cover</h2>
-
-        <h3 style={{ fontSize: 15, color: "#5a6577", margin: "0 0 14px", fontWeight: 600 }}>Europe</h3>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginBottom: 28 }}>
-          {EUROPE.map(([f, n], i) => <CountryChip key={i} flag={f} name={n} go={go} />)}
-        </div>
-
-        <h3 style={{ fontSize: 15, color: "#5a6577", margin: "0 0 14px", fontWeight: 600 }}>Other destinations</h3>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
-          {ELSEWHERE.map(([f, n], i) => <CountryChip key={i} flag={f} name={n} go={go} />)}
-        </div>
-      </Section>
-
-      {/* ---------------- FINAL CTA ---------------- */}
-      <Section style={{ background: `linear-gradient(120deg,${CORAL} 0%,${ROYAL} 55%,${NAVY} 100%)` }}>
-        <div style={{ textAlign: "center", maxWidth: 720, margin: "0 auto" }}>
-          <h2 style={{ color: "#fff", fontSize: 28, marginBottom: 14 }}>Ready to explore your international opportunities?</h2>
-          <p style={{ color: "rgba(255,255,255,0.88)", marginBottom: 28, lineHeight: 1.75 }}>
-            Whether you are planning to work abroad, visit another country, explore a possible visit-to-work pathway or understand your UK immigration options, NC Migration can help you understand the next steps.
-          </p>
-          <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
-            <Btn variant="gold" onClick={() => scrollTo("nc-services")}>Explore Our Services</Btn>
-            <Btn variant="ghost" onClick={() => go("contact")}>Get Free Consultation</Btn>
           </div>
-        </div>
-      </Section>
+
+        </section>
+
+      </div>
+
     </PageShell>
   );
 }
-
 function CountryChip({ flag, name, go }) {
   const [hover, setHover] = useState(false);
   const workKeys = { Spain: "spain", Italy: "italy", Germany: "germany", Slovakia: "slovakia", Bulgaria: "bulgaria", Serbia: "serbia", "United Kingdom": "uk", "New Zealand": "new-zealand", UAE: "uae" };
