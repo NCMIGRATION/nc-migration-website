@@ -732,48 +732,49 @@ function CurrencyTicker() {
   const [lastUpdated, setLastUpdated] = useState(null);
 
   const loadRates = useCallback(async () => {
-    const newRates = {};
+    try {
+      const response = await fetch(
+        "https://api.frankfurter.app/latest?from=INR"
+      );
 
-    for (const [, , currency] of TICKER_CURRENCIES) {
-      try {
-        const url =
-          `https://exchangerates.com/api/index.php` +
-          `?action=public_rate&from=${currency}&to=INR`;
-
-        const response = await fetch(url);
-
-        if (!response.ok) continue;
-
-        const data = await response.json();
-        const rate = Number(data?.rates?.INR);
-
-        if (Number.isFinite(rate) && rate > 0) {
-          newRates[currency] = rate;
-        }
-      } catch (error) {
-        console.error(`Rate failed for ${currency}`, error);
+      if (!response.ok) {
+        throw new Error("Rates unavailable");
       }
-    }
 
-    if (Object.keys(newRates).length > 0) {
-      setRates(newRates);
-      setLastUpdated(new Date().toISOString());
+      const data = await response.json();
+
+      if (!data?.rates) {
+        throw new Error("No rates returned");
+      }
+
+      const converted = {};
+
+      Object.entries(data.rates).forEach(([currency, inrToCurrency]) => {
+        if (inrToCurrency > 0) {
+          converted[currency] = 1 / inrToCurrency;
+        }
+      });
+
+      setRates(converted);
+      setLastUpdated(new Date());
+    } catch (error) {
+      console.error("Currency rates error:", error);
     }
   }, []);
 
   useEffect(() => {
     loadRates();
 
-    const refresh = setInterval(loadRates, 60 * 1000);
+    const timer = setInterval(loadRates, 60 * 60 * 1000);
 
-    return () => clearInterval(refresh);
+    return () => clearInterval(timer);
   }, [loadRates]);
 
   const formatRate = (code) => {
     const value = rates[code];
 
     if (value == null) {
-      return "Updating...";
+      return "—";
     }
 
     if (value < 0.01) {
@@ -864,25 +865,11 @@ function CurrencyTicker() {
         }}
       >
         {lastUpdated
-          ? `Live mid-market rates • Updated ${new Date(
-              lastUpdated
-            ).toLocaleTimeString([], {
+          ? `Exchange rates • Updated ${lastUpdated.toLocaleTimeString([], {
               hour: "2-digit",
               minute: "2-digit",
             })}`
-          : "Updating rates..."}
-        {" • "}
-        <a
-          href="https://exchangerates.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            color: "rgba(255,255,255,0.65)",
-            textDecoration: "underline",
-          }}
-        >
-          Rates by ExchangeRates.com
-        </a>
+          : "Loading exchange rates..."}
       </div>
     </div>
   );
