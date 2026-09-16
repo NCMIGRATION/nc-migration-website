@@ -247,7 +247,7 @@ const VISITOR_IMAGES = {
   "United Kingdom":
     "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=85",
 
-  Australia:
+  "Australia":
   "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d5?auto=format&fit=crop&w=1200&q=85",
   
   "New Zealand":
