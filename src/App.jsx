@@ -729,31 +729,35 @@ const TICKER_CURRENCIES = [
 
 function CurrencyTicker() {
   const [rates, setRates] = useState({});
-  const [loading, setLoading] = useState(true);
   const [lastUpdated, setLastUpdated] = useState(null);
 
   const loadRates = useCallback(async () => {
-    try {
-      const res = await fetch("/api/rates", {
-        cache: "no-store",
-      });
+    const newRates = {};
 
-      if (!res.ok) {
-        throw new Error("Live rates unavailable");
+    for (const [, , currency] of TICKER_CURRENCIES) {
+      try {
+        const url =
+          `https://exchangerates.com/api/index.php` +
+          `?action=public_rate&from=${currency}&to=INR`;
+
+        const response = await fetch(url);
+
+        if (!response.ok) continue;
+
+        const data = await response.json();
+        const rate = Number(data?.rates?.INR);
+
+        if (Number.isFinite(rate) && rate > 0) {
+          newRates[currency] = rate;
+        }
+      } catch (error) {
+        console.error(`Rate failed for ${currency}`, error);
       }
+    }
 
-      const data = await res.json();
-
-      if (!data.success || !data.rates) {
-        throw new Error("Invalid rates response");
-      }
-
-      setRates(data.rates);
-      setLastUpdated(data.updatedAt);
-      setLoading(false);
-    } catch (error) {
-      console.error("Unable to load live currency rates:", error);
-      setLoading(false);
+    if (Object.keys(newRates).length > 0) {
+      setRates(newRates);
+      setLastUpdated(new Date().toISOString());
     }
   }, []);
 
@@ -765,38 +769,22 @@ function CurrencyTicker() {
     return () => clearInterval(refresh);
   }, [loadRates]);
 
-  useEffect(() => {
-    const handleVisibility = () => {
-      if (document.visibilityState === "visible") {
-        loadRates();
-      }
-    };
-
-    document.addEventListener("visibilitychange", handleVisibility);
-
-    return () => {
-      document.removeEventListener("visibilitychange", handleVisibility);
-    };
-  }, [loadRates]);
-
   const formatRate = (code) => {
     const value = rates[code];
 
     if (value == null) {
-      return "Updating…";
+      return "Updating...";
     }
 
-    const number = Number(value);
-
-    if (number < 0.01) {
-      return `₹${number.toFixed(5)}`;
+    if (value < 0.01) {
+      return `₹${value.toFixed(5)}`;
     }
 
-    if (number < 1) {
-      return `₹${number.toFixed(3)}`;
+    if (value < 1) {
+      return `₹${value.toFixed(3)}`;
     }
 
-    return `₹${number.toFixed(2)}`;
+    return `₹${value.toFixed(2)}`;
   };
 
   const items = [...TICKER_CURRENCIES, ...TICKER_CURRENCIES];
@@ -875,16 +863,14 @@ function CurrencyTicker() {
           paddingBottom: 4,
         }}
       >
-        {loading
-          ? "Updating rates..."
-          : lastUpdated
+        {lastUpdated
           ? `Live mid-market rates • Updated ${new Date(
               lastUpdated
             ).toLocaleTimeString([], {
               hour: "2-digit",
               minute: "2-digit",
             })}`
-          : "Live currency rates"}
+          : "Updating rates..."}
         {" • "}
         <a
           href="https://exchangerates.com/"
@@ -901,7 +887,6 @@ function CurrencyTicker() {
     </div>
   );
 }
-
 function Hero({ go }) {
   return (
     <div style={{
