@@ -876,60 +876,327 @@ function CurrencyTicker() {
 }
 
 function Hero({ go }) {
+  const cards = [
+    {
+      title: "WORK VISA",
+      subtitle: "Europe · New Zealand · UK · UAE · And More",
+      description: "Skilled and semi-skilled roles matched to your CV.",
+      badge: "8 COUNTRIES",
+      image:
+        "https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1200&q=85",
+      flags: ["🇳🇿", "🇩🇪", "🇧🇬", "🇷🇸", "🇸🇰", "🇦🇪", "🇬🇧"],
+      route: "work-visa",
+      accent: "#e0203a",
+    },
+
+    {
+      title: "VISIT TO WORK",
+      subtitle: "Schengen · United Kingdom · Europe",
+      description: "Legal pathways from a visit toward work authorisation.",
+      badge: "NEW PATHWAY",
+      image:
+        "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1200&q=85",
+      flags: ["🇪🇺", "🇪🇸", "🇱🇹", "🇬🇧"],
+      route: "visit-to-work",
+      accent: "#c9700e",
+    },
+
+    {
+      title: "VISITOR VISA",
+      subtitle: "Schengen · UK · UAE · Singapore · Australia",
+      description: "Guided applications for tourism and family visits.",
+      badge: "EXPLORE THE WORLD",
+      image:
+        "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=85",
+      flags: ["🇪🇺", "🇬🇧", "🇦🇺", "🇳🇿", "🇦🇪", "🇸🇬"],
+      route: "visitor-visa",
+      accent: "#00a99d",
+    },
+
+    {
+      title: "UK VISA EXTENSION",
+      subtitle: "Right to Work · Share Code · COS",
+      description:
+        "Understand your UK visa extension and right-to-work options.",
+      badge: "PROFILE ASSESSMENT",
+      image:
+        "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=85",
+      flags: ["🇬🇧"],
+      route: "uk-extension",
+      accent: "#6c4fd1",
+    },
+  ];
+
   return (
-    <div style={{
-      backgroundImage: `linear-gradient(115deg, rgba(18,17,64,0.88) 0%, rgba(224,32,58,0.75) 45%, rgba(0,169,157,0.8) 100%), url(${IMG("photo-1436491865332-7a61a109cc05")})`,
-      backgroundSize: "cover", backgroundPosition: "center",
-      padding: "120px 24px 104px", position: "relative", overflow: "hidden",
-    }}>
-      <div style={{
-        position: "absolute", inset: 0, opacity: 0.16,
-        backgroundImage: "radial-gradient(circle at 20% 20%, #fff 0, transparent 2px), radial-gradient(circle at 70% 60%, #fff 0, transparent 2px), radial-gradient(circle at 45% 85%, #fff 0, transparent 2px)",
-        backgroundSize: "140px 140px",
-      }} />
-      <div style={{ maxWidth: 1180, margin: "0 auto", textAlign: "center", position: "relative" }}>
-        <div style={{ color: SUN, fontWeight: 700, fontSize: 13.5, letterSpacing: 1.2, marginBottom: 22, textTransform: "uppercase" }}>NC Migration · Global Work &amp; Travel Consultancy</div>
-        <h1 style={{ color: "#fff", fontSize: "clamp(32px, 5vw, 54px)", lineHeight: 1.15, fontWeight: 800, margin: 0, textShadow: "0 4px 20px rgba(0,0,0,0.25)", maxWidth: 900, marginLeft: "auto", marginRight: "auto" }}>
-          Your journey to the world starts with NC Migration
-        </h1>
-        <p style={{ color: "rgba(255,255,255,0.9)", fontSize: 18, marginTop: 22, lineHeight: 1.6, fontWeight: 500 }}>
-          Work Abroad &nbsp;|&nbsp; Visit the World &nbsp;|&nbsp; Explore New Opportunities
-        </p>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 20, marginTop: 42, textAlign: "left" }} className="nc-4col nc-services-grid">
-          <ServiceCard
-            big="WORK VISA" sub="Europe · New Zealand · UK · UAE · And More"
-            desc="Skilled and semi-skilled roles matched to your CV."
-            image={WORK_VISA_IMG} badge="8 COUNTRIES" badgeColor={CORAL}
-            flags={["🇳🇿","🇩🇪","🇧🇬","🇷🇸","🇸🇰","🇦🇪","🇬🇧"]}
-            onClick={() => go("work-visa")}
-          />
-          <ServiceCard
-            big="VISITOR VISA" sub="Schengen · UK · UAE · Singapore · Australia"
-            desc="Guided applications for tourism and family visits."
-            image={VISITOR_VISA_IMG} badge="EXPLORE THE WORLD" badgeColor={TEAL}
-            flags={["🇪🇺","🇬🇧","🇦🇺","🇳🇿","🇦🇪","🇸🇬"]}
-            onClick={() => go("visitor-visa")}
-          />
-          <ServiceCard
-            big="VISIT TO WORK" sub="Schengen · United Kingdom · Europe"
-            desc="Legal pathways from a visit toward work authorisation."
-            image={VISIT_TO_WORK_IMG} badge="NEW PATHWAY" badgeColor="#c9700e"
-            flags={["🇪🇺","🇪🇸","🇱🇹","🇬🇧"]}
-            onClick={() => go("visit-to-work")}
-          />
-          <ServiceCard
-            big="UK VISA EXTENSION" sub="Right to Work · Share Code · COS"
-            desc="Understand your UK visa extension and right-to-work options."
-            image={UK_EXTENSION_IMG} badge="PROFILE ASSESSMENT" badgeColor={"#6c4fd1"}
-            flags={["🇬🇧"]}
-            onClick={() => go("uk-extension")}
-          />
+    <section
+      style={{
+        position: "relative",
+        overflow: "hidden",
+        minHeight: 650,
+        padding: "105px 24px 70px",
+        backgroundImage:
+          "linear-gradient(110deg, rgba(7,24,55,0.88) 0%, rgba(12,42,82,0.62) 45%, rgba(7,25,52,0.48) 100%), url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=2200&q=90')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      {/* Soft dark overlay */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          background:
+            "linear-gradient(180deg, rgba(5,18,40,0.15), rgba(5,18,40,0.55))",
+          pointerEvents: "none",
+        }}
+      />
+
+      <div
+        style={{
+          position: "relative",
+          zIndex: 2,
+          maxWidth: 1250,
+          margin: "0 auto",
+        }}
+      >
+        {/* HERO TEXT */}
+        <div
+          style={{
+            maxWidth: 900,
+            marginBottom: 38,
+          }}
+        >
+          <div
+            style={{
+              color: "#ffc72c",
+              fontWeight: 800,
+              fontSize: 13,
+              letterSpacing: 2.2,
+              marginBottom: 18,
+              textTransform: "uppercase",
+            }}
+          >
+            NC Migration · Global Work & Travel Consultancy
+          </div>
+
+          <h1
+            style={{
+              color: "#fff",
+              fontSize: "clamp(38px, 5.5vw, 68px)",
+              lineHeight: 1.05,
+              fontWeight: 850,
+              margin: 0,
+              maxWidth: 850,
+              textShadow: "0 5px 25px rgba(0,0,0,0.35)",
+            }}
+          >
+            Your journey to the world starts with NC Migration
+          </h1>
+
+          <p
+            style={{
+              color: "rgba(255,255,255,0.94)",
+              fontSize: 19,
+              marginTop: 20,
+              lineHeight: 1.55,
+              fontWeight: 500,
+            }}
+          >
+            Work Abroad &nbsp;|&nbsp; Visit the World &nbsp;|&nbsp; Explore New
+            Opportunities
+          </p>
+        </div>
+
+        {/* FOUR SERVICE CARDS */}
+        <div
+          className="nc-4col nc-services-grid"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(4, 1fr)",
+            gap: 18,
+            alignItems: "stretch",
+          }}
+        >
+          {cards.map((card) => (
+            <div
+              key={card.title}
+              onClick={() => go(card.route)}
+              style={{
+                position: "relative",
+                height: 360,
+                borderRadius: 22,
+                overflow: "hidden",
+                cursor: "pointer",
+                background: "#071b3b",
+                border: "1px solid rgba(255,255,255,0.45)",
+                boxShadow: "0 18px 45px rgba(0,0,0,0.30)",
+                transition:
+                  "transform .3s ease, box-shadow .3s ease",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform =
+                  "translateY(-10px)";
+                e.currentTarget.style.boxShadow =
+                  "0 28px 55px rgba(0,0,0,0.42)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform =
+                  "translateY(0)";
+                e.currentTarget.style.boxShadow =
+                  "0 18px 45px rgba(0,0,0,0.30)";
+              }}
+            >
+              {/* PHOTO */}
+              <img
+                src={card.image}
+                alt={card.title}
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  transition: "transform .5s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "scale(1.08)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "scale(1)";
+                }}
+              />
+
+              {/* IMAGE DARK GRADIENT */}
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  background:
+                    "linear-gradient(180deg, rgba(4,15,35,0.02) 15%, rgba(4,15,35,0.22) 40%, rgba(4,15,35,0.96) 100%)",
+                }}
+              />
+
+              {/* BADGE */}
+              <div
+                style={{
+                  position: "absolute",
+                  top: 16,
+                  left: 16,
+                  background: card.accent,
+                  color: "#fff",
+                  fontSize: 10,
+                  fontWeight: 800,
+                  letterSpacing: 0.9,
+                  padding: "7px 12px",
+                  borderRadius: 30,
+                  boxShadow: "0 5px 14px rgba(0,0,0,0.22)",
+                }}
+              >
+                {card.badge}
+              </div>
+
+              {/* FLAGS */}
+              <div
+                style={{
+                  position: "absolute",
+                  top: 16,
+                  right: 14,
+                  display: "flex",
+                  gap: 4,
+                  flexWrap: "wrap",
+                  justifyContent: "flex-end",
+                  maxWidth: 125,
+                }}
+              >
+                {card.flags.map((flag, index) => (
+                  <span
+                    key={index}
+                    style={{
+                      fontSize: 17,
+                      background: "rgba(255,255,255,0.18)",
+                      backdropFilter: "blur(7px)",
+                      padding: "4px 5px",
+                      borderRadius: 6,
+                    }}
+                  >
+                    {flag}
+                  </span>
+                ))}
+              </div>
+
+              {/* CONTENT */}
+              <div
+                style={{
+                  position: "absolute",
+                  left: 20,
+                  right: 18,
+                  bottom: 18,
+                  color: "#fff",
+                }}
+              >
+                <h2
+                  style={{
+                    margin: 0,
+                    fontSize: 25,
+                    lineHeight: 1.05,
+                    fontWeight: 850,
+                    letterSpacing: -0.4,
+                  }}
+                >
+                  {card.title}
+                </h2>
+
+                <div
+                  style={{
+                    marginTop: 8,
+                    fontSize: 13,
+                    fontWeight: 700,
+                    color: "rgba(255,255,255,0.92)",
+                  }}
+                >
+                  {card.subtitle}
+                </div>
+
+                <p
+                  style={{
+                    margin: "12px 0 0",
+                    fontSize: 12.5,
+                    lineHeight: 1.5,
+                    color: "rgba(255,255,255,0.88)",
+                    maxWidth: 280,
+                  }}
+                >
+                  {card.description}
+                </p>
+
+                {/* ARROW */}
+                <div
+                  style={{
+                    position: "absolute",
+                    right: 0,
+                    bottom: 0,
+                    width: 48,
+                    height: 48,
+                    borderRadius: "50%",
+                    border: "1px solid rgba(255,255,255,0.75)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    background: "rgba(255,255,255,0.10)",
+                    backdropFilter: "blur(5px)",
+                    fontSize: 25,
+                  }}
+                >
+                  →
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 }
-
 function ServiceCard({ big, sub, desc, image, badge, badgeColor, flags, onClick }) {
   const [hover, setHover] = useState(false);
   return (
