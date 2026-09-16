@@ -734,7 +734,7 @@ function CurrencyTicker() {
   const loadRates = useCallback(async () => {
     try {
       const response = await fetch(
-        "https://api.frankfurter.app/latest?from=INR"
+        "/api/rates"
       );
 
       if (!response.ok) {
