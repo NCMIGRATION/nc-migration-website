@@ -1872,14 +1872,14 @@ function WorkCountryCard({ c, onClick }) {
     UAE:
       "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1200&q=85",
 
-    Slovakia:
-      "https://images.unsplash.com/photo-1590050752117-23a9d3c9c8c1?auto=format&fit=crop&w=1200&q=85",
+   Slovakia:
+     "https://images.unsplash.com/photo-1602356862498-43139e75df4f?auto=format&fit=crop&w=1200&q=85",
 
-    Bulgaria:
-      "https://images.unsplash.com/photo-1603565816030-6b389eeb23cb?auto=format&fit=crop&w=1200&q=85",
+Bulgaria:
+     "https://images.unsplash.com/photo-1603565816030-6b389eeb23cb?auto=format&fit=crop&w=1200&q=85",
 
-    Serbia:
-      "https://images.unsplash.com/photo-1587487268606-2f3f2d7c2f7d?auto=format&fit=crop&w=1200&q=85",
+Serbia:
+     "https://images.unsplash.com/photo-1609766857041-ed402ea8069a?auto=format&fit=crop&w=1200&q=85",
   };
 
   const image = COUNTRY_IMAGES[c.name];
