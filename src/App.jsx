@@ -3437,26 +3437,6 @@ function VisitToWorkPage({ go }) {
     </PageShell>
   );
 }
-const VISIT_TO_WORK_OPTIONS = {
-  const V2W_IMAGES = {
-  "United Kingdom":
-    "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=85",
-
-  Spain:
-    "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?auto=format&fit=crop&w=1200&q=85",
-
-  Germany:
-    "https://images.unsplash.com/photo-1528728329032-2972f65dfb3f?auto=format&fit=crop&w=1200&q=85",
-
-  Greece:
-    "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=85",
-
-  Italy:
-    "https://images.unsplash.com/photo-1529260830199-42c24126f198?auto=format&fit=crop&w=1200&q=85",
-
-  Lithuania:
-    "https://images.unsplash.com/photo-1561484930-998b6a7b22e8?auto=format&fit=crop&w=1200&q=85",
-};
 
 function VisitToWorkCountryPage({ countryKey, go }) {
   const c = VISIT_TO_WORK_OPTIONS[countryKey];
