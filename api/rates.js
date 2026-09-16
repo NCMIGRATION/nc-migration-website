@@ -16,6 +16,7 @@ export default async function handler(req, res) {
 
     const currencies = [
       "GBP",
+      "UAE",
       "EUR",
       "USD",
       "AED",
