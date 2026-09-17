@@ -29,108 +29,14 @@ const WHATSAPP_LINK = "https://wa.me/917658882546";
 // ServiceCard doesn't change either way.
 const svgDataUri = (svg) => `data:image/svg+xml,${encodeURIComponent(svg)}`;
 
-const WORK_VISA_IMG = svgDataUri(`
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400">
-  <defs>
-    <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#ff7a5c"/><stop offset="100%" stop-color="#c9312a"/>
-    </linearGradient>
-  </defs>
-  <rect width="900" height="400" fill="url(#g1)"/>
-  <g opacity="0.15" fill="#fff">
-    <circle cx="820" cy="60" r="120"/><circle cx="60" cy="360" r="100"/>
-  </g>
-  <g fill="#ffffff" opacity="0.92">
-    <rect x="560" y="120" width="90" height="200" rx="4"/>
-    <rect x="660" y="80" width="110" height="240" rx="4"/>
-    <rect x="580" y="150" width="18" height="18"/><rect x="612" y="150" width="18" height="18"/>
-    <rect x="580" y="190" width="18" height="18"/><rect x="612" y="190" width="18" height="18"/>
-    <rect x="580" y="230" width="18" height="18"/><rect x="612" y="230" width="18" height="18"/>
-    <rect x="686" y="110" width="18" height="18"/><rect x="722" y="110" width="18" height="18"/>
-    <rect x="686" y="150" width="18" height="18"/><rect x="722" y="150" width="18" height="18"/>
-    <rect x="686" y="190" width="18" height="18"/><rect x="722" y="190" width="18" height="18"/>
-    <rect x="686" y="230" width="18" height="18"/><rect x="722" y="230" width="18" height="18"/>
-  </g>
-  <g transform="translate(180,150)">
-    <circle cx="90" cy="30" r="34" fill="#161233"/>
-    <rect x="30" y="70" width="120" height="130" rx="18" fill="#161233"/>
-    <rect x="10" y="90" width="30" height="90" rx="12" fill="#161233"/>
-    <rect x="150" y="90" width="30" height="90" rx="12" fill="#161233"/>
-    <rect x="55" y="10" width="70" height="26" rx="6" fill="#ffc72c"/>
-    <rect x="60" y="170" width="60" height="60" rx="8" fill="#ffc72c"/>
-  </g>
-</svg>`);
-
-const VISITOR_VISA_IMG = svgDataUri(`
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400">
-  <defs>
-    <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#22c2b5"/><stop offset="100%" stop-color="#00706a"/>
-    </linearGradient>
-  </defs>
-  <rect width="900" height="400" fill="url(#g2)"/>
-  <circle cx="740" cy="90" r="60" fill="#ffc72c" opacity="0.9"/>
-  <g fill="#ffffff" opacity="0.85">
-    <polygon points="80,320 220,150 360,320"/>
-    <polygon points="260,320 400,190 540,320"/>
-  </g>
-  <g fill="#0e2a52">
-    <ellipse cx="450" cy="330" rx="420" ry="40"/>
-  </g>
-  <g transform="translate(430,110) rotate(-18)" fill="#ffffff">
-    <path d="M0 20 L140 0 L170 20 L140 40 L60 34 L20 46 L0 40 L14 30 Z"/>
-    <polygon points="35,22 5,4 20,22 5,40"/>
-  </g>
-</svg>`);
-
-const VISIT_TO_WORK_IMG = svgDataUri(`
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400">
-  <defs>
-    <linearGradient id="g3" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#e79a2e"/><stop offset="100%" stop-color="#a5630f"/>
-    </linearGradient>
-  </defs>
-  <rect width="900" height="400" fill="url(#g3)"/>
-  <g opacity="0.15" fill="#fff"><circle cx="90" cy="80" r="90"/><circle cx="800" cy="330" r="120"/></g>
-  <g transform="translate(140,110)">
-    <circle cx="70" cy="30" r="30" fill="#161233"/>
-    <rect x="20" y="65" width="100" height="110" rx="16" fill="#161233"/>
-    <rect x="0" y="150" width="55" height="70" rx="8" fill="#ffc72c"/>
-    <rect x="10" y="140" width="35" height="14" rx="6" fill="#ffc72c"/>
-  </g>
-  <g stroke="#ffffff" stroke-width="4" stroke-dasharray="10 10" fill="none" opacity="0.85">
-    <path d="M300 230 C 420 150, 520 150, 620 210"/>
-  </g>
-  <g transform="translate(620,175)">
-    <rect x="0" y="20" width="90" height="65" rx="10" fill="#161233"/>
-    <rect x="30" y="4" width="30" height="20" rx="6" fill="#161233"/>
-    <rect x="0" y="46" width="90" height="12" fill="#ffc72c"/>
-  </g>
-</svg>`);
-
-const UK_EXTENSION_IMG = svgDataUri(`
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400">
-  <defs>
-    <linearGradient id="g4" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#7b64e8"/><stop offset="100%" stop-color="#2a2166"/>
-    </linearGradient>
-  </defs>
-  <rect width="900" height="400" fill="url(#g4)"/>
-  <g fill="#0e0a33" opacity="0.9">
-    <rect x="60" y="200" width="60" height="120"/><rect x="140" y="170" width="70" height="150"/>
-    <rect x="700" y="190" width="70" height="130"/><rect x="790" y="230" width="60" height="90"/>
-  </g>
-  <g transform="translate(360,40)">
-    <rect x="60" y="60" width="60" height="260" fill="#0e0a33"/>
-    <polygon points="60,60 90,10 120,60" fill="#0e0a33"/>
-    <circle cx="90" cy="100" r="26" fill="#ffc72c"/>
-    <rect x="30" y="150" width="120" height="16" fill="#0e0a33"/>
-    <rect x="40" y="190" width="14" height="130" fill="#0e0a33"/>
-    <rect x="126" y="190" width="14" height="130" fill="#0e0a33"/>
-    <rect x="0" y="300" width="180" height="20" fill="#0e0a33"/>
-  </g>
-  <rect x="0" y="330" width="900" height="70" fill="#0e0a33" opacity="0.5"/>
-</svg>`);
+const WORK_VISA_IMG =
+  "https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1400&q=85";
+const VISITOR_VISA_IMG =
+  "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1400&q=85";
+const VISIT_TO_WORK_IMG =
+  "https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1400&q=85";
+const UK_EXTENSION_IMG =
+  "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1400&q=85";
 
 const NAVY = "#121140";
 const NAVY2 = "#1a1854";
