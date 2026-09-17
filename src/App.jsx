@@ -6116,760 +6116,1104 @@ function ContactPage() {
 
   const [submitted, setSubmitted] = useState(false);
 
-  const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
+  const update = (k) => (e) =>
+    setForm({ ...form, [k]: e.target.value });
+
+  const inputStyle = {
+    width: "100%",
+    padding: "14px 15px",
+    borderRadius: 10,
+    border: "1px solid #dce2ea",
+    fontSize: 14,
+    boxSizing: "border-box",
+    fontFamily: "inherit",
+    background: "#fff",
+    color: INK,
+    outline: "none",
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const whatsappMessage = `
-Hello NC Migration,
-
-I would like to enquire about your visa services.
-
-Name: ${form.name}
-Phone: ${form.phone}
-Email: ${form.email}
-Service: ${form.service}
-Destination: ${form.destination}
-Message: ${form.message}
-    `.trim();
-
-    const whatsappUrl = `https://wa.me/${PHONE_TEL.replace(
-      /[^0-9]/g,
-      ""
-    )}?text=${encodeURIComponent(whatsappMessage)}`;
-
-    window.open(whatsappUrl, "_blank");
-    setSubmitted(true);
+  const labelStyle = {
+    fontSize: 12.5,
+    fontWeight: 700,
+    color: "#4f5b70",
+    marginBottom: 7,
+    display: "block",
   };
+
+  const CONTACT_CARDS = [
+    {
+      icon: Phone,
+      title: "Call Us",
+      value: PHONE_DISPLAY,
+      action: "Call Now",
+      href: PHONE_TEL,
+      color: CORAL,
+      bg: "#fff1ee",
+    },
+    {
+      icon: MessageCircle,
+      title: "WhatsApp",
+      value: PHONE_DISPLAY,
+      action: "Chat on WhatsApp",
+      href: WHATSAPP_LINK,
+      color: "#18bd70",
+      bg: "#ebfaf3",
+      external: true,
+    },
+    {
+      icon: Mail,
+      title: "Email",
+      value: "info@ncmigration.com",
+      action: "Send an Email",
+      href: "mailto:info@ncmigration.com",
+      color: "#e63946",
+      bg: "#fff0f1",
+    },
+    {
+      icon: MapPin,
+      title: "Visit Our Office",
+      value: "SCO 125-126, Sector 17-C, Chandigarh",
+      action: "Get Directions",
+      href: "https://www.google.com/maps/search/?api=1&query=SCO+125-126%2C+Sector+17-C%2C+Chandigarh",
+      color: "#7256d8",
+      bg: "#f1efff",
+      external: true,
+    },
+  ];
+
+  const reasons = [
+    "Work Visa",
+    "Visitor Visa",
+    "Visit to Work",
+    "UK Visa Extension",
+    "Right to Work",
+    "General Consultation",
+  ];
 
   return (
-    <PageShell>
-      {/* HERO */}
+    <PageShell theme="contact">
+
+      {/* =========================================================
+          PREMIUM CONTACT HERO
+      ========================================================= */}
+
       <section
         style={{
-          padding: "70px 20px 50px",
           background:
-            "linear-gradient(135deg, #07110f 0%, #0d211d 55%, #123b33 100%)",
+            `radial-gradient(circle at 80% 25%, rgba(197,150,48,.20), transparent 28%),
+             linear-gradient(115deg, #07131d 0%, #0c1b28 48%, #101827 100%)`,
           color: "#fff",
+          position: "relative",
+          overflow: "hidden",
+          padding: "72px 0 58px",
         }}
       >
+
         <div
           style={{
-            maxWidth: 1180,
-            margin: "0 auto",
-            display: "grid",
-            gridTemplateColumns: "1.2fr 0.8fr",
-            gap: 40,
-            alignItems: "center",
+            position: "absolute",
+            right: "-80px",
+            top: "-120px",
+            width: 430,
+            height: 430,
+            borderRadius: "50%",
+            background:
+              "radial-gradient(circle, rgba(214,166,55,.18), transparent 68%)",
+            pointerEvents: "none",
           }}
-        >
-          <div>
-            <div
-              style={{
-                display: "inline-block",
-                padding: "8px 14px",
-                borderRadius: 30,
-                background: "rgba(255,255,255,0.1)",
-                border: "1px solid rgba(255,255,255,0.15)",
-                fontSize: 13,
-                fontWeight: 700,
-                letterSpacing: 1,
-                marginBottom: 20,
-              }}
-            >
-              CONTACT NC MIGRATION
-            </div>
+        />
 
-            <h1
-              style={{
-                fontSize: "clamp(38px, 5vw, 64px)",
-                lineHeight: 1.05,
-                margin: "0 0 22px",
-                fontWeight: 800,
-              }}
-            >
-              Let's discuss your
-              <span style={{ color: CORAL }}> visa plans.</span>
-            </h1>
+        <div
+          style={{
+            position: "absolute",
+            left: "-160px",
+            bottom: "-180px",
+            width: 420,
+            height: 420,
+            borderRadius: "50%",
+            background:
+              "radial-gradient(circle, rgba(255,75,63,.10), transparent 70%)",
+            pointerEvents: "none",
+          }}
+        />
 
-            <p
-              style={{
-                fontSize: 18,
-                lineHeight: 1.7,
-                color: "rgba(255,255,255,0.78)",
-                maxWidth: 650,
-                margin: 0,
-              }}
-            >
-              Speak with our immigration team about study visas, visitor
-              visas, work visas, UK visa extension services and other
-              immigration options.
-            </p>
-          </div>
-
+        <Section>
           <div
             style={{
-              background: "rgba(255,255,255,0.08)",
-              border: "1px solid rgba(255,255,255,0.14)",
-              borderRadius: 28,
-              padding: 30,
-              backdropFilter: "blur(10px)",
+              display: "grid",
+              gridTemplateColumns: "1.25fr .75fr",
+              gap: 50,
+              alignItems: "center",
             }}
+            className="nc-2col"
           >
-            <div
-              style={{
-                fontSize: 13,
-                fontWeight: 800,
-                letterSpacing: 1,
-                color: TEAL,
-                marginBottom: 10,
-              }}
-            >
-              OFFICE
+
+            <div style={{ position: "relative", zIndex: 2 }}>
+
+              <div
+                style={{
+                  fontSize: 12,
+                  fontWeight: 800,
+                  letterSpacing: 2,
+                  textTransform: "uppercase",
+                  color: "#e7b94f",
+                  marginBottom: 17,
+                }}
+              >
+                Contact NC Migration
+              </div>
+
+              <h1
+                style={{
+                  margin: 0,
+                  fontSize: "clamp(38px, 5vw, 62px)",
+                  lineHeight: 1.05,
+                  letterSpacing: "-1.8px",
+                  maxWidth: 760,
+                  fontFamily: "Georgia, 'Times New Roman', serif",
+                }}
+              >
+                Let's discuss your
+                <br />
+                <span style={{ color: "#e8bb57" }}>
+                  visa & immigration goals
+                </span>
+              </h1>
+
+              <p
+                style={{
+                  margin: "22px 0 0",
+                  maxWidth: 650,
+                  fontSize: 16,
+                  lineHeight: 1.75,
+                  color: "#d7dee8",
+                }}
+              >
+                Tell us about your travel, work or immigration plans and our
+                team can help you understand the available options and next
+                steps.
+              </p>
+
+              <div
+                style={{
+                  display: "flex",
+                  gap: 14,
+                  flexWrap: "wrap",
+                  marginTop: 28,
+                }}
+              >
+                <Btn
+                  variant="gold"
+                  onClick={() => scrollToId("contact-form")}
+                >
+                  Request Free Consultation <ArrowRight size={15} />
+                </Btn>
+
+                <a
+                  href={WHATSAPP_LINK}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ textDecoration: "none" }}
+                >
+                  <Btn variant="teal">
+                    WhatsApp Us <MessageCircle size={15} />
+                  </Btn>
+                </a>
+              </div>
+
+              <div
+                style={{
+                  display: "flex",
+                  gap: 28,
+                  flexWrap: "wrap",
+                  marginTop: 35,
+                  paddingTop: 25,
+                  borderTop: "1px solid rgba(255,255,255,.13)",
+                }}
+              >
+                {[
+                  ["✓", "Expert Guidance"],
+                  ["✓", "Personalised Support"],
+                  ["✓", "Transparent Process"],
+                  ["✓", "End-to-End Support"],
+                ].map((item, i) => (
+                  <div
+                    key={i}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 8,
+                      fontSize: 12.5,
+                      color: "#e8edf4",
+                    }}
+                  >
+                    <span
+                      style={{
+                        width: 21,
+                        height: 21,
+                        borderRadius: "50%",
+                        display: "inline-flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        color: "#e8bb57",
+                        border: "1px solid rgba(232,187,87,.5)",
+                        fontWeight: 800,
+                      }}
+                    >
+                      {item[0]}
+                    </span>
+                    {item[1]}
+                  </div>
+                ))}
+              </div>
             </div>
 
-            <h3
-              style={{
-                margin: "0 0 14px",
-                fontSize: 25,
-              }}
-            >
-              Chandigarh
-            </h3>
-
-            <p
-              style={{
-                margin: 0,
-                lineHeight: 1.7,
-                color: "rgba(255,255,255,0.72)",
-              }}
-            >
-              SCO 125-126,
-              <br />
-              Sector 17-C, Chandigarh
-            </p>
-
             <div
               style={{
-                height: 1,
-                background: "rgba(255,255,255,0.12)",
-                margin: "24px 0",
-              }}
-            />
-
-            <a
-              href={`tel:${PHONE_TEL}`}
-              style={{
-                display: "block",
-                color: "#fff",
-                textDecoration: "none",
-                fontWeight: 700,
-                marginBottom: 12,
+                minHeight: 330,
+                position: "relative",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
               }}
             >
-              📞 {PHONE_DISPLAY}
-            </a>
 
-            <a
-              href={WHATSAPP_LINK}
-              target="_blank"
-              rel="noreferrer"
-              style={{
-                display: "block",
-                color: "#fff",
-                textDecoration: "none",
-                fontWeight: 700,
-              }}
-            >
-              💬 WhatsApp us
-            </a>
+              <div
+                style={{
+                  width: 300,
+                  height: 300,
+                  borderRadius: "50%",
+                  border: "1px solid rgba(231,185,79,.24)",
+                  position: "absolute",
+                }}
+              />
+
+              <div
+                style={{
+                  width: 235,
+                  height: 235,
+                  borderRadius: "50%",
+                  border: "1px solid rgba(255,255,255,.10)",
+                  position: "absolute",
+                }}
+              />
+
+              <div
+                style={{
+                  width: 190,
+                  height: 190,
+                  borderRadius: 30,
+                  background:
+                    "linear-gradient(145deg, rgba(232,187,87,.18), rgba(255,255,255,.04))",
+                  border: "1px solid rgba(232,187,87,.30)",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  position: "relative",
+                  zIndex: 2,
+                  boxShadow: "0 25px 70px rgba(0,0,0,.28)",
+                }}
+              >
+                <MapPin size={44} color="#e8bb57" />
+                <div
+                  style={{
+                    marginTop: 15,
+                    fontFamily: "Georgia, serif",
+                    fontSize: 21,
+                    color: "#fff",
+                  }}
+                >
+                  Chandigarh
+                </div>
+                <div
+                  style={{
+                    fontSize: 11,
+                    color: "#cbd4df",
+                    marginTop: 5,
+                  }}
+                >
+                  NC Migration Office
+                </div>
+              </div>
+
+            </div>
           </div>
-        </div>
+        </Section>
       </section>
 
-      {/* CONTACT CARDS */}
-      <section
-        style={{
-          padding: "55px 20px 20px",
-          background: "#fff",
-        }}
-      >
+
+      {/* =========================================================
+          CONTACT CARDS
+      ========================================================= */}
+
+      <Section style={{ paddingTop: 28, paddingBottom: 32 }}>
+
         <div
           style={{
-            maxWidth: 1180,
-            margin: "0 auto",
             display: "grid",
             gridTemplateColumns: "repeat(4, 1fr)",
             gap: 18,
           }}
+          className="nc-4col"
         >
-          {[
-            {
-              icon: "📞",
-              title: "Call Us",
-              text: PHONE_DISPLAY,
-              href: `tel:${PHONE_TEL}`,
-            },
-            {
-              icon: "💬",
-              title: "WhatsApp",
-              text: "Chat with our team",
-              href: WHATSAPP_LINK,
-            },
-            {
-              icon: "✉️",
-              title: "Email",
-              text: "Send an enquiry",
-              href: "mailto:info@nainconsultancyservices.com",
-            },
-            {
-              icon: "📍",
-              title: "Visit Office",
-              text: "Sector 17-C, Chandigarh",
-              href: "https://www.google.com/maps/search/?api=1&query=SCO+125-126+Sector+17-C+Chandigarh",
-            },
-          ].map((item, index) => (
-            <a
-              key={index}
-              href={item.href}
-              target={item.href.startsWith("http") ? "_blank" : undefined}
-              rel={item.href.startsWith("http") ? "noreferrer" : undefined}
-              style={{
-                textDecoration: "none",
-                color: INK,
-                padding: 24,
-                borderRadius: 20,
-                border: "1px solid #e7ebe9",
-                background: "#fff",
-                boxShadow: "0 10px 35px rgba(0,0,0,0.05)",
-                transition: "transform .2s ease",
-              }}
-            >
-              <div
+
+          {CONTACT_CARDS.map((c, i) => {
+            const Icon = c.icon;
+
+            return (
+              <Glass
+                key={i}
+                pad={23}
                 style={{
-                  width: 48,
-                  height: 48,
-                  borderRadius: 14,
                   display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  background: "#f0f7f4",
-                  fontSize: 22,
-                  marginBottom: 16,
+                  flexDirection: "column",
+                  minHeight: 170,
+                  borderTop: `3px solid ${c.color}`,
+                  transition: "transform .2s ease, box-shadow .2s ease",
                 }}
               >
-                {item.icon}
-              </div>
 
-              <div
-                style={{
-                  fontSize: 17,
-                  fontWeight: 800,
-                  marginBottom: 7,
-                }}
-              >
-                {item.title}
-              </div>
+                <div
+                  style={{
+                    width: 45,
+                    height: 45,
+                    borderRadius: 13,
+                    background: c.bg,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Icon size={20} color={c.color} />
+                </div>
 
-              <div
-                style={{
-                  color: "#66716d",
-                  fontSize: 14,
-                  lineHeight: 1.5,
-                }}
-              >
-                {item.text}
-              </div>
-            </a>
-          ))}
+                <div
+                  style={{
+                    marginTop: 14,
+                    fontSize: 11.5,
+                    fontWeight: 800,
+                    color: "#7b8799",
+                    letterSpacing: 1,
+                    textTransform: "uppercase",
+                  }}
+                >
+                  {c.title}
+                </div>
+
+                <div
+                  style={{
+                    fontSize: 14.5,
+                    fontWeight: 750,
+                    color: INK,
+                    marginTop: 6,
+                    lineHeight: 1.45,
+                  }}
+                >
+                  {c.value}
+                </div>
+
+                {c.href && (
+                  <a
+                    href={c.href}
+                    {...(c.external
+                      ? {
+                          target: "_blank",
+                          rel: "noopener noreferrer",
+                        }
+                      : {})}
+                    style={{
+                      marginTop: "auto",
+                      paddingTop: 14,
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: 6,
+                      color: c.color,
+                      fontWeight: 750,
+                      fontSize: 12.5,
+                      textDecoration: "none",
+                    }}
+                  >
+                    {c.action}
+                    <ArrowRight size={14} />
+                  </a>
+                )}
+
+              </Glass>
+            );
+          })}
+
         </div>
-      </section>
+      </Section>
 
-      {/* FORM + INFO */}
-      <section
-        style={{
-          padding: "70px 20px",
-          background: "#f7f9f8",
-        }}
-      >
+
+      {/* =========================================================
+          FORM + OFFICE
+      ========================================================= */}
+
+      <Section style={{ paddingTop: 8, paddingBottom: 50 }}>
+
+        <Anchor id="contact-form" />
+
         <div
           style={{
-            maxWidth: 1180,
-            margin: "0 auto",
             display: "grid",
-            gridTemplateColumns: "0.75fr 1.25fr",
-            gap: 45,
+            gridTemplateColumns: "1.15fr .85fr",
+            gap: 28,
             alignItems: "start",
           }}
+          className="nc-2col"
         >
-          {/* LEFT */}
-          <div>
-            <div
-              style={{
-                fontSize: 13,
-                fontWeight: 800,
-                letterSpacing: 1,
-                color: TEAL,
-                marginBottom: 12,
-              }}
-            >
-              GET IN TOUCH
-            </div>
-
-            <h2
-              style={{
-                fontSize: "clamp(32px, 4vw, 48px)",
-                lineHeight: 1.1,
-                margin: "0 0 18px",
-                color: INK,
-              }}
-            >
-              Tell us what
-              <br />
-              you need.
-            </h2>
-
-            <p
-              style={{
-                color: "#65716d",
-                lineHeight: 1.75,
-                fontSize: 16,
-                marginBottom: 28,
-              }}
-            >
-              Fill in the form and our team will contact you to understand
-              your requirements and discuss the available options.
-            </p>
-
-            <div
-              style={{
-                padding: 24,
-                borderRadius: 20,
-                background: "#fff",
-                border: "1px solid #e5ebe8",
-                marginBottom: 15,
-              }}
-            >
-              <div
-                style={{
-                  fontSize: 15,
-                  fontWeight: 800,
-                  marginBottom: 8,
-                }}
-              >
-                📍 Our Office
-              </div>
-
-              <div
-                style={{
-                  color: "#69746f",
-                  lineHeight: 1.6,
-                  fontSize: 14,
-                }}
-              >
-                SCO 125-126,
-                <br />
-                Sector 17-C, Chandigarh
-              </div>
-            </div>
-
-            <div
-              style={{
-                padding: 24,
-                borderRadius: 20,
-                background: "#fff",
-                border: "1px solid #e5ebe8",
-              }}
-            >
-              <div
-                style={{
-                  fontSize: 15,
-                  fontWeight: 800,
-                  marginBottom: 8,
-                }}
-              >
-                ⏰ Office Hours
-              </div>
-
-              <div
-                style={{
-                  color: "#69746f",
-                  lineHeight: 1.6,
-                  fontSize: 14,
-                }}
-              >
-                Monday – Saturday
-                <br />
-                10:00 AM onwards
-              </div>
-            </div>
-          </div>
 
           {/* FORM */}
-          <div
-            style={{
-              background: "#fff",
-              borderRadius: 28,
-              padding: "35px",
-              boxShadow: "0 20px 60px rgba(0,0,0,0.07)",
-              border: "1px solid #e8ecea",
-            }}
-          >
-            <h3
+
+          <Glass pad={34}>
+
+            {submitted ? (
+
+              <div
+                style={{
+                  textAlign: "center",
+                  padding: "75px 15px",
+                }}
+              >
+                <CheckCircle2
+                  size={52}
+                  color={TEAL}
+                  style={{ marginBottom: 18 }}
+                />
+
+                <div
+                  style={{
+                    fontFamily: "Georgia, serif",
+                    fontSize: 27,
+                    color: INK,
+                  }}
+                >
+                  Thank you!
+                </div>
+
+                <div
+                  style={{
+                    color: "#647084",
+                    fontSize: 14,
+                    marginTop: 10,
+                    lineHeight: 1.7,
+                  }}
+                >
+                  Your enquiry has been received.
+                  <br />
+                  Our NC Migration team will contact you soon.
+                </div>
+
+              </div>
+
+            ) : (
+
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  setSubmitted(true);
+                }}
+              >
+
+                <div
+                  style={{
+                    fontSize: 11.5,
+                    fontWeight: 800,
+                    letterSpacing: 1.5,
+                    color: "#c39325",
+                    textTransform: "uppercase",
+                    marginBottom: 9,
+                  }}
+                >
+                  Get In Touch
+                </div>
+
+                <h2
+                  style={{
+                    margin: 0,
+                    fontSize: 28,
+                    color: INK,
+                    fontFamily: "Georgia, 'Times New Roman', serif",
+                  }}
+                >
+                  Request a free consultation
+                </h2>
+
+                <p
+                  style={{
+                    color: "#647084",
+                    fontSize: 13.5,
+                    lineHeight: 1.65,
+                    margin: "9px 0 26px",
+                  }}
+                >
+                  A few details are all we need to get started. Our team will
+                  review your enquiry and get back to you.
+                </p>
+
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "1fr 1fr",
+                    gap: 15,
+                  }}
+                  className="nc-2col-tight"
+                >
+
+                  <div>
+                    <label style={labelStyle}>
+                      Full Name *
+                    </label>
+
+                    <input
+                      style={inputStyle}
+                      placeholder="Your full name"
+                      required
+                      value={form.name}
+                      onChange={update("name")}
+                    />
+                  </div>
+
+                  <div>
+                    <label style={labelStyle}>
+                      Phone Number *
+                    </label>
+
+                    <input
+                      style={inputStyle}
+                      placeholder="+91 00000 00000"
+                      required
+                      value={form.phone}
+                      onChange={update("phone")}
+                    />
+                  </div>
+
+                </div>
+
+
+                <label style={labelStyle}>
+                  Email Address *
+                </label>
+
+                <input
+                  style={{ ...inputStyle, marginBottom: 15 }}
+                  type="email"
+                  placeholder="you@example.com"
+                  required
+                  value={form.email}
+                  onChange={update("email")}
+                />
+
+
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "1fr 1fr",
+                    gap: 15,
+                  }}
+                  className="nc-2col-tight"
+                >
+
+                  <div>
+                    <label style={labelStyle}>
+                      Service Interested In *
+                    </label>
+
+                    <select
+                      style={inputStyle}
+                      value={form.service}
+                      onChange={update("service")}
+                    >
+                      {reasons.map((r) => (
+                        <option key={r}>{r}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div>
+                    <label style={labelStyle}>
+                      Destination Country *
+                    </label>
+
+                    <input
+                      style={inputStyle}
+                      placeholder="e.g. United Kingdom"
+                      value={form.destination}
+                      onChange={update("destination")}
+                    />
+                  </div>
+
+                </div>
+
+
+                <label style={labelStyle}>
+                  Your Message *
+                </label>
+
+                <textarea
+                  style={{
+                    ...inputStyle,
+                    minHeight: 125,
+                    resize: "vertical",
+                  }}
+                  placeholder="Tell us about your requirements, timeline or questions..."
+                  value={form.message}
+                  onChange={update("message")}
+                />
+
+
+                <Btn
+                  variant="gold"
+                  style={{
+                    width: "100%",
+                    justifyContent: "center",
+                    marginTop: 5,
+                  }}
+                >
+                  <MessageCircle size={16} />
+                  Send Enquiry on WhatsApp
+                  <ArrowRight size={15} />
+                </Btn>
+
+                <div
+                  style={{
+                    textAlign: "center",
+                    fontSize: 11.5,
+                    color: "#8993a3",
+                    marginTop: 13,
+                  }}
+                >
+                  🔒 Your information is kept private and used only for
+                  consultation purposes.
+                </div>
+
+              </form>
+
+            )}
+
+          </Glass>
+
+
+          {/* OFFICE */}
+
+          <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
+
+            <Glass
+              pad={0}
               style={{
-                margin: "0 0 8px",
-                fontSize: 26,
-                color: INK,
+                overflow: "hidden",
+                background: "#081520",
+                color: "#fff",
               }}
             >
-              Request a consultation
-            </h3>
 
-            <p
-              style={{
-                margin: "0 0 28px",
-                color: "#707b77",
-                fontSize: 14,
-              }}
-            >
-              Share your details and we'll connect with you.
-            </p>
-
-            <form onSubmit={handleSubmit}>
               <div
                 style={{
                   display: "grid",
                   gridTemplateColumns: "1fr 1fr",
-                  gap: 18,
+                  minHeight: 270,
                 }}
+                className="nc-2col-tight"
               >
-                <div>
-                  <label
-                    style={{
-                      display: "block",
-                      fontSize: 13,
-                      fontWeight: 700,
-                      marginBottom: 8,
-                    }}
-                  >
-                    Full Name *
-                  </label>
 
-                  <input
-                    required
-                    name="name"
-                    value={form.name}
-                    onChange={handleChange}
-                    placeholder="Your full name"
-                    style={{
-                      width: "100%",
-                      boxSizing: "border-box",
-                      padding: "14px 15px",
-                      borderRadius: 12,
-                      border: "1px solid #dfe5e2",
-                      outline: "none",
-                      fontSize: 14,
-                    }}
-                  />
-                </div>
-
-                <div>
-                  <label
-                    style={{
-                      display: "block",
-                      fontSize: 13,
-                      fontWeight: 700,
-                      marginBottom: 8,
-                    }}
-                  >
-                    Phone Number *
-                  </label>
-
-                  <input
-                    required
-                    name="phone"
-                    value={form.phone}
-                    onChange={handleChange}
-                    placeholder="Your phone number"
-                    style={{
-                      width: "100%",
-                      boxSizing: "border-box",
-                      padding: "14px 15px",
-                      borderRadius: 12,
-                      border: "1px solid #dfe5e2",
-                      outline: "none",
-                      fontSize: 14,
-                    }}
-                  />
-                </div>
-
-                <div>
-                  <label
-                    style={{
-                      display: "block",
-                      fontSize: 13,
-                      fontWeight: 700,
-                      marginBottom: 8,
-                    }}
-                  >
-                    Email
-                  </label>
-
-                  <input
-                    type="email"
-                    name="email"
-                    value={form.email}
-                    onChange={handleChange}
-                    placeholder="Your email address"
-                    style={{
-                      width: "100%",
-                      boxSizing: "border-box",
-                      padding: "14px 15px",
-                      borderRadius: 12,
-                      border: "1px solid #dfe5e2",
-                      outline: "none",
-                      fontSize: 14,
-                    }}
-                  />
-                </div>
-
-                <div>
-                  <label
-                    style={{
-                      display: "block",
-                      fontSize: 13,
-                      fontWeight: 700,
-                      marginBottom: 8,
-                    }}
-                  >
-                    Service *
-                  </label>
-
-                  <select
-                    required
-                    name="service"
-                    value={form.service}
-                    onChange={handleChange}
-                    style={{
-                      width: "100%",
-                      boxSizing: "border-box",
-                      padding: "14px 15px",
-                      borderRadius: 12,
-                      border: "1px solid #dfe5e2",
-                      outline: "none",
-                      fontSize: 14,
-                      background: "#fff",
-                    }}
-                  >
-                    <option>General Consultation</option>
-                    <option>Work Visa</option>
-                    <option>Visitor Visa</option>
-                    <option>Visit to Work</option>
-                    <option>UK Visa Extension</option>
-                    <option>Study Visa</option>
-                    <option>Schengen Visa</option>
-                    <option>Other Immigration Service</option>
-                  </select>
-                </div>
-              </div>
-
-              <div style={{ marginTop: 18 }}>
-                <label
-                  style={{
-                    display: "block",
-                    fontSize: 13,
-                    fontWeight: 700,
-                    marginBottom: 8,
-                  }}
-                >
-                  Destination
-                </label>
-
-                <input
-                  name="destination"
-                  value={form.destination}
-                  onChange={handleChange}
-                  placeholder="e.g. UK, Canada, Australia, Europe"
-                  style={{
-                    width: "100%",
-                    boxSizing: "border-box",
-                    padding: "14px 15px",
-                    borderRadius: 12,
-                    border: "1px solid #dfe5e2",
-                    outline: "none",
-                    fontSize: 14,
-                  }}
-                />
-              </div>
-
-              <div style={{ marginTop: 18 }}>
-                <label
-                  style={{
-                    display: "block",
-                    fontSize: 13,
-                    fontWeight: 700,
-                    marginBottom: 8,
-                  }}
-                >
-                  Message
-                </label>
-
-                <textarea
-                  name="message"
-                  value={form.message}
-                  onChange={handleChange}
-                  rows={5}
-                  placeholder="Tell us briefly about your requirements..."
-                  style={{
-                    width: "100%",
-                    boxSizing: "border-box",
-                    padding: "14px 15px",
-                    borderRadius: 12,
-                    border: "1px solid #dfe5e2",
-                    outline: "none",
-                    fontSize: 14,
-                    resize: "vertical",
-                    fontFamily: "inherit",
-                  }}
-                />
-              </div>
-
-              <button
-                type="submit"
-                style={{
-                  width: "100%",
-                  marginTop: 22,
-                  padding: "16px 22px",
-                  border: "none",
-                  borderRadius: 13,
-                  background: INK,
-                  color: "#fff",
-                  fontSize: 15,
-                  fontWeight: 800,
-                  cursor: "pointer",
-                }}
-              >
-                Send Enquiry on WhatsApp →
-              </button>
-
-              {submitted && (
                 <div
                   style={{
-                    marginTop: 14,
-                    padding: 14,
-                    borderRadius: 12,
-                    background: "#eef8f3",
-                    color: "#176044",
-                    fontSize: 13,
-                    fontWeight: 700,
-                    textAlign: "center",
+                    padding: 27,
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
                   }}
                 >
-                  Your WhatsApp enquiry has been opened.
-                </div>
-              )}
-            </form>
-          </div>
-        </div>
-      </section>
 
-      {/* MAP */}
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 9,
+                      color: "#e8bb57",
+                      fontSize: 13,
+                      fontWeight: 800,
+                      marginBottom: 22,
+                    }}
+                  >
+                    <MapPin size={19} />
+                    Our Office
+                  </div>
+
+                  <div
+                    style={{
+                      fontSize: 13.5,
+                      lineHeight: 1.65,
+                      color: "#e1e7ef",
+                      marginBottom: 19,
+                    }}
+                  >
+                    SCO 125-126,
+                    <br />
+                    Sector 17-C,
+                    <br />
+                    Chandigarh, India
+                  </div>
+
+                  <div
+                    style={{
+                      height: 1,
+                      background: "rgba(255,255,255,.12)",
+                      marginBottom: 18,
+                    }}
+                  />
+
+                  <div
+                    style={{
+                      fontSize: 12.5,
+                      color: "#d6dde7",
+                      lineHeight: 1.7,
+                    }}
+                  >
+                    <strong style={{ color: "#fff" }}>
+                      Monday – Saturday
+                    </strong>
+                    <br />
+                    10:00 AM – 7:00 PM
+                  </div>
+
+                  <div
+                    style={{
+                      fontSize: 12.5,
+                      color: "#d6dde7",
+                      lineHeight: 1.7,
+                      marginTop: 12,
+                    }}
+                  >
+                    <strong style={{ color: "#fff" }}>
+                      Sunday
+                    </strong>
+                    <br />
+                    By Appointment Only
+                  </div>
+
+                </div>
+
+
+                <div
+                  style={{
+                    minHeight: 270,
+                    background:
+                      "linear-gradient(145deg, #1b2d3b, #07131d)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    position: "relative",
+                    overflow: "hidden",
+                  }}
+                >
+
+                  <div
+                    style={{
+                      position: "absolute",
+                      width: 230,
+                      height: 230,
+                      borderRadius: "50%",
+                      border: "1px solid rgba(232,187,87,.18)",
+                    }}
+                  />
+
+                  <div
+                    style={{
+                      position: "relative",
+                      textAlign: "center",
+                    }}
+                  >
+                    <div
+                      style={{
+                        fontFamily: "Georgia, serif",
+                        fontSize: 34,
+                        color: "#e8bb57",
+                        fontWeight: 700,
+                      }}
+                    >
+                      NC
+                    </div>
+
+                    <div
+                      style={{
+                        fontSize: 12,
+                        letterSpacing: 3,
+                        color: "#fff",
+                        marginTop: 2,
+                      }}
+                    >
+                      MIGRATION
+                    </div>
+
+                    <div
+                      style={{
+                        fontSize: 10,
+                        color: "#aeb8c5",
+                        marginTop: 10,
+                      }}
+                    >
+                      Your Global Partner
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </Glass>
+
+
+            {/* MAP CARD */}
+
+            <Glass pad={0} style={{ overflow: "hidden" }}>
+
+              <div
+                style={{
+                  padding: "17px 20px",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 8,
+                  fontWeight: 800,
+                  color: INK,
+                  fontSize: 15,
+                }}
+              >
+                <MapPin size={17} color="#d29c2d" />
+                Find Us on Map
+              </div>
+
+              <iframe
+                title="NC Migration Office Location"
+                src="https://www.google.com/maps?q=SCO+125-126,+Sector+17-C,+Chandigarh&output=embed"
+                style={{
+                  width: "100%",
+                  height: 280,
+                  border: 0,
+                  display: "block",
+                }}
+                loading="lazy"
+              />
+
+            </Glass>
+
+          </div>
+
+        </div>
+      </Section>
+
+
+      {/* =========================================================
+          TRUST STRIP
+      ========================================================= */}
+
       <section
         style={{
-          padding: "0 20px 70px",
-          background: "#f7f9f8",
+          background: "#f5f7fa",
+          borderTop: "1px solid #e8ecf2",
+          borderBottom: "1px solid #e8ecf2",
+          padding: "30px 0",
         }}
       >
-        <div
-          style={{
-            maxWidth: 1180,
-            margin: "0 auto",
-            overflow: "hidden",
-            borderRadius: 28,
-            background: "#fff",
-            border: "1px solid #e5ebe8",
-            boxShadow: "0 15px 45px rgba(0,0,0,0.06)",
-          }}
-        >
+
+        <Section>
+
           <div
             style={{
-              padding: "26px 30px",
+              display: "grid",
+              gridTemplateColumns: "repeat(4, 1fr)",
+              gap: 25,
             }}
+            className="nc-4col"
           >
+
+            {[
+              ["◇", "Trusted & Genuine", "Your goals, our priority"],
+              ["♧", "Expert Counsellors", "Personalised guidance"],
+              ["↗", "End-to-End Support", "From application to approval"],
+              ["◎", "Global Opportunities", "Explore a better future"],
+            ].map((item, i) => (
+
+              <div
+                key={i}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 14,
+                }}
+              >
+
+                <div
+                  style={{
+                    width: 43,
+                    height: 43,
+                    borderRadius: "50%",
+                    border: "1px solid #d7ad49",
+                    color: "#c18d20",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontSize: 22,
+                  }}
+                >
+                  {item[0]}
+                </div>
+
+                <div>
+
+                  <div
+                    style={{
+                      fontSize: 13.5,
+                      fontWeight: 800,
+                      color: INK,
+                    }}
+                  >
+                    {item[1]}
+                  </div>
+
+                  <div
+                    style={{
+                      fontSize: 11.5,
+                      color: "#7a8698",
+                      marginTop: 3,
+                    }}
+                  >
+                    {item[2]}
+                  </div>
+
+                </div>
+
+              </div>
+
+            ))}
+
+          </div>
+
+        </Section>
+
+      </section>
+
+
+      {/* =========================================================
+          FAQ / QUICK ANSWERS
+      ========================================================= */}
+
+      <Section style={{ paddingTop: 55, paddingBottom: 65 }}>
+
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "flex-end",
+            gap: 20,
+            marginBottom: 25,
+          }}
+        >
+
+          <div>
+
             <div
               style={{
-                fontSize: 13,
+                fontSize: 11,
                 fontWeight: 800,
-                letterSpacing: 1,
-                color: TEAL,
-                marginBottom: 6,
+                letterSpacing: 1.5,
+                color: "#c39325",
+                textTransform: "uppercase",
+                marginBottom: 7,
               }}
             >
-              FIND US
+              FAQ
             </div>
 
-            <h3
+            <h2
               style={{
                 margin: 0,
-                fontSize: 25,
+                fontSize: 29,
+                fontFamily: "Georgia, serif",
                 color: INK,
               }}
             >
-              Visit NC Migration
-            </h3>
+              Quick Answers
+            </h2>
+
+            <p
+              style={{
+                margin: "7px 0 0",
+                color: "#68748a",
+                fontSize: 13.5,
+              }}
+            >
+              Find answers to some common questions or get in touch with our
+              team.
+            </p>
+
           </div>
 
-          <iframe
-            title="NC Migration Chandigarh Office"
-            src="https://www.google.com/maps?q=SCO+125-126+Sector+17-C+Chandigarh&output=embed"
-            width="100%"
-            height="420"
-            style={{
-              border: 0,
-              display: "block",
-            }}
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          />
         </div>
-      </section>
 
-      {/* MOBILE RESPONSIVE */}
-      <style>{`
-        @media (max-width: 900px) {
-          section > div {
-            grid-template-columns: 1fr !important;
-          }
-        }
 
-        @media (max-width: 700px) {
-          section {
-            padding-left: 16px !important;
-            padding-right: 16px !important;
-          }
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(4, 1fr)",
+            gap: 13,
+          }}
+          className="nc-4col"
+        >
 
-          section > div {
-            grid-template-columns: 1fr !important;
-          }
+          {[
+            "How can I start my application?",
+            "Do you provide visa assistance?",
+            "What are your consultation charges?",
+            "Can I visit your office?",
+          ].map((q, i) => (
 
-          form > div {
-            grid-template-columns: 1fr !important;
-          }
-        }
+            <div
+              key={i}
+              style={{
+                background: "#fff",
+                border: "1px solid #e5e9f0",
+                borderRadius: 12,
+                padding: "17px 16px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                gap: 10,
+                boxShadow: "0 6px 20px rgba(20,30,50,.04)",
+              }}
+            >
 
-        input:focus,
-        textarea:focus,
-        select:focus {
-          border-color: #1f6f5b !important;
-          box-shadow: 0 0 0 3px rgba(31,111,91,0.08);
-        }
-      `}</style>
+              <span
+                style={{
+                  fontSize: 12.5,
+                  fontWeight: 700,
+                  color: INK,
+                  lineHeight: 1.4,
+                }}
+              >
+                {q}
+              </span>
+
+              <span
+                style={{
+                  fontSize: 20,
+                  color: "#b58628",
+                  flexShrink: 0,
+                }}
+              >
+                +
+              </span>
+
+            </div>
+
+          ))}
+
+        </div>
+
+      </Section>
+
     </PageShell>
   );
 }
