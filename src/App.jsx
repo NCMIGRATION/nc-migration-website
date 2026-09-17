@@ -6172,7 +6172,7 @@ function ContactPage() {
     {
       icon: MapPin,
       title: "Visit Our Office",
-      value: "SCO 125-126, Sector 17-C, Chandigarh",
+      value: "Sector 17, Chandigarh, India",
       action: "Get Directions",
       href: "https://www.google.com/maps/search/?api=1&query=SCO+125-126%2C+Sector+17-C%2C+Chandigarh",
       color: "#7256d8",
@@ -6764,18 +6764,78 @@ function ContactPage() {
                 />
 
 
-                <Btn
-                  variant="gold"
-                  style={{
-                    width: "100%",
-                    justifyContent: "center",
-                    marginTop: 5,
-                  }}
-                >
-                  <MessageCircle size={16} />
-                  Send Enquiry on WhatsApp
-                  <ArrowRight size={15} />
-                </Btn>
+                <div
+  style={{
+    display: "flex",
+    flexDirection: "column",
+    gap: 10,
+    marginTop: 5,
+  }}
+>
+  <a
+    href={`https://wa.me/917658882546?text=${encodeURIComponent(
+      `Hello NC Migration,
+
+Name: ${form.name}
+Phone: ${form.phone}
+Email: ${form.email}
+Service: ${form.service}
+Destination: ${form.destination}
+
+Message:
+${form.message}`
+    )}`}
+    target="_blank"
+    rel="noopener noreferrer"
+    style={{
+      textDecoration: "none",
+    }}
+  >
+    <Btn
+      variant="gold"
+      style={{
+        width: "100%",
+        justifyContent: "center",
+      }}
+    >
+      <MessageCircle size={16} />
+      Send Enquiry on WhatsApp
+      <ArrowRight size={15} />
+    </Btn>
+  </a>
+
+  <a
+    href={`mailto:info@ncmigration.com?subject=${encodeURIComponent(
+      "New Consultation Enquiry - NC Migration"
+    )}&body=${encodeURIComponent(
+      `Hello NC Migration,
+
+Name: ${form.name}
+Phone: ${form.phone}
+Email: ${form.email}
+Service: ${form.service}
+Destination: ${form.destination}
+
+Message:
+${form.message}`
+    )}`}
+    style={{
+      textDecoration: "none",
+    }}
+  >
+    <Btn
+      variant="outline"
+      style={{
+        width: "100%",
+        justifyContent: "center",
+      }}
+    >
+      <Mail size={16} />
+      Send Enquiry on Email
+      <ArrowRight size={15} />
+    </Btn>
+  </a>
+</div>
 
                 <div
                   style={{
@@ -6850,8 +6910,6 @@ function ContactPage() {
                       marginBottom: 19,
                     }}
                   >
-                    SCO 125-126,
-                    <br />
                     Sector 17-C,
                     <br />
                     Chandigarh, India
@@ -6987,7 +7045,7 @@ function ContactPage() {
 
               <iframe
                 title="NC Migration Office Location"
-                src="https://www.google.com/maps?q=SCO+125-126,+Sector+17-C,+Chandigarh&output=embed"
+                src="https://www.google.com/maps?q=Sector+17,+Chandigarh,+India&output=embed"
                 style={{
                   width: "100%",
                   height: 280,
