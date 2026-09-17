@@ -7217,6 +7217,46 @@ function ContactPage() {
     </PageShell>
   );
 }
+/* ------------------------------------------------------------------ */
+/*  PER-PAGE SEO METADATA                                             */
+/* ------------------------------------------------------------------ */
+
+const SEO = {
+  home: {
+    title: "NC Migration | Work Visa, Visitor Visa & UK Immigration Services",
+    desc: "Explore work visa opportunities, visitor visas, UK visa extension support and international immigration services with NC Migration. Profile-based visa guidance for the UK, Europe, New Zealand and UAE.",
+  },
+
+  "work-visa": {
+    title: "Work Visa Opportunities | Europe, UK, New Zealand & UAE | NC Migration",
+    desc: "Explore work visa routes across Spain, Italy, Germany, the UK, New Zealand, UAE, Slovakia, Bulgaria and Serbia. Work visa consultant guidance based on your occupation and eligibility.",
+  },
+
+  "visitor-visa": {
+    title: "Visitor & Tourist Visa Services | Schengen, UK, UAE | NC Migration",
+    desc: "Visitor visa and tourist visa assistance for the UAE, Singapore, Thailand, Malaysia, Vietnam, the UK, Australia, New Zealand, Switzerland and Schengen Europe.",
+  },
+
+  "visit-to-work": {
+    title: "Visit to Work | Explore Legal Work Pathways in Europe & UK | NC Migration",
+    desc: "Understand lawful immigration pathways from visitor status toward work-authorised routes in the UK, Spain, Germany, Greece, Italy and Lithuania. Subject to eligibility and immigration rules.",
+  },
+
+  "uk-extension": {
+    title: "UK Visa Extension & Right to Work Guidance | NC Migration",
+    desc: "UK visa extension consultant guidance covering right to work, Share Code, eVisa status, Skilled Worker visa eligibility and Certificate of Sponsorship-related support.",
+  },
+
+  about: {
+    title: "About NC Migration | Visa & Immigration Consultant",
+    desc: "NC Migration is an immigration and visa consultancy providing work visa, visitor visa, visit-to-work and UK immigration guidance based on your individual profile.",
+  },
+
+  contact: {
+    title: "Contact NC Migration | Free Visa Consultation, Chandigarh",
+    desc: "Speak with NC Migration about work visas, visitor visas, visit-to-work pathways or UK visa extension options. Request a free consultation from our Chandigarh office.",
+  },
+};
 
 function useSeo(page, param) {
   useEffect(() => {
