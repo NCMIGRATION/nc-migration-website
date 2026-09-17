@@ -6106,204 +6106,1127 @@ function AboutPage({ go }) {
 
 function ContactPage() {
   const [form, setForm] = useState({
-    name: "", phone: "", email: "", service: "General Consultation", destination: "", message: "",
+    name: "",
+    phone: "",
+    email: "",
+    service: "General Consultation",
+    destination: "",
+    message: "",
   });
+
   const [submitted, setSubmitted] = useState(false);
-  const update = (k) => (e) => setForm({ ...form, [k]: e.target.value });
+
+  const update = (k) => (e) =>
+    setForm({ ...form, [k]: e.target.value });
 
   const inputStyle = {
-    width: "100%", padding: "13px 15px", borderRadius: 10, border: "1px solid #dfe3ec",
-    fontSize: 14.5, marginBottom: 14, boxSizing: "border-box", fontFamily: "inherit",
-    background: "#fff", color: INK,
+    width: "100%",
+    padding: "14px 16px",
+    borderRadius: 11,
+    border: "1px solid #dce2ee",
+    fontSize: 14,
+    boxSizing: "border-box",
+    fontFamily: "inherit",
+    background: "#fff",
+    color: INK,
+    outline: "none",
   };
-  const labelStyle = { fontSize: 12.5, fontWeight: 700, color: "#5a6577", marginBottom: 6, display: "block" };
+
+  const labelStyle = {
+    fontSize: 12.5,
+    fontWeight: 800,
+    color: "#56627a",
+    marginBottom: 7,
+    display: "block",
+  };
 
   const CONTACT_CARDS = [
-    { icon: Phone, title: "Call Us", value: PHONE_DISPLAY, cta: "Call Now", href: PHONE_TEL, color: CORAL },
-    { icon: MessageCircle, title: "WhatsApp", value: PHONE_DISPLAY, cta: "Chat on WhatsApp", href: WHATSAPP_LINK, color: "#25D366", external: true },
-    { icon: Mail, title: "Email", value: "info@ncmigration.com", cta: "Send Email", href: "mailto:info@ncmigration.com", color: ROYAL },
-    { icon: MapPin, title: "Office", value: "Sector 17, Chandigarh", color: "#6c4fd1" },
+    {
+      icon: Phone,
+      title: "Call Us",
+      value: PHONE_DISPLAY,
+      action: "Call Now",
+      href: PHONE_TEL,
+      color: "#ff4b3f",
+      bg: "#fff0ee",
+    },
+    {
+      icon: MessageCircle,
+      title: "WhatsApp",
+      value: PHONE_DISPLAY,
+      action: "Chat on WhatsApp",
+      href: WHATSAPP_LINK,
+      color: "#16b875",
+      bg: "#ecfbf4",
+      external: true,
+    },
+    {
+      icon: Mail,
+      title: "Email",
+      value: "info@ncmigration.com",
+      action: "Send Email",
+      href: "mailto:info@ncmigration.com",
+      color: "#1762d1",
+      bg: "#edf4ff",
+    },
+    {
+      icon: MapPin,
+      title: "Office",
+      value: "Sector 17, Chandigarh",
+      action: "View Location",
+      href: "https://www.google.com/maps/search/?api=1&query=Sector+17%2C+Chandigarh",
+      color: "#7356d8",
+      bg: "#f2efff",
+      external: true,
+    },
+  ];
+
+  const reasons = [
+    "Work Visa",
+    "Visitor Visa",
+    "Visit to Work",
+    "UK Visa Extension",
+    "Right to Work",
+    "General Consultation",
   ];
 
   return (
     <PageShell theme="contact">
-      <PageHero
-        theme="contact"
-        eyebrow="Contact NC Migration"
-        h1="Let's discuss your visa & immigration options"
-        desc="Tell us about your travel, work or immigration goal and our team can help you understand the next steps."
-      >
-        <Btn variant="coral" onClick={() => scrollToId("contact-form")}>Request Free Consultation ↓</Btn>
-      </PageHero>
 
-      {/* CONTACT OPTIONS */}
-      <Section style={{ paddingTop: 12, paddingBottom: 30 }}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 18 }} className="nc-4col">
-          {CONTACT_CARDS.map((c, i) => {
-            const Icon = c.icon;
-            return (
-              <Glass key={i} pad={24} style={{ display: "flex", flexDirection: "column", borderTop: `4px solid ${c.color}` }}>
-                <div style={{ width: 44, height: 44, borderRadius: 12, background: `${c.color}1a`, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <Icon size={20} color={c.color} />
-                </div>
-                <div style={{ fontSize: 12.5, fontWeight: 700, color: "#7a8699", marginTop: 14, textTransform: "uppercase", letterSpacing: 0.5 }}>{c.title}</div>
-                <div style={{ fontSize: 15, fontWeight: 700, color: INK, marginTop: 5 }}>{c.value}</div>
-                {c.href && (
-                  <a href={c.href}
-                     {...(c.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                     style={{
-                       marginTop: "auto", paddingTop: 16, display: "inline-flex", alignItems: "center", gap: 6,
-                       color: c.color, fontWeight: 700, fontSize: 13.5, textDecoration: "none",
-                     }}>
-                    {c.cta} <ArrowRight size={14} />
-                  </a>
-                )}
-              </Glass>
+      <style>{`
+        .nc-contact-page {
+          background:
+            radial-gradient(circle at 5% 5%, rgba(40,105,210,.10), transparent 28%),
+            radial-gradient(circle at 95% 15%, rgba(255,72,60,.10), transparent 28%),
+            linear-gradient(180deg,#f5f7fc 0%,#f8f9fd 48%,#f3f5fa 100%);
+          min-height: 100vh;
+        }
+
+        .nc-contact-container {
+          width: min(1180px, calc(100% - 40px));
+          margin: 0 auto;
+        }
+
+        .nc-contact-hero {
+          padding: 54px 0 28px;
+        }
+
+        .nc-contact-hero-box {
+          position: relative;
+          overflow: hidden;
+          border-radius: 26px;
+          padding: 48px 50px;
+          background:
+            linear-gradient(
+              105deg,
+              rgba(255,255,255,.98) 0%,
+              rgba(255,255,255,.96) 48%,
+              rgba(237,243,255,.86) 100%
             );
-          })}
-        </div>
-      </Section>
+          border: 1px solid rgba(255,255,255,.95);
+          box-shadow: 0 20px 55px rgba(25,37,75,.10);
+        }
 
-      {/* FORM + MAP */}
-      <Section style={{ paddingTop: 0 }}>
-        <Anchor id="contact-form" />
-        <div style={{ display: "grid", gridTemplateColumns: "1.3fr 1fr", gap: 34 }} className="nc-2col">
-          <Glass pad={34}>
-            {submitted ? (
-              <div style={{ textAlign: "center", padding: "50px 10px" }}>
-                <CheckCircle2 size={40} color={TEAL} style={{ marginBottom: 16 }} />
-                <div style={{ fontSize: 19, fontWeight: 700, color: INK }}>Thank you.</div>
-                <div style={{ color: "#5a6577", fontSize: 14.5, marginTop: 8, lineHeight: 1.7 }}>
-                  Our NC Migration team will contact you soon.
-                </div>
+        .nc-contact-hero-box:after {
+          content: "";
+          position: absolute;
+          width: 420px;
+          height: 420px;
+          right: -150px;
+          top: -180px;
+          border-radius: 50%;
+          background: radial-gradient(
+            circle,
+            rgba(23,98,209,.13),
+            rgba(23,98,209,0) 70%
+          );
+          pointer-events: none;
+        }
+
+        .nc-contact-hero-content {
+          position: relative;
+          z-index: 2;
+          max-width: 760px;
+        }
+
+        .nc-contact-eyebrow {
+          color: #ff4b3f;
+          font-size: 12px;
+          font-weight: 900;
+          letter-spacing: 1px;
+          text-transform: uppercase;
+          margin-bottom: 11px;
+        }
+
+        .nc-contact-title {
+          color: #171b3d;
+          font-size: 42px;
+          line-height: 1.08;
+          font-weight: 950;
+          margin: 0;
+        }
+
+        .nc-contact-title span {
+          color: #1762d1;
+        }
+
+        .nc-contact-subtitle {
+          color: #59677e;
+          font-size: 15.5px;
+          line-height: 1.75;
+          max-width: 690px;
+          margin: 15px 0 22px;
+        }
+
+        .nc-contact-hero-points {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+          margin-top: 22px;
+        }
+
+        .nc-contact-point {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          padding: 9px 13px;
+          border-radius: 30px;
+          background: rgba(255,255,255,.82);
+          border: 1px solid #e2e7f0;
+          color: #29344d;
+          font-size: 11.5px;
+          font-weight: 800;
+        }
+
+        .nc-contact-point-check {
+          width: 19px;
+          height: 19px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: #eaf3ff;
+          color: #1762d1;
+          font-size: 11px;
+          font-weight: 900;
+        }
+
+        .nc-contact-cards {
+          display: grid;
+          grid-template-columns: repeat(4,1fr);
+          gap: 16px;
+          margin-top: 18px;
+        }
+
+        .nc-contact-card {
+          background: rgba(255,255,255,.94);
+          border: 1px solid #e2e7ef;
+          border-radius: 17px;
+          padding: 21px;
+          min-height: 148px;
+          box-shadow: 0 8px 25px rgba(20,32,65,.06);
+          transition: transform .2s ease, box-shadow .2s ease;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .nc-contact-card:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 16px 34px rgba(20,32,65,.11);
+        }
+
+        .nc-contact-card-icon {
+          width: 45px;
+          height: 45px;
+          border-radius: 13px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 14px;
+        }
+
+        .nc-contact-card-label {
+          color: #7b879b;
+          font-size: 10.5px;
+          font-weight: 900;
+          text-transform: uppercase;
+          letter-spacing: .8px;
+        }
+
+        .nc-contact-card-value {
+          color: #171b3d;
+          font-size: 14px;
+          font-weight: 850;
+          margin-top: 5px;
+          line-height: 1.45;
+        }
+
+        .nc-contact-card-action {
+          margin-top: auto;
+          padding-top: 12px;
+          color: #1762d1;
+          font-size: 11.5px;
+          font-weight: 850;
+          text-decoration: none;
+          display: inline-flex;
+          align-items: center;
+          gap: 5px;
+        }
+
+        .nc-contact-main {
+          display: grid;
+          grid-template-columns: 1.18fr .82fr;
+          gap: 20px;
+          padding: 30px 0 48px;
+        }
+
+        .nc-contact-form-card {
+          background: rgba(255,255,255,.97);
+          border: 1px solid #e3e7ef;
+          border-radius: 21px;
+          padding: 31px;
+          box-shadow: 0 12px 35px rgba(20,32,65,.07);
+        }
+
+        .nc-contact-form-head {
+          display: flex;
+          justify-content: space-between;
+          gap: 15px;
+          align-items: flex-start;
+          margin-bottom: 23px;
+        }
+
+        .nc-contact-form-title {
+          color: #171b3d;
+          font-size: 23px;
+          font-weight: 900;
+          margin: 0 0 5px;
+        }
+
+        .nc-contact-form-desc {
+          color: #68758b;
+          font-size: 12.5px;
+          line-height: 1.6;
+          margin: 0;
+        }
+
+        .nc-contact-secure {
+          background: #eef9f5;
+          color: #0b9c7e;
+          border: 1px solid #cdeee4;
+          padding: 8px 11px;
+          border-radius: 20px;
+          font-size: 10.5px;
+          font-weight: 850;
+          white-space: nowrap;
+        }
+
+        .nc-contact-form-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 14px;
+        }
+
+        .nc-contact-field {
+          margin-bottom: 14px;
+        }
+
+        .nc-contact-full {
+          grid-column: 1 / -1;
+        }
+
+        .nc-contact-service-box {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 7px;
+          margin-top: 5px;
+        }
+
+        .nc-contact-service {
+          border: 1px solid #dce3ef;
+          background: #f9faff;
+          color: #4e5b72;
+          padding: 8px 11px;
+          border-radius: 20px;
+          font-size: 10.5px;
+          font-weight: 750;
+          cursor: pointer;
+          transition: all .15s ease;
+        }
+
+        .nc-contact-service:hover {
+          border-color: #1762d1;
+          color: #1762d1;
+          background: #edf4ff;
+        }
+
+        .nc-contact-service.active {
+          background: #1762d1;
+          border-color: #1762d1;
+          color: white;
+        }
+
+        .nc-contact-map-card {
+          background: #fff;
+          border-radius: 21px;
+          overflow: hidden;
+          border: 1px solid #e3e7ef;
+          box-shadow: 0 12px 35px rgba(20,32,65,.07);
+        }
+
+        .nc-contact-map {
+          height: 285px;
+          width: 100%;
+          border: 0;
+          display: block;
+        }
+
+        .nc-contact-location-body {
+          padding: 22px;
+        }
+
+        .nc-contact-location-title {
+          color: #171b3d;
+          font-size: 19px;
+          font-weight: 900;
+          margin-bottom: 5px;
+        }
+
+        .nc-contact-location-desc {
+          color: #6a768a;
+          font-size: 12px;
+          line-height: 1.6;
+          margin-bottom: 17px;
+        }
+
+        .nc-contact-location-row {
+          display: flex;
+          gap: 11px;
+          align-items: flex-start;
+          margin-bottom: 13px;
+        }
+
+        .nc-contact-location-icon {
+          width: 35px;
+          height: 35px;
+          border-radius: 10px;
+          background: #edf4ff;
+          color: #1762d1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+        }
+
+        .nc-contact-location-label {
+          color: #8490a2;
+          font-size: 9.5px;
+          font-weight: 900;
+          text-transform: uppercase;
+          letter-spacing: .7px;
+        }
+
+        .nc-contact-location-value {
+          color: #1d2540;
+          font-size: 12.5px;
+          font-weight: 800;
+          margin-top: 2px;
+        }
+
+        .nc-contact-bottom {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          gap: 15px;
+          padding-bottom: 45px;
+        }
+
+        .nc-contact-mini {
+          background: rgba(255,255,255,.88);
+          border: 1px solid #e3e7ef;
+          border-radius: 15px;
+          padding: 18px;
+          display: flex;
+          gap: 12px;
+          align-items: flex-start;
+        }
+
+        .nc-contact-mini-icon {
+          width: 38px;
+          height: 38px;
+          border-radius: 11px;
+          background: #edf4ff;
+          color: #1762d1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+        }
+
+        .nc-contact-mini-title {
+          color: #1c2440;
+          font-size: 12.5px;
+          font-weight: 850;
+          margin-bottom: 3px;
+        }
+
+        .nc-contact-mini-text {
+          color: #6c788c;
+          font-size: 11px;
+          line-height: 1.5;
+        }
+
+        @media (max-width: 950px) {
+          .nc-contact-cards {
+            grid-template-columns: repeat(2,1fr);
+          }
+
+          .nc-contact-main {
+            grid-template-columns: 1fr;
+          }
+
+          .nc-contact-bottom {
+            grid-template-columns: 1fr;
+          }
+        }
+
+        @media (max-width: 650px) {
+          .nc-contact-container {
+            width: calc(100% - 28px);
+          }
+
+          .nc-contact-hero {
+            padding-top: 30px;
+          }
+
+          .nc-contact-hero-box {
+            padding: 31px 23px;
+            border-radius: 20px;
+          }
+
+          .nc-contact-title {
+            font-size: 31px;
+          }
+
+          .nc-contact-subtitle {
+            font-size: 13.5px;
+          }
+
+          .nc-contact-cards {
+            grid-template-columns: 1fr;
+          }
+
+          .nc-contact-form-card {
+            padding: 22px 18px;
+          }
+
+          .nc-contact-form-grid {
+            grid-template-columns: 1fr;
+            gap: 0;
+          }
+
+          .nc-contact-full {
+            grid-column: auto;
+          }
+
+          .nc-contact-form-head {
+            flex-direction: column;
+          }
+
+          .nc-contact-secure {
+            white-space: normal;
+          }
+
+          .nc-contact-map {
+            height: 240px;
+          }
+        }
+      `}</style>
+
+      <div className="nc-contact-page">
+
+        {/* HERO */}
+        <div className="nc-contact-container nc-contact-hero">
+
+          <div className="nc-contact-hero-box">
+
+            <div className="nc-contact-hero-content">
+
+              <div className="nc-contact-eyebrow">
+                CONTACT NC MIGRATION
               </div>
-            ) : (
-              <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }}>
-                <h2 style={{ fontSize: 21, color: INK, margin: "0 0 6px" }}>Request a free consultation</h2>
-                <p style={{ fontSize: 13.5, color: "#5a6577", margin: "0 0 24px", lineHeight: 1.6 }}>
-                  A few details is all we need to get started.
-                </p>
 
-                <label style={labelStyle}>Full Name</label>
-                <input style={inputStyle} placeholder="Your full name" required value={form.name} onChange={update("name")} />
+              <h1 className="nc-contact-title">
+                Let's discuss your{" "}
+                <span>visa & immigration options</span>
+              </h1>
 
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }} className="nc-2col-tight">
-                  <div>
-                    <label style={labelStyle}>Phone Number</label>
-                    <input style={inputStyle} placeholder="+91 00000 00000" required value={form.phone} onChange={update("phone")} />
-                  </div>
-                  <div>
-                    <label style={labelStyle}>Email</label>
-                    <input style={inputStyle} type="email" placeholder="you@example.com" required value={form.email} onChange={update("email")} />
-                  </div>
+              <p className="nc-contact-subtitle">
+                Tell us about your travel, work or immigration goal.
+                Our team will understand your profile and guide you
+                through the next steps.
+              </p>
+
+              <Btn
+                variant="coral"
+                onClick={() => scrollToId("contact-form")}
+              >
+                Request Free Consultation
+                <ArrowRight size={15} />
+              </Btn>
+
+              <div className="nc-contact-hero-points">
+
+                <div className="nc-contact-point">
+                  <span className="nc-contact-point-check">✓</span>
+                  Profile-based guidance
                 </div>
 
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }} className="nc-2col-tight">
-                  <div>
-                    <label style={labelStyle}>Service Required</label>
-                    <select style={inputStyle} value={form.service} onChange={update("service")}>
-                      <option>Work Visa</option>
-                      <option>Visitor Visa</option>
-                      <option>Visit to Work</option>
-                      <option>UK Visa Extension</option>
-                      <option>General Consultation</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label style={labelStyle}>Destination</label>
-                    <input style={inputStyle} placeholder="e.g. United Kingdom" value={form.destination} onChange={update("destination")} />
-                  </div>
+                <div className="nc-contact-point">
+                  <span className="nc-contact-point-check">✓</span>
+                  Personalised support
                 </div>
 
-                <label style={labelStyle}>Message <span style={{ fontWeight: 500, color: "#9aa3b2" }}>(optional)</span></label>
-                <textarea
-                  style={{ ...inputStyle, minHeight: 120, resize: "vertical" }}
-                  placeholder="Tell us briefly about your background and what you're hoping to do."
-                  value={form.message} onChange={update("message")}
-                />
-
-                <Btn variant="coral" style={{ width: "100%", justifyContent: "center", marginTop: 6 }}>
-                  Request Free Consultation <ArrowRight size={15} />
-                </Btn>
-              </form>
-            )}
-          </Glass>
-
-          <div>
-            <Glass pad={0} style={{ overflow: "hidden" }}>
-              <div style={{
-                height: 210, background: `linear-gradient(140deg,${NAVY},${ROYAL})`,
-                position: "relative", display: "flex", alignItems: "center", justifyContent: "center",
-              }}>
-                <img src={SKYLINE_SVG} alt="NC Migration office, Sector 17, Chandigarh" style={{
-                  position: "absolute", bottom: 0, left: 0, width: "100%", height: 120,
-                  objectFit: "cover", objectPosition: "bottom",
-                }} />
-                <div style={{ position: "relative", textAlign: "center" }}>
-                  <MapPin size={26} color={SUN} />
-                  <div style={{ color: "#fff", fontSize: 15, fontWeight: 700, marginTop: 8 }}>Sector 17, Chandigarh</div>
+                <div className="nc-contact-point">
+                  <span className="nc-contact-point-check">✓</span>
+                  Multiple visa categories
                 </div>
+
+                <div className="nc-contact-point">
+                  <span className="nc-contact-point-check">✓</span>
+                  Chandigarh office
+                </div>
+
               </div>
-              <div style={{ padding: 24 }}>
-                <h2 style={{ fontSize: 17, color: INK, margin: "0 0 12px" }}>Visit or reach us</h2>
-                <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-                  <InfoStat icon={Phone} label="Phone" value={PHONE_DISPLAY} />
-                  <InfoStat icon={MessageCircle} label="WhatsApp" value={PHONE_DISPLAY} />
-                  <InfoStat icon={Mail} label="Email" value="info@ncmigration.com" />
-                  <InfoStat icon={MapPin} label="Office" value="Sector 17, Chandigarh" />
-                </div>
-                <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-                  <Btn variant="teal" style={{ width: "100%", justifyContent: "center", marginTop: 20 }}>
-                    Chat on WhatsApp <ArrowRight size={15} />
-                  </Btn>
-                </a>
-              </div>
-            </Glass>
+
+            </div>
+
           </div>
+
         </div>
-      </Section>
+
+
+        {/* CONTACT OPTIONS */}
+
+        <div className="nc-contact-container">
+
+          <div className="nc-contact-cards">
+
+            {CONTACT_CARDS.map((card, index) => {
+
+              const Icon = card.icon;
+
+              return (
+                <div
+                  className="nc-contact-card"
+                  key={index}
+                  style={{
+                    borderTop: `4px solid ${card.color}`,
+                  }}
+                >
+
+                  <div
+                    className="nc-contact-card-icon"
+                    style={{
+                      background: card.bg,
+                      color: card.color,
+                    }}
+                  >
+                    <Icon size={20} />
+                  </div>
+
+                  <div className="nc-contact-card-label">
+                    {card.title}
+                  </div>
+
+                  <div className="nc-contact-card-value">
+                    {card.value}
+                  </div>
+
+                  {card.href && (
+                    <a
+                      href={card.href}
+                      target={card.external ? "_blank" : undefined}
+                      rel={card.external ? "noopener noreferrer" : undefined}
+                      className="nc-contact-card-action"
+                      style={{ color: card.color }}
+                    >
+                      {card.action}
+                      <ArrowRight size={13} />
+                    </a>
+                  )}
+
+                </div>
+              );
+
+            })}
+
+          </div>
+
+        </div>
+
+
+        {/* FORM + MAP */}
+
+        <div
+          className="nc-contact-container"
+          style={{ paddingTop: 28 }}
+        >
+
+          <Anchor id="contact-form" />
+
+          <div className="nc-contact-main">
+
+            {/* FORM */}
+
+            <div className="nc-contact-form-card">
+
+              {submitted ? (
+
+                <div
+                  style={{
+                    textAlign: "center",
+                    padding: "80px 20px",
+                  }}
+                >
+
+                  <CheckCircle2
+                    size={55}
+                    color={TEAL}
+                    style={{ marginBottom: 18 }}
+                  />
+
+                  <h2
+                    style={{
+                      color: INK,
+                      fontSize: 24,
+                      margin: 0,
+                      fontWeight: 900,
+                    }}
+                  >
+                    Thank You!
+                  </h2>
+
+                  <p
+                    style={{
+                      color: "#69758a",
+                      fontSize: 14,
+                      lineHeight: 1.7,
+                      marginTop: 10,
+                    }}
+                  >
+                    Your consultation request has been received.
+                    <br />
+                    Our NC Migration team will contact you soon.
+                  </p>
+
+                  <Btn
+                    variant="navy"
+                    onClick={() => setSubmitted(false)}
+                    style={{ marginTop: 18 }}
+                  >
+                    Submit Another Request
+                  </Btn>
+
+                </div>
+
+              ) : (
+
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    setSubmitted(true);
+                  }}
+                >
+
+                  <div className="nc-contact-form-head">
+
+                    <div>
+                      <h2 className="nc-contact-form-title">
+                        Request a free consultation
+                      </h2>
+
+                      <p className="nc-contact-form-desc">
+                        Share a few details and our team will understand
+                        your requirement before contacting you.
+                      </p>
+                    </div>
+
+                    <div className="nc-contact-secure">
+                      ✓ Confidential Enquiry
+                    </div>
+
+                  </div>
+
+
+                  <div className="nc-contact-form-grid">
+
+                    <div className="nc-contact-field nc-contact-full">
+                      <label style={labelStyle}>
+                        Full Name
+                      </label>
+
+                      <input
+                        style={inputStyle}
+                        placeholder="Enter your full name"
+                        required
+                        value={form.name}
+                        onChange={update("name")}
+                      />
+                    </div>
+
+
+                    <div className="nc-contact-field">
+
+                      <label style={labelStyle}>
+                        Phone Number
+                      </label>
+
+                      <input
+                        style={inputStyle}
+                        placeholder="+91 00000 00000"
+                        required
+                        value={form.phone}
+                        onChange={update("phone")}
+                      />
+
+                    </div>
+
+
+                    <div className="nc-contact-field">
+
+                      <label style={labelStyle}>
+                        Email Address
+                      </label>
+
+                      <input
+                        style={inputStyle}
+                        type="email"
+                        placeholder="you@example.com"
+                        required
+                        value={form.email}
+                        onChange={update("email")}
+                      />
+
+                    </div>
+
+
+                    <div className="nc-contact-field">
+
+                      <label style={labelStyle}>
+                        Service Required
+                      </label>
+
+                      <select
+                        style={inputStyle}
+                        value={form.service}
+                        onChange={update("service")}
+                      >
+                        <option>General Consultation</option>
+                        <option>Work Visa</option>
+                        <option>Visitor Visa</option>
+                        <option>Visit to Work</option>
+                        <option>UK Visa Extension</option>
+                        <option>Right to Work</option>
+                      </select>
+
+                    </div>
+
+
+                    <div className="nc-contact-field">
+
+                      <label style={labelStyle}>
+                        Destination
+                      </label>
+
+                      <input
+                        style={inputStyle}
+                        placeholder="e.g. United Kingdom"
+                        value={form.destination}
+                        onChange={update("destination")}
+                      />
+
+                    </div>
+
+
+                    <div className="nc-contact-field nc-contact-full">
+
+                      <label style={labelStyle}>
+                        What can we help you with?
+                      </label>
+
+                      <div className="nc-contact-service-box">
+
+                        {reasons.map((reason, index) => (
+
+                          <button
+                            type="button"
+                            key={index}
+                            className={
+                              "nc-contact-service " +
+                              (form.service === reason ? "active" : "")
+                            }
+                            onClick={() =>
+                              setForm({
+                                ...form,
+                                service: reason,
+                              })
+                            }
+                          >
+                            {reason}
+                          </button>
+
+                        ))}
+
+                      </div>
+
+                    </div>
+
+
+                    <div className="nc-contact-field nc-contact-full">
+
+                      <label style={labelStyle}>
+                        Message{" "}
+                        <span
+                          style={{
+                            color: "#9aa3b2",
+                            fontWeight: 500,
+                          }}
+                        >
+                          (optional)
+                        </span>
+                      </label>
+
+                      <textarea
+                        style={{
+                          ...inputStyle,
+                          minHeight: 125,
+                          resize: "vertical",
+                        }}
+                        placeholder="Tell us briefly about your background and what you are hoping to do."
+                        value={form.message}
+                        onChange={update("message")}
+                      />
+
+                    </div>
+
+                  </div>
+
+
+                  <Btn
+                    variant="coral"
+                    style={{
+                      width: "100%",
+                      justifyContent: "center",
+                      marginTop: 6,
+                      padding: "15px 20px",
+                    }}
+                  >
+                    Request Free Consultation
+                    <ArrowRight size={15} />
+                  </Btn>
+
+                  <div
+                    style={{
+                      textAlign: "center",
+                      color: "#8a95a7",
+                      fontSize: 10.5,
+                      marginTop: 11,
+                    }}
+                  >
+                    By submitting this form, you agree to be contacted
+                    regarding your enquiry.
+                  </div>
+
+                </form>
+
+              )}
+
+            </div>
+
+
+            {/* MAP + OFFICE */}
+
+            <div className="nc-contact-map-card">
+
+              <iframe
+                className="nc-contact-map"
+                title="NC Migration Office Location"
+                src="https://www.google.com/maps?q=Sector+17,+Chandigarh&output=embed"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+
+              <div className="nc-contact-location-body">
+
+                <div className="nc-contact-location-title">
+                  Visit our Chandigarh office
+                </div>
+
+                <div className="nc-contact-location-desc">
+                  Speak with our team about your visa, work,
+                  travel and immigration requirements.
+                </div>
+
+
+                <div className="nc-contact-location-row">
+
+                  <div className="nc-contact-location-icon">
+                    <MapPin size={17} />
+                  </div>
+
+                  <div>
+                    <div className="nc-contact-location-label">
+                      Office
+                    </div>
+
+                    <div className="nc-contact-location-value">
+                      Sector 17, Chandigarh
+                    </div>
+                  </div>
+
+                </div>
+
+
+                <div className="nc-contact-location-row">
+
+                  <div className="nc-contact-location-icon">
+                    <Phone size={17} />
+                  </div>
+
+                  <div>
+                    <div className="nc-contact-location-label">
+                      Phone
+                    </div>
+
+                    <div className="nc-contact-location-value">
+                      {PHONE_DISPLAY}
+                    </div>
+                  </div>
+
+                </div>
+
+
+                <div className="nc-contact-location-row">
+
+                  <div className="nc-contact-location-icon">
+                    <Mail size={17} />
+                  </div>
+
+                  <div>
+                    <div className="nc-contact-location-label">
+                      Email
+                    </div>
+
+                    <div className="nc-contact-location-value">
+                      info@ncmigration.com
+                    </div>
+                  </div>
+
+                </div>
+
+
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=Sector+17%2C+Chandigarh"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    textDecoration: "none",
+                  }}
+                >
+
+                  <Btn
+                    variant="navy"
+                    style={{
+                      width: "100%",
+                      justifyContent: "center",
+                      marginTop: 8,
+                    }}
+                  >
+                    Open in Google Maps
+                    <ArrowRight size={14} />
+                  </Btn>
+
+                </a>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          {/* BOTTOM INFORMATION */}
+
+          <div className="nc-contact-bottom">
+
+            <div className="nc-contact-mini">
+
+              <div className="nc-contact-mini-icon">
+                <CheckCircle2 size={18} />
+              </div>
+
+              <div>
+                <div className="nc-contact-mini-title">
+                  Profile-Based Guidance
+                </div>
+
+                <div className="nc-contact-mini-text">
+                  We understand your circumstances before discussing
+                  possible immigration routes.
+                </div>
+              </div>
+
+            </div>
+
+
+            <div className="nc-contact-mini">
+
+              <div className="nc-contact-mini-icon">
+                <MessageCircle size={18} />
+              </div>
+
+              <div>
+                <div className="nc-contact-mini-title">
+                  Quick Communication
+                </div>
+
+                <div className="nc-contact-mini-text">
+                  Contact our team by phone, WhatsApp or email for
+                  your enquiry.
+                </div>
+              </div>
+
+            </div>
+
+
+            <div className="nc-contact-mini">
+
+              <div className="nc-contact-mini-icon">
+                <MapPin size={18} />
+              </div>
+
+              <div>
+                <div className="nc-contact-mini-title">
+                  Chandigarh Office
+                </div>
+
+                <div className="nc-contact-mini-text">
+                  Visit our office in Sector 17, Chandigarh for
+                  consultation and support.
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
     </PageShell>
   );
 }
-
-/* ------------------------------------------------------------------ */
-/*  APP ROOT                                                            */
-/* ------------------------------------------------------------------ */
-
-/* ------------------------------------------------------------------ */
-/*  PER-PAGE SEO METADATA                                               */
-/* ------------------------------------------------------------------ */
-
-const SEO = {
-  home: {
-    title: "NC Migration | Work Visa, Visitor Visa & UK Immigration Services",
-    desc: "Explore work visa opportunities, visitor visas, UK visa extension support and international immigration services with NC Migration. Profile-based visa guidance for the UK, Europe, New Zealand and UAE.",
-  },
-  "work-visa": {
-    title: "Work Visa Opportunities | Europe, UK, New Zealand & UAE | NC Migration",
-    desc: "Explore work visa routes across Spain, Italy, Germany, the UK, New Zealand, UAE, Slovakia, Bulgaria and Serbia. Work visa consultant guidance based on your occupation and eligibility.",
-  },
-  "visitor-visa": {
-    title: "Visitor & Tourist Visa Services | Schengen, UK, UAE | NC Migration",
-    desc: "Visitor visa and tourist visa assistance for the UAE, Singapore, Thailand, Malaysia, Vietnam, the UK, Australia, New Zealand, Switzerland and Schengen Europe.",
-  },
-  "visit-to-work": {
-    title: "Visit to Work | Explore Legal Work Pathways in Europe & UK | NC Migration",
-    desc: "Understand lawful immigration pathways from visitor status toward work-authorised routes in the UK, Spain, Germany, Greece, Italy and Lithuania. Subject to eligibility and immigration rules.",
-  },
-  "uk-extension": {
-    title: "UK Visa Extension & Right to Work Guidance | NC Migration",
-    desc: "UK visa extension consultant guidance covering right to work, Share Code, eVisa status, Skilled Worker visa eligibility and Certificate of Sponsorship-related support.",
-  },
-  about: {
-    title: "About NC Migration | Visa & Immigration Consultant",
-    desc: "NC Migration is an immigration and visa consultancy providing work visa, visitor visa, visit-to-work and UK immigration guidance based on your individual profile.",
-  },
-  contact: {
-    title: "Contact NC Migration | Free Visa Consultation, Chandigarh",
-    desc: "Speak with NC Migration about work visas, visitor visas, visit-to-work pathways or UK visa extension options. Request a free consultation from our Chandigarh office.",
-  },
-};
 
 function useSeo(page, param) {
   useEffect(() => {
